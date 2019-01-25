@@ -13,3 +13,11 @@ export function getGeoData() {
     console.error(error);
   });
 }
+
+export function getMalePop() {
+  return fetch('https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2016&geography=E06000023&sex=1&age=*')
+    .then((response) => response.json())
+    .catch((error) => {
+    console.error(error);
+  });
+}
