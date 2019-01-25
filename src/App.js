@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './assets/css/main.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { getCodes, getGeoData } from './api/RequestHandler';
 import Header from './components/Header';

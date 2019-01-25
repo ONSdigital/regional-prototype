@@ -1,4 +1,22 @@
+/* Custom css */
+
+.region-info {
+  width: 300px;
+  height: 150px;
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  background-color: #3B7A9E;
+  z-index: 1;
+  color: #fff;
+  padding: 15px;
+}
+
+.region-info h1 {
+  margin: 0;
+}
+
 .map {
-  height: 300px;
+  height: 500px;
   width: 100vw;
 }

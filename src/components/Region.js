@@ -21,17 +21,21 @@ class Region extends Component {
         })
       }
     })
-
   }
+
   render() {
     console.log(this.props.places)
     return (
       <div>
-        <div className="">
-          <h1>{this.props.location.state.label}</h1>
-        </div>
-        {this.state.polygon.length > 0 ?
-          <MapContainer polygon={this.state.polygon} mapCenter={this.state.mapCenter}/> :
+
+        {this.state.polygon.length !== 0 ?
+          <div>
+            <MapContainer polygon={this.state.polygon} mapCenter={this.state.mapCenter}/>
+            <div className="region-info">
+              <h1>{this.props.location.state.label}</h1>
+            </div> 
+          </div>
+          :
             <p>Loading map data for {this.props.location.state.label}...</p>
         }
       </div>
