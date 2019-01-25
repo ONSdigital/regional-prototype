@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { getCodes, getGeoData } from './api/RequestHandler';
 import Header from './components/Header';
+import Search from './components/Search';
 
 
 class App extends Component {
@@ -34,6 +35,9 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header />
+            <Switch>
+              <Route exact path="/" component={() => <Search localAuthorities={this.state.localAuthorities} />} />
+            </Switch>
         </div>
       </Router>
     );
