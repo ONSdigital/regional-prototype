@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { getCodes, getGeoData } from './api/RequestHandler';
 import Header from './components/Header';
 import Search from './components/Search';
+import Region from './components/Region';
 
 
 class App extends Component {
@@ -37,6 +38,7 @@ class App extends Component {
           <Header />
             <Switch>
               <Route exact path="/" component={() => <Search localAuthorities={this.state.localAuthorities} />} />
+              <Route path="/:region" render={(props) => <Region {...props} places={this.state.places} />} />
             </Switch>
         </div>
       </Router>
