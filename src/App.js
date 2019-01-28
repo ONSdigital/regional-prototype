@@ -35,12 +35,12 @@ class App extends Component {
 
   render() {
     return (
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router>
         <div className="App">
           <Header />
             <Switch>
-              <Route exact path={process.env.PUBLIC_URL + "/"} component={() => <Search localAuthorities={this.state.localAuthorities} />} />
-              <Route path={process.env.PUBLIC_URL + "/:region"} render={(props) => <Region {...props} places={this.state.places} />} />
+              <Route exact path="/" component={() => <Search localAuthorities={this.state.localAuthorities} />} />
+              <Route path="/:region" render={(props) => <Region {...props} places={this.state.places} />} />
             </Switch>
         </div>
       </Router>
