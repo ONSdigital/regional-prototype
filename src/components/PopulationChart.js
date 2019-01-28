@@ -1,38 +1,81 @@
 import React, { Component } from 'react';
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryTooltip, VictoryLabel, VictoryStack} from 'victory';
 
 class PopulationChart extends Component {
+
+  componentDidUpdate() {
+    console.log(this.props.malePop, this.props.totalPop)
+  }
+
   render() {
-    const data=[
-    { x: 1, y: -10, y0: 10 },
-    { x: 2, y: 3, y0: 2 },
-    { x: 3, y: 5, y0: 2 },
-    { x: 4, y: 4, y0: 3 },
-    { x: 5, y: 6, y0: 3 }
-  ];
+
+    const dataA = [
+      { x: "0-10", y: (this.props.malePop.m1 / this.props.totalPop * 100).toFixed(2) },
+      { x: "11-20", y: (this.props.malePop.m2 / this.props.totalPop * 100).toFixed(2) },
+      { x: "21-30", y: (this.props.malePop.m3 / this.props.totalPop * 100).toFixed(2) },
+      { x: "31-40", y: (this.props.malePop.m4 / this.props.totalPop * 100).toFixed(2) },
+      { x: "41-50", y: (this.props.malePop.m5 / this.props.totalPop * 100).toFixed(2) },
+      { x: "51-60", y: (this.props.malePop.m6 / this.props.totalPop * 100).toFixed(2) },
+      { x: "61-70", y: (this.props.malePop.m7 / this.props.totalPop * 100).toFixed(2) },
+      { x: "70+", y: (this.props.malePop.m8 / this.props.totalPop * 100).toFixed(2) }
+    ];
+
+    const dataB = [
+      { x: "0-10", y: (this.props.malePop.m1 / this.props.totalPop * 100).toFixed(2) },
+      { x: "11-20", y: (this.props.malePop.m2 / this.props.totalPop * 100).toFixed(2) },
+      { x: "21-30", y: (this.props.malePop.m3 / this.props.totalPop * 100).toFixed(2) },
+      { x: "31-40", y: (this.props.malePop.m4 / this.props.totalPop * 100).toFixed(2) },
+      { x: "41-50", y: (this.props.malePop.m5 / this.props.totalPop * 100).toFixed(2) },
+      { x: "51-60", y: (this.props.malePop.m6 / this.props.totalPop * 100).toFixed(2) },
+      { x: "61-70", y: (this.props.malePop.m7 / this.props.totalPop * 100).toFixed(2) },
+      { x: "70+", y: (this.props.malePop.m8 / this.props.totalPop * 100).toFixed(2) }
+    ];
+
+
+    const width = 500;
+    const height = 500;
+    const padding = { top: 80, bottom: 80, left: 20, right: 20 };
+
     return (
-      <VictoryChart domainPadding={20}>
-        <svg>
-          <VictoryAxis crossAxis
-            width={400}
-            height={400}
-            domain={[-10, 10]}
-            offsetY={200}
-            standalone={false}
-            tickLabels={"display= none"}
+      <svg viewBox={`0 0 ${width} ${height}`}
+        style={{ width: "100%", height: "auto" }}
+      >
+        <VictoryStack horizontal
+          standalone={false}
+          domain={{ x: [-20, 20] }}
+          padding={padding}
+          height={height}
+          width={width}
+          style={{ data: { width: 20 }, labels: { fontSize: 11 } }}
+        >
+          <VictoryBar
+            style={{ data: { fill: "tomato" } }}
+            data={dataA}
+            y={(data) => (-Math.abs(data.y))}
+            labels={(data) => (`${Math.abs(data.y)}%`)}
           />
-          <VictoryAxis dependentAxis crossAxis
-            width={400}
-            height={400}
-            domain={[-10, 10]}
-            offsetX={200}
-            standalone={false}
+          <VictoryBar
+            style={{ data: { fill: "orange" } }}
+            data={dataB}
+            labels={(data) => (`${Math.abs(data.y)}%`)}
+            y={(data) => (Math.abs(data.y))}
           />
-        </svg>
+        </VictoryStack>
 
-      </VictoryChart>
-
-    )
+        <VictoryAxis dependentAxis
+          height={height}
+          width={width}
+          padding={padding}
+          style={{
+            axis: { stroke: "black" },
+            ticks: { stroke: "black" },
+            tickLabels: { fontSize: 11, fill: "black" }
+          }}
+          tickLabelComponent={<VictoryLabel x={250} textAnchor="middle"/>}
+          tickValues={dataA.map((point) => point.x).reverse()}
+        />
+      </svg>
+    );
   }
 }
 

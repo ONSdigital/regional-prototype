@@ -14,8 +14,24 @@ export function getGeoData() {
   });
 }
 
-export function getMalePop() {
-  return fetch('https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2016&geography=E06000023&sex=1&age=*')
+export function getMalePop(code) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2016&geography=${code}&sex=1&age=*`)
+    .then((response) => response.json())
+    .catch((error) => {
+    console.error(error);
+  });
+}
+
+export function getFemalePop(code) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2016&geography=${code}&sex=2&age=*`)
+    .then((response) => response.json())
+    .catch((error) => {
+    console.error(error);
+  });
+}
+
+export function getPop(code) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2016&geography=${code}&sex=0&age=*`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);
