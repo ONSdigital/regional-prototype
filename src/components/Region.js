@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getPop, getMalePop } from '../api/RequestHandler';
+import { getPop, getMalePop, getFemalePop } from '../api/RequestHandler';
 import MapContainer from './MapContainer';
 import PopulationChart from './PopulationChart';
 
@@ -7,6 +7,7 @@ class Region extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loaded: false,
       polygon: [],
       mapCenter: [],
       m: {
@@ -19,6 +20,17 @@ class Region extends Component {
         m6: 0,
         m7: 0,
         m8: 0
+      },
+      f: {
+        total: 0,
+        f1: 0,
+        f2: 0,
+        f3: 0,
+        f4: 0,
+        f5: 0,
+        f6: 0,
+        f7: 0,
+        f8: 0
       },
       total: 0
     }
@@ -99,12 +111,12 @@ class Region extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
 
 
     let that = this;
 
-    this.props.places.forEach(function(place) {
+    await this.props.places.forEach(function(place) {
       if(place.attributes.lad18cd === that.props.location.state.id) {
         that.setState({
           polygon: place.geometry.rings,
@@ -113,7 +125,7 @@ class Region extends Component {
       }
     })
 
-    getMalePop(that.props.location.state.id)
+    await getMalePop(that.props.location.state.id)
       .then((response) => {
         response.observations.forEach(function(age) {
           if(age.dimensions.age.id === 'total') {
@@ -128,7 +140,22 @@ class Region extends Component {
         })
       })
 
-    getPop(that.props.location.state.id)
+    await getFemalePop(that.props.location.state.id)
+      .then((response) => {
+        response.observations.forEach(function(age) {
+          if(age.dimensions.age.id === 'total') {
+            that.setState({
+              f: {
+                ...that.state.f,
+                total: parseInt(age.observation, 10)
+              }
+            })
+          }
+          that.sortPop(age.dimensions.age.id, "f", parseInt(age.observation, 10))
+        })
+      })
+
+    await getPop(that.props.location.state.id)
       .then((response) => {
         response.observations.forEach(function(age) {
           if(age.dimensions.age.id === 'total') {
@@ -138,18 +165,23 @@ class Region extends Component {
           }
         })
       })
+
+    this.setState({
+      loaded: true
+    })
   }
 
   render() {
+    console.log((this.state.f))
     return (
       <div>
-        {this.state.polygon.length !== 0 ?
+        {this.state.loaded ?
           <div>
-            <MapContainer polygon={this.state.polygon} mapCenter={this.state.mapCenter}/>
+            {this.state.polygon.length > 0 ? <MapContainer polygon={this.state.polygon} mapCenter={this.state.mapCenter}/> : null}
             <div className="region-info">
               <h1>{this.props.location.state.label}</h1>
               <h3>Population: {this.state.total}</h3>
-              <PopulationChart totalPop={this.state.total} malePop={this.state.m}/>
+              <PopulationChart totalPop={this.state.total} malePop={this.state.m} femalePop={this.state.f}/>
             </div>
           </div>
           :

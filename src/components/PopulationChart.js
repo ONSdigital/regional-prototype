@@ -3,10 +3,6 @@ import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryTooltip, Vi
 
 class PopulationChart extends Component {
 
-  componentDidUpdate() {
-    console.log(this.props.malePop, this.props.totalPop)
-  }
-
   render() {
 
     const dataA = [
@@ -21,19 +17,19 @@ class PopulationChart extends Component {
     ];
 
     const dataB = [
-      { x: "0-10", y: (this.props.malePop.m1 / this.props.totalPop * 100).toFixed(2) },
-      { x: "11-20", y: (this.props.malePop.m2 / this.props.totalPop * 100).toFixed(2) },
-      { x: "21-30", y: (this.props.malePop.m3 / this.props.totalPop * 100).toFixed(2) },
-      { x: "31-40", y: (this.props.malePop.m4 / this.props.totalPop * 100).toFixed(2) },
-      { x: "41-50", y: (this.props.malePop.m5 / this.props.totalPop * 100).toFixed(2) },
-      { x: "51-60", y: (this.props.malePop.m6 / this.props.totalPop * 100).toFixed(2) },
-      { x: "61-70", y: (this.props.malePop.m7 / this.props.totalPop * 100).toFixed(2) },
-      { x: "70+", y: (this.props.malePop.m8 / this.props.totalPop * 100).toFixed(2) }
+      { x: "0-10", y: (this.props.femalePop.f1 / this.props.totalPop * 100).toFixed(2) },
+      { x: "11-20", y: (this.props.femalePop.f2 / this.props.totalPop * 100).toFixed(2) },
+      { x: "21-30", y: (this.props.femalePop.f3 / this.props.totalPop * 100).toFixed(2) },
+      { x: "31-40", y: (this.props.femalePop.f4 / this.props.totalPop * 100).toFixed(2) },
+      { x: "41-50", y: (this.props.femalePop.f5 / this.props.totalPop * 100).toFixed(2) },
+      { x: "51-60", y: (this.props.femalePop.f6 / this.props.totalPop * 100).toFixed(2) },
+      { x: "61-70", y: (this.props.femalePop.f7 / this.props.totalPop * 100).toFixed(2) },
+      { x: "70+", y: (this.props.femalePop.f8 / this.props.totalPop * 100).toFixed(2) }
     ];
 
 
-    const width = 500;
-    const height = 500;
+    const width = 300;
+    const height = 400;
     const padding = { top: 80, bottom: 80, left: 20, right: 20 };
 
     return (
@@ -42,7 +38,7 @@ class PopulationChart extends Component {
       >
         <VictoryStack horizontal
           standalone={false}
-          domain={{ x: [-20, 20] }}
+          domain={{ x: [-15, 15] }}
           padding={padding}
           height={height}
           width={width}
