@@ -3,7 +3,7 @@
 .region-info {
   width: 400px;
   position: absolute;
-  top: 25%;
+  top: 20%;
   left: 10%;
   background-color: #3B7A9E;
   z-index: 1;
@@ -38,4 +38,15 @@ g text tspan {
   height: 500px;
   width: 100vw;
   border-bottom: 1px solid #000;
+}
+
+.map-placeholder {
+  height: 500px;
+  width: 100vw;
+  border-bottom: 1px solid #000;
+}
+
+.chart-tab {
+  margin-top: 10%;
+  border: 1px solid #414042;
 }

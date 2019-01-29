@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getPop, getMalePop, getFemalePop } from '../api/RequestHandler';
 import MapContainer from './MapContainer';
 import PopulationChart from './PopulationChart';
+import ChartTab from './ChartTab';
 
 class Region extends Component {
   constructor(props) {
@@ -176,7 +177,7 @@ class Region extends Component {
       <div>
         {this.state.loaded ?
           <div>
-            {this.state.polygon.length > 0 ? <MapContainer polygon={this.state.polygon} mapCenter={this.state.mapCenter}/> : null}
+            {this.state.polygon.length > 0 ? <MapContainer polygon={this.state.polygon} mapCenter={this.state.mapCenter}/> : <div className="map-placeholder"></div>}
             <div className="region-info">
               <h1>{this.props.location.state.label}</h1>
               <h3>Population: {this.state.total}</h3>
@@ -188,6 +189,7 @@ class Region extends Component {
           :
             <p>Loading map data for {this.props.location.state.label}...</p>
         }
+        <ChartTab />
       </div>
     )
   }

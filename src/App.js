@@ -5,7 +5,6 @@ import { getCodes, getGeoData } from './api/RequestHandler';
 import Header from './components/Header';
 import Search from './components/Search';
 import Region from './components/Region';
-import PopulationChart from './components/PopulationChart';
 
 
 class App extends Component {
