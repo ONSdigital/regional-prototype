@@ -15,6 +15,25 @@
   margin: 0;
 }
 
+.label {
+  display: inline-block;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.female {
+  float: right;
+}
+
+g line {
+  display: none;
+}
+
+g text tspan {
+  font-size: 10px !important;
+  fill: white !important;
+}
+
 .map {
   height: 500px;
   width: 100vw;

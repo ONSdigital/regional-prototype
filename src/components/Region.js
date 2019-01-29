@@ -172,7 +172,6 @@ class Region extends Component {
   }
 
   render() {
-    console.log((this.state.f))
     return (
       <div>
         {this.state.loaded ?
@@ -181,6 +180,8 @@ class Region extends Component {
             <div className="region-info">
               <h1>{this.props.location.state.label}</h1>
               <h3>Population: {this.state.total}</h3>
+              <p className="label male">Male</p>
+              <p className="label female">Female</p>
               <PopulationChart totalPop={this.state.total} malePop={this.state.m} femalePop={this.state.f}/>
             </div>
           </div>
