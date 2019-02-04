@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryTooltip, VictoryLabel, VictoryStack, PropTypes } from 'victory';
+import { VictoryBar, VictoryAxis, VictoryLabel, VictoryStack } from 'victory';
 
 class PopulationChart extends Component {
 

@@ -1,3 +1,5 @@
+// Get codes for Local Authorities
+
 export function getCodes() {
   return fetch(`https://api.beta.ons.gov.uk/v1/code-lists/local-authority/editions/2016/codes`)
 
@@ -8,6 +10,8 @@ export function getCodes() {
     });
 }
 
+// Get Geo Data
+
 export function getGeoData() {
   return fetch('https://ons-inspire.esriuk.com/arcgis/rest/services/Administrative_Boundaries/Local_Authority_Districts_May_2018_Boundaries/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=json')
     .then(console.log('geoData'))
@@ -16,6 +20,8 @@ export function getGeoData() {
     console.error(error);
   });
 }
+
+// Get Population Data
 
 export function getMalePop(code) {
   return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2016&geography=${code}&sex=1&age=*`)
@@ -38,6 +44,64 @@ export function getFemalePop(code) {
 export function getPop(code) {
   return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2016&geography=${code}&sex=0&age=*`)
     .then(console.log('getPop'))
+    .then((response) => response.json())
+    .catch((error) => {
+    console.error(error);
+  });
+}
+
+// Get Full Time Earnings
+
+export function getEarnings(code) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-7-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=all&Workingpattern=full-time&Statistics=median&Geography=${code}`)
+    .then(console.log('getEarnings'))
+    .then((response) => response.json())
+    .catch((error) => {
+    console.error(error);
+  });
+}
+
+export function getEarningsMale(code) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-7-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=male&Workingpattern=full-time&Statistics=median&Geography=${code}`)
+    .then(console.log('getEarningsMale'))
+    .then((response) => response.json())
+    .catch((error) => {
+    console.error(error);
+  });
+}
+
+export function getEarningsFemale(code) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-7-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=female&Workingpattern=full-time&Statistics=median&Geography=${code}`)
+    .then(console.log('getEarningsFemale'))
+    .then((response) => response.json())
+    .catch((error) => {
+    console.error(error);
+  });
+}
+
+// Get Part Time Earnings
+
+export function getPartTimeEarnings(code) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-7-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=all&Workingpattern=part-time&Statistics=median&Geography=${code}`)
+    .then(console.log('getPartTimeEarnings'))
+    .then((response) => response.json())
+    .catch((error) => {
+    console.error(error);
+  });
+}
+
+export function getPartTimeEarningsMale(code) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-7-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=male&Workingpattern=part-time&Statistics=median&Geography=${code}`)
+    .then(console.log('getPartTimeEarningsMale'))
+    .then((response) => response.json())
+    .catch((error) => {
+    console.error(error);
+  });
+}
+
+export function getPartTimeEarningsFemale(code) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-7-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=female&Workingpattern=part-time&Statistics=median&Geography=${code}`)
+    .then(console.log('getPartTimeEarningsFemale'))
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);

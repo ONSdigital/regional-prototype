@@ -25,11 +25,11 @@
   float: right;
 }
 
-g line {
+#population g line {
   display: none;
 }
 
-g text tspan {
+#population g text tspan {
   font-size: 10px !important;
   fill: white !important;
 }
