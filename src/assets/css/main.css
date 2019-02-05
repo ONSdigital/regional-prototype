@@ -1,9 +1,9 @@
 /* Custom css */
 
 .region-info {
-  width: 400px;
+  width: 500px;
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 10%;
   background-color: #3B7A9E;
   z-index: 1;
@@ -30,7 +30,7 @@
 }
 
 #population g text tspan {
-  font-size: 10px !important;
+  font-size: 5px !important;
   fill: white !important;
 }
 

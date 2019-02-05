@@ -32,8 +32,8 @@ class MapContainer extends Component {
           'layout': {},
           'paint': {
             'fill-color': '#206095',
-            'fill-opacity': 0.8,
-            'fill-outline-color': '#FF9933'
+            'fill-opacity': 0.7,
+            'fill-outline-color': '#000000'
           }
       });
     });

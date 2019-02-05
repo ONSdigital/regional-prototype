@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import MapContainer from './MapContainer';
 import PopulationData from './Data/PopulationData';
 import ChartTab from './ChartTab';
+import area from '@turf/area';
+import {polygon} from '@turf/helpers';
 
 class Region extends Component {
   constructor(props) {
@@ -9,12 +11,12 @@ class Region extends Component {
     this.state = {
       loaded: false,
       polygon: [],
-      mapCenter: []
+      mapCenter: [],
+      zoom: 8
     }
   }
 
   async componentDidMount() {
-
 
     let that = this;
 
@@ -27,9 +29,14 @@ class Region extends Component {
       }
     })
 
+    var pg = polygon(this.state.polygon)
+    var size = area(pg)
+
     this.setState({
-      loaded: true
+      loaded: true,
+      zoom: Math.round(size)
     })
+
   }
 
   render() {

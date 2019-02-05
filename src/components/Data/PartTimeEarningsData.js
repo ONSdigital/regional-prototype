@@ -17,7 +17,6 @@ class PartTimeEarningsData extends Component {
     let that = this
     await getPartTimeEarnings(this.props.localAuth)
       .then((response) => {
-        console.log(response)
         response.observations.forEach(function(time) {
           if (time.observation === '') {
             return null
@@ -31,7 +30,6 @@ class PartTimeEarningsData extends Component {
 
     await getPartTimeEarningsMale(this.props.localAuth)
       .then((response) => {
-        console.log(response)
         response.observations.forEach(function(time) {
           if(time.observation === '') {
             return null
@@ -46,7 +44,6 @@ class PartTimeEarningsData extends Component {
 
     await getPartTimeEarningsFemale(this.props.localAuth)
       .then((response) => {
-        console.log(response)
         response.observations.forEach(function(time) {
           if(time.observation === '') {
             return null

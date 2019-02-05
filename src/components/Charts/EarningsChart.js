@@ -42,7 +42,7 @@ class EarningsChart extends Component {
       <VictoryChart domain={{y: [this.state.lower - 2000, this.state.upper + 2000]}}>
         <VictoryGroup
           data={this.props.dataFull}
-          labels={(d) => `£${d.y}`}
+          labels={(data) => `£${data.y}`}
           labelComponent={
               <VictoryTooltip
                 style={{ fontSize: 10 }}
@@ -59,7 +59,7 @@ class EarningsChart extends Component {
         </VictoryGroup>
         <VictoryGroup
           data={this.props.dataMale}
-          labels={(d) => `£${d.y}`}
+          labels={(data) => `£${data.y}`}
           labelComponent={
               <VictoryTooltip
                 style={{ fontSize: 10 }}
