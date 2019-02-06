@@ -55,7 +55,7 @@ class EarningsChart extends Component {
                 }}
 
           />
-          <VictoryScatter />
+        <VictoryScatter size={5} style={{ data: { fill: "#3B7A9E" } }}/>
         </VictoryGroup>
         <VictoryGroup
           data={this.props.dataMale}
@@ -71,7 +71,7 @@ class EarningsChart extends Component {
                   data: { stroke: "tomato" }
                 }}
             />
-          <VictoryScatter />
+          <VictoryScatter size={5} style={{ data: { fill: "tomato" } }}/>
         </VictoryGroup>
         <VictoryGroup
           data={this.props.dataFemale}
@@ -87,7 +87,7 @@ class EarningsChart extends Component {
                   data: { stroke: "orange" }
                 }}
             />
-          <VictoryScatter />
+          <VictoryScatter size={5} style={{ data: { fill: "orange" } }}/>
         </VictoryGroup>
 
 
