@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import EarningsData from './Data/EarningsData';
 import PartTimeEarningsData from './Data/PartTimeEarningsData';
+import WellBeingData from './Data/WellBeingData';
 
 class ChartTab extends Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class ChartTab extends Component {
     this.state = {
       earnings: true,
       unemployment: false,
-      wellfare: false
+      wellbeing: false
     }
   }
 
@@ -16,7 +17,7 @@ class ChartTab extends Component {
     this.setState({
       earnings: true,
       unemployment: false,
-      wellfare: false
+      wellbeing: false
     })
     this.updateClass(e)
   }
@@ -25,16 +26,16 @@ class ChartTab extends Component {
     this.setState({
       earnings: false,
       unemployment: true,
-      wellfare: false
+      wellbeing: false
     })
     this.updateClass(e)
   }
 
-  handleWellfareClick(e) {
+  handleWellBeingClick(e) {
     this.setState({
       earnings: false,
       unemployment: false,
-      wellfare: true
+      wellbeing: true
     })
     this.updateClass(e)
   }
@@ -52,7 +53,7 @@ class ChartTab extends Component {
   render() {
     this.handleEarningsClick = this.handleEarningsClick.bind(this)
     this.handleUnemploymentClick = this.handleUnemploymentClick.bind(this)
-    this.handleWellfareClick = this.handleWellfareClick.bind(this)
+    this.handleWellBeingClick = this.handleWellBeingClick.bind(this)
     return (
       <div className="chart-tab wrapper">
         <div className="background--ship-grey padding-top-md--1">
@@ -62,10 +63,10 @@ class ChartTab extends Component {
                         <span className="tab__link tab__link--active" onClick={(e) => {this.handleEarningsClick(e)}}>Earnings</span>
                     </li>
                     <li className="tab__item width-sm--6">
-                        <span className="tab__link tab__link" onClick={(e) => {this.handleUnemploymentClick(e)}}>Unemployment</span>
+                        <span className="tab__link tab__link" onClick={(e) => {this.handleWellBeingClick(e)}}>Well-Being</span>
                     </li>
                     <li className="tab__item width-sm--6">
-                        <span className="tab__link tab__link" onClick={(e) => {this.handleWellfareClick(e)}}>Wellfare</span>
+                        <span className="tab__link tab__link" onClick={(e) => {this.handleUnemploymentClick(e)}}>Unemployment</span>
                     </li>
                 </ul>
             </nav>
@@ -86,6 +87,18 @@ class ChartTab extends Component {
               </div>
             </div>
              : null}
+          {this.state.wellbeing ?
+            <div className="col-wrap">
+              <div className="col col--md-one col--lg-one">
+                <h2>Personal Well-being</h2>
+              </div>
+              <div className="col col--md-half col--lg-half">
+              </div>
+              <div>
+                <WellBeingData localAuth={this.props.localAuth} />
+              </div>
+            </div> : null
+          }
         </div>
 
       </div>
