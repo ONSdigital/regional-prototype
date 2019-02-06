@@ -24,7 +24,6 @@ class WellBeingData extends Component {
 
     await getUKWellBeing('anxiety')
       .then((response) => {
-        console.log(response)
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {
             that.setState({
