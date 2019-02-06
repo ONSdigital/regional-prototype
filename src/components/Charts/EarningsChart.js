@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel, VictoryScatter, VictoryGroup, VictoryTooltip } from 'victory';
+import { VictoryChart, VictoryLine, VictoryScatter, VictoryGroup, VictoryTooltip } from 'victory';
 
 class EarningsChart extends Component {
   constructor(props) {

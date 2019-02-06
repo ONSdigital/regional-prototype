@@ -31,10 +31,10 @@ class PopulationChart extends Component {
   }
 
   render() {
-    console.log(this.props)
     const width = 150;
     const height = this.props.fData.length * 1.25;
     const padding = { top: 5, bottom: 5, left: 0, right: 0 };
+    const domain = { x: [-this.state.upper.toFixed(2), this.state.upper.toFixed(2)]}
 
     return (
       <svg viewBox={`0 0 ${width} ${height}`}
@@ -42,7 +42,7 @@ class PopulationChart extends Component {
       >
         <VictoryStack horizontal
           standalone={false}
-          domain={{ x: [-this.state.upper, this.state.upper] }}
+          domain={domain}
           padding={padding}
           height={height}
           width={width}
@@ -53,7 +53,7 @@ class PopulationChart extends Component {
 
             style={{ data: { fill: "tomato" } }}
             data={this.props.mData}
-            labels={''}
+            labels={(data) => ""}
             labelComponent={<VictoryLabel x={10} textAnchor="middle"/>}
             y={(data) => (-Math.abs(data.y))}
             events={[
@@ -88,7 +88,7 @@ class PopulationChart extends Component {
           <VictoryBar
             style={{ data: { fill: "orange" } }}
             data={this.props.fData}
-            labels={''}
+            labels={(data) => ""}
             labelComponent={<VictoryLabel x={140} textAnchor="middle"/>}
             y={(data) => (Math.abs(data.y))}
             events={[
@@ -122,7 +122,7 @@ class PopulationChart extends Component {
           />
           <VictoryAxis
             dependentAxis
-            tickLabelComponent={<VictoryLabel x={75} textAnchor="middle"   />}
+            tickLabelComponent={<VictoryLabel x={75} textAnchor="middle" />}
           />
 
         </VictoryStack>

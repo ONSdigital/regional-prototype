@@ -70,10 +70,12 @@ class ChartTab extends Component {
                 </ul>
             </nav>
         </div>
-        <div>
+        <div className="margin-left--2 margin-right--2 margin-bottom--2">
           {this.state.earnings ?
             <div className="col-wrap">
-              <h2>Annual Earnings for Full Time and Part Time Workers </h2>
+              <div className="col col--md-one col--lg-one">
+                <h2>Annual Earnings for Full Time and Part Time Workers </h2>
+              </div>
               <div className="col col--md-half col--lg-half">
                 <h3>Full Time</h3>
                 <EarningsData localAuth={this.props.localAuth} />
