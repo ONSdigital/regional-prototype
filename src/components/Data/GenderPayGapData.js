@@ -57,7 +57,6 @@ class GenderPayGapData extends Component {
       .then((response) => {
         response.observations.forEach(function(item) {
           if(item.observation === "") {
-            console.log(item)
             that.setState({
               malePT: [...that.state.malePT, {x:Number(item.dimensions.Time.label), y: 0}]
             })

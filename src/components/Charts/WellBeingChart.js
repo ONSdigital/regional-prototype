@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryChart, VictoryBar, VictoryAxis, VictoryGroup, VictoryTooltip } from 'victory';
+import { VictoryChart, VictoryBar, VictoryAxis, VictoryGroup } from 'victory';
 
 class WellBeingChart extends Component {
   render() {
