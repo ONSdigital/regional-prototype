@@ -15,6 +15,7 @@ class GenderPayGapData extends Component {
       fullTime: [],
       partTime: [],
       all: [],
+      date: 0,
       loaded: false
     }
   }
@@ -27,11 +28,11 @@ class GenderPayGapData extends Component {
         response.observations.forEach(function(item) {
           if(item.observation === "") {
             that.setState({
-              maleFT: [...that.state.maleFT, {x: item.dimensions.Time.label , y: 0}]
+              maleFT: [...that.state.maleFT, {x: Number(item.dimensions.Time.label), y: 0}]
             })
           } else {
             that.setState({
-              maleFT: [...that.state.maleFT, {x: item.dimensions.Time.label , y: parseFloat(item.observation,2)}]
+              maleFT: [...that.state.maleFT, {x: Number(item.dimensions.Time.label) , y: Number(item.observation)}]
             })
           }
         })
@@ -42,11 +43,11 @@ class GenderPayGapData extends Component {
         response.observations.forEach(function(item) {
           if(item.observation === "") {
             that.setState({
-              femaleFT: [...that.state.femaleFT, {x: item.dimensions.Time.label , y: 0}]
+              femaleFT: [...that.state.femaleFT, {x: Number(item.dimensions.Time.label) , y: 0}]
             })
           } else {
             that.setState({
-              femaleFT: [...that.state.femaleFT, {x: item.dimensions.Time.label , y: parseFloat(item.observation, 2)}]
+              femaleFT: [...that.state.femaleFT, {x: Number(item.dimensions.Time.label) , y: Number(item.observation)}]
             })
           }
         })
@@ -58,11 +59,11 @@ class GenderPayGapData extends Component {
           if(item.observation === "") {
             console.log(item)
             that.setState({
-              malePT: [...that.state.malePT, {x: item.dimensions.Time.label , y: 0}]
+              malePT: [...that.state.malePT, {x:Number(item.dimensions.Time.label), y: 0}]
             })
           } else {
             that.setState({
-              malePT: [...that.state.malePT, {x: item.dimensions.Time.label , y: parseFloat(item.observation,2)}]
+              malePT: [...that.state.malePT, {x: Number(item.dimensions.Time.label) , y: Number(item.observation)}]
             })
           }
         })
@@ -73,11 +74,11 @@ class GenderPayGapData extends Component {
         response.observations.forEach(function(item) {
           if(item.observation === "") {
             that.setState({
-              femalePT: [...that.state.femalePT, {x: item.dimensions.Time.label , y: 0}]
+              femalePT: [...that.state.femalePT, {x: Number(item.dimensions.Time.label) , y: 0}]
             })
           } else {
             that.setState({
-              femalePT: [...that.state.femalePT, {x: item.dimensions.Time.label , y: parseFloat(item.observation, 2)}]
+              femalePT: [...that.state.femalePT, {x: Number(item.dimensions.Time.label) , y: Number(item.observation)}]
             })
           }
         })
@@ -88,11 +89,11 @@ class GenderPayGapData extends Component {
         response.observations.forEach(function(item) {
           if(item.observation === "") {
             that.setState({
-              maleAll: [...that.state.maleAll, {x: item.dimensions.Time.label , y: 0}]
+              maleAll: [...that.state.maleAll, {x: Number(item.dimensions.Time.label) , y: 0}]
             })
           } else {
             that.setState({
-              maleAll: [...that.state.maleAll, {x: item.dimensions.Time.label , y: parseFloat(item.observation,2)}]
+              maleAll: [...that.state.maleAll, {x: Number(item.dimensions.Time.label) , y: Number(item.observation)}]
             })
           }
         })
@@ -103,11 +104,11 @@ class GenderPayGapData extends Component {
         response.observations.forEach(function(item) {
           if(item.observation === "") {
             that.setState({
-              femaleAll: [...that.state.femaleAll, {x: item.dimensions.Time.label , y: 0}]
+              femaleAll: [...that.state.femaleAll, {x: Number(item.dimensions.Time.label) , y: 0}]
             })
           } else {
             that.setState({
-              femaleAll: [...that.state.femaleAll, {x: item.dimensions.Time.label , y: parseFloat(item.observation, 2)}]
+              femaleAll: [...that.state.femaleAll, {x: Number(item.dimensions.Time.label) , y: Number(item.observation)}]
             })
           }
         })
@@ -116,6 +117,8 @@ class GenderPayGapData extends Component {
     await this.getPercentage(this.state.femaleFT, this.state.maleFT, "fullTime")
     await this.getPercentage(this.state.femalePT, this.state.malePT, "partTime")
     await this.getPercentage(this.state.femaleAll, this.state.maleAll, "all")
+
+    await this.setDate([...this.state.fullTime, ...this.state.partTime, ...this.state.all])
 
     this.setState({
       loaded: true
@@ -140,11 +143,47 @@ class GenderPayGapData extends Component {
     })
   }
 
+  setDate(array) {
+    let that = this
+    let data = []
+    array.forEach(function(date) {
+      data.push(date.x)
+    })
+    if (data.length === array.length) {
+      that.setState({
+          date: that.getHighest(data)
+      })
+    }
+  }
+
+  getHighest(array) {
+    return Math.max.apply(Math, array);
+  }
+
+
 
   render() {
     return (
       <div>
-        {this.state.loaded ? <GenderPayGapChart fullTime={this.state.fullTime} partTime={this.state.partTime}  all={this.state.all}/> : null}
+        {this.state.loaded ?
+          <div>
+            <div className="col col--md-half col--lg-half">
+              <h3>Key Figures ({this.state.date}):</h3>
+              <h4>Full Time: {this.state.fullTime.map((date) =>
+                  date.x === this.state.date ? `${date.y.toFixed(2)}%` : null
+                )}</h4>
+              <h4>Part Time: {this.state.partTime.map((date) =>
+                  date.x === this.state.date ? `${date.y.toFixed(2)}%` : null
+                )}</h4>
+              <h4>All Working Patterns: {this.state.all.map((date) =>
+                  date.x === this.state.date ? `${date.y.toFixed(2)}%` : null
+                )}</h4>
+            </div>
+            <div className="col col--md-half col--lg-half">
+              <GenderPayGapChart fullTime={this.state.fullTime} partTime={this.state.partTime}  all={this.state.all}/>
+            </div>
+          </div>
+          : null}
 
       </div>
 

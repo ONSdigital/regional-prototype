@@ -40,6 +40,7 @@ class GenderPayGapChart extends Component {
     return (
       <VictoryChart
         domain={{y: [this.state.lower - 2, this.state.upper + 2]}}
+        domainPadding={{x: [20, 10]}}
       >
         <VictoryGroup
           labels={(data) => `${data.y.toFixed(2)}%`}
@@ -89,8 +90,20 @@ class GenderPayGapChart extends Component {
             />
           <VictoryScatter size={5} style={{ data: { fill: "#3B7A9E" } }}/>
         </VictoryGroup>
-        <VictoryAxis dependentAxis tickFormat={(t) => `${t}%`}/>
-        <VictoryAxis />
+        <VictoryAxis
+          dependentAxis tickFormat={(t) => `${t}%`}
+          style={{
+            ticks: {stroke: "black", size: 5},
+            grid: {stroke: "grey"},
+          }}
+          />
+        <VictoryAxis
+          tickFormat={(d) => `${d.toString()}`}
+          style={{
+            ticks: {stroke: "black", size: 5},
+            tickLabels: {padding: 120}
+          }}
+          />
       </VictoryChart>
     )
   }

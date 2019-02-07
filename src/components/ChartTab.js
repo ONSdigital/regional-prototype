@@ -93,8 +93,6 @@ class ChartTab extends Component {
               <div className="col col--md-one col--lg-one">
                 <h2>Personal Well-being</h2>
               </div>
-              <div className="col col--md-half col--lg-half">
-              </div>
               <div>
                 <WellBeingData localAuth={this.props.localAuth} />
               </div>
@@ -102,9 +100,10 @@ class ChartTab extends Component {
           }
           {this.state.genderPayGap ?
             <div className="col-wrap">
-              <div className="col col--md-half col--lg-half">
-                <GenderPayGapData localAuth={this.props.localAuth} />
+              <div className="col col--md-one col--lg-one">
+                <h2>Gender Pay Gap</h2>
               </div>
+              <GenderPayGapData localAuth={this.props.localAuth} />
             </div> : null
           }
         </div>
