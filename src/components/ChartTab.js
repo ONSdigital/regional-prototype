@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import EarningsData from './Data/EarningsData';
 import PartTimeEarningsData from './Data/PartTimeEarningsData';
 import WellBeingData from './Data/WellBeingData';
+import GenderPayGapData from './Data/GenderPayGapData';
 
 class ChartTab extends Component {
   constructor(props) {
     super(props)
     this.state = {
       earnings: true,
-      unemployment: false,
+      genderPayGap: false,
       wellbeing: false
     }
   }
@@ -16,16 +17,16 @@ class ChartTab extends Component {
   handleEarningsClick(e) {
     this.setState({
       earnings: true,
-      unemployment: false,
+      genderPayGap: false,
       wellbeing: false
     })
     this.updateClass(e)
   }
 
-  handleUnemploymentClick(e) {
+  handleGenderPayGapClick(e) {
     this.setState({
       earnings: false,
-      unemployment: true,
+      genderPayGap: true,
       wellbeing: false
     })
     this.updateClass(e)
@@ -34,7 +35,7 @@ class ChartTab extends Component {
   handleWellBeingClick(e) {
     this.setState({
       earnings: false,
-      unemployment: false,
+      genderPayGap: false,
       wellbeing: true
     })
     this.updateClass(e)
@@ -52,7 +53,7 @@ class ChartTab extends Component {
 
   render() {
     this.handleEarningsClick = this.handleEarningsClick.bind(this)
-    this.handleUnemploymentClick = this.handleUnemploymentClick.bind(this)
+    this.handleGenderPayGapClick = this.handleGenderPayGapClick.bind(this)
     this.handleWellBeingClick = this.handleWellBeingClick.bind(this)
     return (
       <div className="chart-tab wrapper">
@@ -66,7 +67,7 @@ class ChartTab extends Component {
                         <span className="tab__link tab__link" onClick={(e) => {this.handleWellBeingClick(e)}}>Well-Being</span>
                     </li>
                     <li className="tab__item width-sm--6">
-                        <span className="tab__link tab__link" onClick={(e) => {this.handleUnemploymentClick(e)}}>Unemployment</span>
+                        <span className="tab__link tab__link" onClick={(e) => {this.handleGenderPayGapClick(e)}}>Gender Pay Gap</span>
                     </li>
                 </ul>
             </nav>
@@ -96,6 +97,13 @@ class ChartTab extends Component {
               </div>
               <div>
                 <WellBeingData localAuth={this.props.localAuth} />
+              </div>
+            </div> : null
+          }
+          {this.state.genderPayGap ?
+            <div className="col-wrap">
+              <div className="col col--md-half col--lg-half">
+                <GenderPayGapData localAuth={this.props.localAuth} />
               </div>
             </div> : null
           }
