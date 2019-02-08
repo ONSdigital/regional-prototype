@@ -22,7 +22,7 @@ class EarningsData extends Component {
             return null
           } else {
             that.setState({
-              fullTime: [...that.state.fullTime, {x: time.dimensions.Time.label, y: parseInt(time.observation, 10)}]
+              fullTime: [...that.state.fullTime, {x: Number(time.dimensions.Time.label), y: Number(time.observation)}]
             })
           }
         })
@@ -35,7 +35,7 @@ class EarningsData extends Component {
             return null
           } else {
             that.setState({
-              fullTimeMale: [...that.state.fullTimeMale, {x: time.dimensions.Time.label, y: parseInt(time.observation, 10)}]
+              fullTimeMale: [...that.state.fullTimeMale, {x: Number(time.dimensions.Time.label), y: Number(time.observation)}]
             })
           }
 
@@ -49,7 +49,7 @@ class EarningsData extends Component {
             return null
           } else {
             that.setState({
-              fullTimeFemale: [...that.state.fullTimeFemale, {x: time.dimensions.Time.label, y: parseInt(time.observation, 10)}]
+              fullTimeFemale: [...that.state.fullTimeFemale, {x: Number(time.dimensions.Time.label), y: Number(time.observation)}]
             })
           }
 
@@ -62,10 +62,15 @@ class EarningsData extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.state.loaded ? <EarningsChart dataFull={this.state.fullTime.reverse()} dataMale={this.state.fullTimeMale.reverse()} dataFemale={this.state.fullTimeFemale.reverse()}/> : null}
 
+    return (
+      <div className="col-5">
+        {this.state.loaded && this.props.show ?
+          <div>
+            <h3>Full Time</h3>
+            <EarningsChart dataFull={this.state.fullTime} dataMale={this.state.fullTimeMale} dataFemale={this.state.fullTimeFemale}/>
+          </div>
+            : null}
       </div>
 
     )

@@ -45,16 +45,15 @@ class Region extends Component {
         {this.state.loaded ?
           <div>
             {this.state.polygon.length > 0 ? <MapContainer polygon={this.state.polygon} mapCenter={this.state.mapCenter}/> : <div className="map-placeholder"></div>}
-            <div className="region-info">
-              <h1>{this.props.location.state.label}</h1>
-              <PopulationData localAuth={this.props.location.state.id}/>
-            </div>
           </div>
           :
             <p>Loading map data for {this.props.location.state.label}...</p>
         }
+        <div className="region-info">
+          <h1>{this.props.location.state.label}</h1>
+          <PopulationData localAuth={this.props.location.state.id}/>
+        </div>
         <ChartTab localAuth={this.props.location.state.id} />
-
       </div>
     )
   }

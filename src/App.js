@@ -5,6 +5,7 @@ import { getCodes, getGeoData } from './api/RequestHandler';
 import Header from './components/Header';
 import Search from './components/Search';
 import Region from './components/Region';
+import Footer from './components/Footer';
 
 
 class App extends Component {
@@ -41,6 +42,7 @@ class App extends Component {
               <Route exact path="/" component={() => <Search localAuthorities={this.state.localAuthorities} />} />
               <Route path="/:region" render={(props) => <Region {...props} places={this.state.places} />} />
             </Switch>
+          <Footer />
         </div>
       </Router>
     );

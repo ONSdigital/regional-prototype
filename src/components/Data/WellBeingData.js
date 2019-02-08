@@ -27,7 +27,7 @@ class WellBeingData extends Component {
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {
             that.setState({
-              ukAnxiety: [...that.state.ukAnxiety, {x: item.dimensions.estimate.label, y: parseFloat(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
+              ukAnxiety: [...that.state.ukAnxiety, {x: item.dimensions.estimate.label, y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
             })
           }
         })
@@ -38,7 +38,7 @@ class WellBeingData extends Component {
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {
             that.setState({
-              ukHappiness: [...that.state.ukHappiness, {x: item.dimensions.estimate.label, y: parseInt(item.observation,10), z: that.assignValue(item.dimensions.estimate.label)}]
+              ukHappiness: [...that.state.ukHappiness, {x: item.dimensions.estimate.label, y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
             })
           }
         })
@@ -49,7 +49,7 @@ class WellBeingData extends Component {
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {
             that.setState({
-              ukWorthwhile: [...that.state.ukWorthwhile, {x: item.dimensions.estimate.label, y: parseInt(item.observation,10), z: that.assignValue(item.dimensions.estimate.label)}]
+              ukWorthwhile: [...that.state.ukWorthwhile, {x: item.dimensions.estimate.label, y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
             })
           }
         })
@@ -60,7 +60,7 @@ class WellBeingData extends Component {
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {
             that.setState({
-              ukLifeSatisfaction: [...that.state.ukLifeSatisfaction, {x: item.dimensions.estimate.label, y: parseInt(item.observation,10), z: that.assignValue(item.dimensions.estimate.label)}]
+              ukLifeSatisfaction: [...that.state.ukLifeSatisfaction, {x: item.dimensions.estimate.label, y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
             })
           }
         })
@@ -76,7 +76,7 @@ class WellBeingData extends Component {
               })
             } else {
               that.setState({
-                localAnxiety: [...that.state.localAnxiety, {x: item.dimensions.estimate.label , y: parseInt(item.observation,10), z: that.assignValue(item.dimensions.estimate.label)}]
+                localAnxiety: [...that.state.localAnxiety, {x: item.dimensions.estimate.label , y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
               })
             }
 
@@ -94,7 +94,7 @@ class WellBeingData extends Component {
               })
             } else {
               that.setState({
-                localHappiness: [...that.state.localHappiness, {x: item.dimensions.estimate.label , y: parseInt(item.observation,10), z: that.assignValue(item.dimensions.estimate.label)}]
+                localHappiness: [...that.state.localHappiness, {x: item.dimensions.estimate.label , y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
               })
             }
           }
@@ -111,7 +111,7 @@ class WellBeingData extends Component {
               })
             } else {
               that.setState({
-                localWorthwhile: [...that.state.localWorthwhile, {x: item.dimensions.estimate.label , y: parseInt(item.observation,10), z: that.assignValue(item.dimensions.estimate.label)}]
+                localWorthwhile: [...that.state.localWorthwhile, {x: item.dimensions.estimate.label , y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
               })
             }
           }
@@ -128,7 +128,7 @@ class WellBeingData extends Component {
               })
             } else {
               that.setState({
-                localLifeSatisfaction: [...that.state.localLifeSatisfaction, {x: item.dimensions.estimate.label , y: parseInt(item.observation,10), z: that.assignValue(item.dimensions.estimate.label)}]
+                localLifeSatisfaction: [...that.state.localLifeSatisfaction, {x: item.dimensions.estimate.label , y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
               })
             }
           }
@@ -155,22 +155,29 @@ class WellBeingData extends Component {
   render() {
     return (
       <div>
-        <div className="col col--md-half col--lg-half">
-          <h3>Anxiety</h3>
-          <WellBeingChart local={this.state.localAnxiety} uk={this.state.ukAnxiety} color={["green", "#3B7A9E"]} />
-        </div>
-        <div className="col col--md-half col--lg-half">
-          <h3>Happiness</h3>
-          <WellBeingChart local={this.state.localHappiness} uk={this.state.ukHappiness} color={["orange", "#3B7A9E"]} />
-        </div>
-        <div className="col col--md-half col--lg-half">
-          <h3>Worthwhile</h3>
-          <WellBeingChart local={this.state.localWorthwhile} uk={this.state.ukWorthwhile} color={["red", "#3B7A9E"]} />
-        </div>
-        <div className="col col--md-half col--lg-half">
-          <h3>Life Satisfaction</h3>
-          <WellBeingChart local={this.state.localLifeSatisfaction} uk={this.state.ukLifeSatisfaction} color={["purple", "#3B7A9E"]} />
-        </div>
+        {this.state.loaded && this.props.show ?
+          <div className="row justify-content-md-center">
+            <div className="col-10">
+              <h2>Personal Well-being</h2>
+            </div>
+            <div className="col-5">
+              <h3>Anxiety</h3>
+              <WellBeingChart local={this.state.localAnxiety} uk={this.state.ukAnxiety} color={["rgb(15, 130, 67)", "#3B7A9E"]} />
+            </div>
+            <div className="col-5">
+              <h3>Happiness</h3>
+              <WellBeingChart local={this.state.localHappiness} uk={this.state.ukHappiness} color={["rgb(255, 178, 76)", "#3B7A9E"]} />
+            </div>
+            <div className="col-5">
+              <h3>Worthwhile</h3>
+              <WellBeingChart local={this.state.localWorthwhile} uk={this.state.ukWorthwhile} color={["rgb(211, 47, 47)", "#3B7A9E"]} />
+            </div>
+            <div className="col-5">
+              <h3>Life Satisfaction</h3>
+              <WellBeingChart local={this.state.localLifeSatisfaction} uk={this.state.ukLifeSatisfaction} color={["purple", "#3B7A9E"]} />
+            </div>
+          </div>
+           : null}
       </div>
     )
   }

@@ -56,58 +56,35 @@ class ChartTab extends Component {
     this.handleGenderPayGapClick = this.handleGenderPayGapClick.bind(this)
     this.handleWellBeingClick = this.handleWellBeingClick.bind(this)
     return (
-      <div className="chart-tab wrapper">
-        <div className="background--ship-grey padding-top-md--1">
-            <nav className="tabs--js">
-                <ul className="list--neutral flush">
-                    <li className="tab__item width-sm--6">
-                        <span className="tab__link tab__link--active" onClick={(e) => {this.handleEarningsClick(e)}}>Earnings</span>
-                    </li>
-                    <li className="tab__item width-sm--6">
-                        <span className="tab__link tab__link" onClick={(e) => {this.handleWellBeingClick(e)}}>Well-Being</span>
-                    </li>
-                    <li className="tab__item width-sm--6">
-                        <span className="tab__link tab__link" onClick={(e) => {this.handleGenderPayGapClick(e)}}>Gender Pay Gap</span>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <div className="margin-left--2 margin-right--2 margin-bottom--2">
-          {this.state.earnings ?
-            <div className="col-wrap">
-              <div className="col col--md-one col--lg-one">
-                <h2>Annual Earnings for Full Time and Part Time Workers </h2>
-              </div>
-              <div className="col col--md-half col--lg-half">
-                <h3>Full Time</h3>
-                <EarningsData localAuth={this.props.localAuth} />
-              </div>
-              <div className="col col--md-half col--lg-half">
-                <h3>Part Time</h3>
-                <PartTimeEarningsData localAuth={this.props.localAuth} />
-              </div>
+      <div className="container-fluid chart-tab">
+        <div className="row justify-content-md-center">
+          <div className="col-10">
+            <div className="background--ship-grey padding-top-md--1">
+                <nav className="tabs--js">
+                    <ul className="list--neutral flush">
+                        <li className="tab__item width-sm--6">
+                            <span className="tab__link tab__link--active" onClick={(e) => {this.handleEarningsClick(e)}}>Earnings</span>
+                        </li>
+                        <li className="tab__item width-sm--6">
+                            <span className="tab__link tab__link" onClick={(e) => {this.handleWellBeingClick(e)}}>Well-Being</span>
+                        </li>
+                        <li className="tab__item width-sm--6">
+                            <span className="tab__link tab__link" onClick={(e) => {this.handleGenderPayGapClick(e)}}>Gender Pay Gap</span>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-             : null}
-          {this.state.wellbeing ?
-            <div className="col-wrap">
-              <div className="col col--md-one col--lg-one">
-                <h2>Personal Well-being</h2>
-              </div>
-              <div>
-                <WellBeingData localAuth={this.props.localAuth} />
-              </div>
-            </div> : null
-          }
-          {this.state.genderPayGap ?
-            <div className="col-wrap">
-              <div className="col col--md-one col--lg-one">
-                <h2>Gender Pay Gap</h2>
-              </div>
-              <GenderPayGapData localAuth={this.props.localAuth} />
-            </div> : null
-          }
+          </div>
         </div>
-
+        <div className="row justify-content-md-center">
+          {this.state.earnings ? <div className="col-10">
+            <h2>Annual Earnings for Full Time and Part Time workers</h2>
+          </div> : null}
+          <EarningsData localAuth={this.props.localAuth} show={this.state.earnings} />
+          <PartTimeEarningsData localAuth={this.props.localAuth} show={this.state.earnings} />
+        </div>
+          <WellBeingData localAuth={this.props.localAuth} show={this.state.wellbeing} />
+          <GenderPayGapData localAuth={this.props.localAuth} show={this.state.genderPayGap}/>
       </div>
     )
   }

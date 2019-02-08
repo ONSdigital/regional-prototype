@@ -47,6 +47,7 @@ class PopulationChart extends Component {
           height={height}
           width={width}
           style={{ data: { width: 0.75 }, labels: { fontSize: 11, fill:"#fff" } }}
+          animate={{duration: 500}}
 
         >
           <VictoryBar

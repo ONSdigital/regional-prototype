@@ -164,9 +164,12 @@ class GenderPayGapData extends Component {
   render() {
     return (
       <div>
-        {this.state.loaded ?
-          <div>
-            <div className="col col--md-half col--lg-half">
+        {this.state.loaded && this.props.show ?
+          <div className="row justify-content-md-center">
+            <div className="col-10">
+              <h2>Gender Pay Gap</h2>
+            </div>
+            <div className="col-5">
               <h3>Key Figures ({this.state.date}):</h3>
               <h4>Full Time: {this.state.fullTime.map((date) =>
                   date.x === this.state.date ? `${date.y.toFixed(2)}%` : null
@@ -178,13 +181,13 @@ class GenderPayGapData extends Component {
                   date.x === this.state.date ? `${date.y.toFixed(2)}%` : null
                 )}</h4>
             </div>
-            <div className="col col--md-half col--lg-half">
+            <div className="col-5">
               <GenderPayGapChart fullTime={this.state.fullTime} partTime={this.state.partTime}  all={this.state.all}/>
             </div>
           </div>
           : null}
-
       </div>
+
 
     )
   }

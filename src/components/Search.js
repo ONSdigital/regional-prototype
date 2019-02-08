@@ -77,29 +77,34 @@ class Search extends Component {
         </div>
         <div className="wrapper">
           <div className="col-wrap">
-            <div className="col col--md-two-thirds col--lg-two-thirds">
-            <p>Showing {showingLA.length} results of {this.props.localAuthorities.length}</p>
-              {showingLA.sort().map((item,key) =>
-                <div key={key} className="local-authorities">
-                  <li>{item}</li>
-                  <div className="btn-group">
-                    <Link className="btn btn--primary" to={{pathname: '/' + item.replace(/\s+/g, '-').toLowerCase(), state: this.addCode(item) }}>Go To</Link>
-                    <button className="btn btn--secondary" value={item} onClick={(e) => this.handleAdd(e)}>Add</button>
+            {this.state.query ?
+              <div className="col col--md-two-thirds col--lg-two-thirds results">
+              <p>Showing {showingLA.length} results of {this.props.localAuthorities.length}</p>
+                {showingLA.sort().map((item,key) =>
+                  <div key={key} className="local-authorities">
+                    <li>{item}</li>
+                    <div className="btn-group">
+                      <Link className="btn btn--primary" to={{pathname: '/' + item.replace(/\s+/g, '-').toLowerCase(), state: this.addCode(item) }}>Go To</Link>
+                      <button className="btn btn--secondary" value={item} onClick={(e) => this.handleAdd(e)}>Add</button>
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-            <div className="col col--md-one-third col--lg-one-third">
-              <h2>Compare Local Authorities</h2>
-              {this.state.compare.length > 0 ? this.state.compare.map((item, key) =>
-                <div key={key} className="compare local-authorities">
-                  <li>{item}</li>
-                  <button value={item} onClick={(e) => this.handleRemove(e)}>Remove</button>
-                </div>
-              ) :
-              <p>You have not selected any local authorities yet.</p>
-              }
-            </div>
+                )}
+              </div>
+            : null }
+            {this.state.compare.length > 0 ?
+              <div className="col col--md-one-third col--lg-one-third">
+                <h2>Compare Local Authorities</h2>
+                {this.state.compare.length > 0 ? this.state.compare.map((item, key) =>
+                  <div key={key} className="compare local-authorities">
+                    <li>{item}</li>
+                    <button value={item} onClick={(e) => this.handleRemove(e)}>Remove</button>
+                  </div>
+                ) :
+                <p>You have not selected any local authorities yet.</p>
+                }
+              </div>
+              : null}
+
           </div>
         </div>
       </div>
