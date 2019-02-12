@@ -19,6 +19,11 @@ class EarningsChart extends Component {
     array.forEach(function(time) {
       earnings.push(time.y)
       date.push(time.x)
+
+    })
+    let dateLength = new Set(date).size
+    this.setState({
+      length: dateLength
     })
     if (earnings.length === array.length) {
       that.setState({
@@ -106,6 +111,7 @@ class EarningsChart extends Component {
           style={{
             ticks: {stroke: "black", size: 5}
           }}
+          tickCount={this.state.length}
           />
         <VictoryLegend x={0} y={0}
           orientation="horizontal"
