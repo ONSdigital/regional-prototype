@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { VictoryChart, VictoryLine, VictoryScatter, VictoryGroup, VictoryTooltip, VictoryAxis } from 'victory';
+import { VictoryChart, VictoryLine, VictoryScatter, VictoryGroup, VictoryTooltip, VictoryAxis, VictoryLegend } from 'victory';
 
 class EarningsChart extends Component {
   constructor(props) {
@@ -107,6 +107,16 @@ class EarningsChart extends Component {
             ticks: {stroke: "black", size: 5}
           }}
           />
+        <VictoryLegend x={0} y={0}
+          orientation="horizontal"
+          gutter={20}
+          style={{ title: {fontSize: 20 } }}
+          data={[
+            { name: "All", symbol: { fill: "#3B7A9E" } },
+            { name: "Male", symbol: { fill: "tomato" } },
+            { name: "Female", symbol: { fill: "orange" } }
+          ]}
+        />
      </VictoryChart>
     );
   }

@@ -62,7 +62,6 @@ class PartTimeEarningsData extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="col-5">
         {this.state.loaded && this.props.show ?

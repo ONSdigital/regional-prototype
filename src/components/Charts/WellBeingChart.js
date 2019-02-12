@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { VictoryChart, VictoryBar, VictoryAxis, VictoryGroup, VictoryTooltip } from 'victory';
+import { VictoryChart, VictoryBar, VictoryAxis, VictoryGroup, VictoryTooltip, VictoryLegend } from 'victory';
 
 class WellBeingChart extends Component {
 
   render() {
     const local = this.props.local.sort((a,b) => a.z - b.z)
     const uk = this.props.uk.sort((a,b) => a.z - b.z)
+    const legendColor = this.props.color[0]
     return(
       <VictoryChart>
         <VictoryGroup
@@ -38,6 +39,15 @@ class WellBeingChart extends Component {
           tickLabels: {fontSize: 0}
         }}/>
         <VictoryAxis />
+        <VictoryLegend x={0} y={0}
+          orientation="horizontal"
+          gutter={20}
+          style={{ title: {fontSize: 20 } }}
+          data={[
+            { name: this.props.title, symbol: { fill: legendColor } },
+            { name: "UK", symbol: { fill: "#3B7A9E" } }
+          ]}
+        />
       </VictoryChart>
     )
   }

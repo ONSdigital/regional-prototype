@@ -162,19 +162,19 @@ class WellBeingData extends Component {
             </div>
             <div className="col-5">
               <h3>Anxiety</h3>
-              <WellBeingChart local={this.state.localAnxiety} uk={this.state.ukAnxiety} color={["rgb(15, 130, 67)", "#3B7A9E"]} />
+              <WellBeingChart local={this.state.localAnxiety} uk={this.state.ukAnxiety} color={["rgb(15, 130, 67)", "#3B7A9E"]} title="Anxiety" />
             </div>
             <div className="col-5">
               <h3>Happiness</h3>
-              <WellBeingChart local={this.state.localHappiness} uk={this.state.ukHappiness} color={["rgb(255, 178, 76)", "#3B7A9E"]} />
+              <WellBeingChart local={this.state.localHappiness} uk={this.state.ukHappiness} color={["rgb(255, 178, 76)", "#3B7A9E"]} title="Happiness"/>
             </div>
             <div className="col-5">
               <h3>Worthwhile</h3>
-              <WellBeingChart local={this.state.localWorthwhile} uk={this.state.ukWorthwhile} color={["rgb(211, 47, 47)", "#3B7A9E"]} />
+              <WellBeingChart local={this.state.localWorthwhile} uk={this.state.ukWorthwhile} color={["rgb(211, 47, 47)", "#3B7A9E"]} title="Worthwhile" />
             </div>
             <div className="col-5">
               <h3>Life Satisfaction</h3>
-              <WellBeingChart local={this.state.localLifeSatisfaction} uk={this.state.ukLifeSatisfaction} color={["purple", "#3B7A9E"]} />
+              <WellBeingChart local={this.state.localLifeSatisfaction} uk={this.state.ukLifeSatisfaction} color={["purple", "#3B7A9E"]} title="Life Satisfaction" />
             </div>
           </div>
            : null}
