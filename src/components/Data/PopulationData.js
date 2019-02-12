@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getPop, getMalePop, getFemalePop } from '../../api/RequestHandler';
 import PopulationChart from '../Charts/PopulationChart';
+import CMDLink from '../CMDLink';
 
 class PopulationData extends Component {
   constructor(props) {
@@ -77,12 +78,19 @@ class PopulationData extends Component {
 
 
   render() {
+    let body = '{ "name": "sex", "options": [ "0", "1", "2" ] }, { "name": "time", "options": [ "2016" ] }, { "name": "age", "options": [] }'
     return (
       <div id="population">
         <h3>Population: {this.state.total}</h3>
         <p className="label male">Male</p>
         <p className="label female">Female</p>
         {this.state.loaded ? <PopulationChart totalPop={this.state.total} fData={this.state.fData.sort(this.compareNumbers)} mData={this.state.mData.sort(this.compareNumbers)} /> : <p>Loading Population Pyramid...</p> }
+        <CMDLink className="cmd-pop"
+          localAuth={this.props.localAuth}
+          dataset="mid-year-pop-est"
+          body={body}
+          icon="light"
+           />
       </div>
 
 

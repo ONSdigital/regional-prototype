@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getPartTimeEarnings, getPartTimeEarningsMale, getPartTimeEarningsFemale } from '../../api/RequestHandler';
 import EarningsChart from '../Charts/EarningsChart';
+import CMDLink from '../CMDLink';
 
 class PartTimeEarningsData extends Component {
   constructor(props) {
@@ -62,12 +63,19 @@ class PartTimeEarningsData extends Component {
   }
 
   render() {
+    let body = '{"name": "earnings", "options": [ "annual-pay-gross" ] }, { "name": "sex", "options": [ "all", "female", "male" ] }, {"name": "statistics", "options": [ "median" ] }, { "name": "time", "options": [ "2017" ] }, { "name": "workingpattern", "options": ["part-time"] }'
     return (
       <div className="col-5">
         {this.state.loaded && this.props.show ?
           <div>
             <h3>Part Time</h3>
             <EarningsChart dataFull={this.state.partTime} dataMale={this.state.partTimeMale} dataFemale={this.state.partTimeFemale}/>
+            <CMDLink
+              localAuth={this.props.localAuth}
+              dataset="ashe-table-7-earnings"
+              body={body}
+              icon="dark"
+               />
           </div> : null}
       </div>
 

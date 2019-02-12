@@ -7,7 +7,6 @@ import Search from './components/Search';
 import Region from './components/Region';
 import Footer from './components/Footer';
 
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -38,10 +37,10 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header />
-            <Switch>
-              <Route exact path="/" component={() => <Search localAuthorities={this.state.localAuthorities} />} />
-              <Route path="/:region" render={(props) => <Region {...props} places={this.state.places} />} />
-            </Switch>
+          <Switch>
+            <Route exact path="/" component={() => <Search localAuthorities={this.state.localAuthorities} />} />
+            <Route path="/:region" render={(props) => <Region {...props} places={this.state.places} />} />
+          </Switch>
           <Footer />
         </div>
       </Router>

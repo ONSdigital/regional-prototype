@@ -24,7 +24,7 @@ export function getGeoData() {
 // Get Population Data
 
 export function getMalePop(code) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2016&geography=${code}&sex=1&age=*`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2017&geography=${code}&sex=1&age=*`)
     .then(console.log('getMalePop'))
     .then((response) => response.json())
     .catch((error) => {
@@ -33,7 +33,7 @@ export function getMalePop(code) {
 }
 
 export function getFemalePop(code) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2016&geography=${code}&sex=2&age=*`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2017&geography=${code}&sex=2&age=*`)
     .then(console.log('getFemalePop'))
     .then((response) => response.json())
     .catch((error) => {
@@ -42,7 +42,7 @@ export function getFemalePop(code) {
 }
 
 export function getPop(code) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2016&geography=${code}&sex=0&age=*`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2017&geography=${code}&sex=0&age=*`)
     .then(console.log('getPop'))
     .then((response) => response.json())
     .catch((error) => {
@@ -137,4 +137,20 @@ export function getHourlyEarnings(code, hours, gender) {
     .catch((error) => {
     console.error(error);
   });
+}
+
+
+// CMD Link
+
+export function getCMDLink(query) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/filters?submitted=true`,
+    {
+      mode: 'cors',
+      method: 'post',
+      body: query
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.log(error);
+      })
 }

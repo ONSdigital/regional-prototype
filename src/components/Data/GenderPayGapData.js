@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GenderPayGapChart from '../Charts/GenderPayGapChart';
 import {getHourlyEarnings} from '../../api/RequestHandler';
+import CMDLink from '../CMDLink';
 
 class GenderPayGapData extends Component {
   constructor(props) {
@@ -171,6 +172,7 @@ class GenderPayGapData extends Component {
     let all = this.state.all.filter((date) =>
         date.x === this.state.date ? date : null
       )
+    let body = '{"name": "earnings", "options": [ "hourly-pay-excluding-overtime" ] }, { "name": "sex", "options": [ "all", "female", "male" ] }, {"name": "statistics", "options": [ "median" ] }, { "name": "time", "options": [ "2017" ] }, { "name": "workingpattern", "options": ["part-time", "full-time", "all"] }'
     return (
       <div>
         {this.state.loaded && this.props.show ?
@@ -183,6 +185,12 @@ class GenderPayGapData extends Component {
               <h4>Full Time: {fullTime.length > 0 ? `${fullTime[0].y.toFixed(2)}%` : "No data"}</h4>
               <h4>Part Time: {partTime.length > 0 ? `${partTime[0].y.toFixed(2)}%` : "No data"}</h4>
               <h4>All Working Patterns: {all.length > 0 ? `${all[0].y.toFixed(2)}%` : "No data"}</h4>
+              <CMDLink
+                localAuth={this.props.localAuth}
+                dataset="ashe-table-7-earnings"
+                body={body}
+                icon="dark"
+                 />
             </div>
             <div className="col-5">
               <GenderPayGapChart fullTime={this.state.fullTime} partTime={this.state.partTime}  all={this.state.all}/>

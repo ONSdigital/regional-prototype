@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getLocalWellBeing, getUKWellBeing } from '../../api/RequestHandler';
 import WellBeingChart from '../Charts/WellBeingChart';
+import CMDLink from '../CMDLink';
 
 class WellBeingData extends Component {
   constructor(props) {
@@ -153,6 +154,10 @@ class WellBeingData extends Component {
   }
 
   render() {
+    let bodyAnxiety = '{ "name": "allmeasuresofwellbeing", "options": [ "anxiety" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
+    let bodyHappiness = '{ "name": "allmeasuresofwellbeing", "options": [ "happiness" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
+    let bodyWorthwhile = '{ "name": "allmeasuresofwellbeing", "options": [ "worthwhile" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
+    let bodyLifeSatisfaction = '{ "name": "allmeasuresofwellbeing", "options": [ "life-satisfaction" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
     return (
       <div>
         {this.state.loaded && this.props.show ?
@@ -163,21 +168,46 @@ class WellBeingData extends Component {
             <div className="col-5">
               <h3>Anxiety</h3>
               <WellBeingChart local={this.state.localAnxiety} uk={this.state.ukAnxiety} color={["rgb(15, 130, 67)", "#3B7A9E"]} title="Anxiety" />
+              <CMDLink className="cmd-anxiety"
+                localAuth={this.props.localAuth}
+                dataset="wellbeing-local-authority"
+                body={bodyAnxiety}
+                icon="dark"
+                 />
             </div>
             <div className="col-5">
               <h3>Happiness</h3>
               <WellBeingChart local={this.state.localHappiness} uk={this.state.ukHappiness} color={["rgb(255, 178, 76)", "#3B7A9E"]} title="Happiness"/>
+              <CMDLink className="cmd-happiness"
+                localAuth={this.props.localAuth}
+                dataset="wellbeing-local-authority"
+                body={bodyHappiness}
+                icon="dark"
+                 />
             </div>
             <div className="col-5">
               <h3>Worthwhile</h3>
               <WellBeingChart local={this.state.localWorthwhile} uk={this.state.ukWorthwhile} color={["rgb(211, 47, 47)", "#3B7A9E"]} title="Worthwhile" />
+              <CMDLink className="cmd-worthwhile"
+                localAuth={this.props.localAuth}
+                dataset="wellbeing-local-authority"
+                body={bodyWorthwhile}
+                icon="dark"
+                 />
             </div>
             <div className="col-5">
               <h3>Life Satisfaction</h3>
               <WellBeingChart local={this.state.localLifeSatisfaction} uk={this.state.ukLifeSatisfaction} color={["purple", "#3B7A9E"]} title="Life Satisfaction" />
+              <CMDLink className="cmd-life-satisfaction"
+                localAuth={this.props.localAuth}
+                dataset="wellbeing-local-authority"
+                body={bodyLifeSatisfaction}
+                icon="dark"
+                 />
             </div>
           </div>
            : null}
+
       </div>
     )
   }

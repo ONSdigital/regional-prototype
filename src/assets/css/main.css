@@ -92,7 +92,14 @@
 
 #population g text tspan {
   font-size: 5px !important;
-  fill: white !important;
+  fill: #fff !important;
+}
+.cmd-pop {
+  color: #fff;
+}
+
+.cmd-pop:hover {
+  color: #fff
 }
 
 .map {
@@ -109,4 +116,8 @@
 
 .chart-tab {
   margin: 10% 0;
+}
+
+.col-5 {
+  height: 100%
 }
