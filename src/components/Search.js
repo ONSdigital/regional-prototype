@@ -53,6 +53,13 @@ class Search extends Component {
     })
   }
 
+  handleCloseSearch() {
+    this.setState({
+      query: '',
+      show: false
+    })
+  }
+
   render() {
     let showingLA
     if(this.state.query) {
@@ -61,7 +68,7 @@ class Search extends Component {
     } else {
       showingLA = this.props.localAuthorities.map((item) => item.label)
     }
-
+    this.handleCloseSearch = this.handleCloseSearch.bind(this)
     return (
       <div>
         <div className="search search--results-page print--hide" id="searchBar">
@@ -87,7 +94,7 @@ class Search extends Component {
           <div className="col-wrap">
             {this.state.query || this.state.show ?
               <div className="col col--md-two-thirds col--lg-two-thirds results">
-              <p>Showing {showingLA.length} results of {this.props.localAuthorities.length}</p>
+              <p>Showing {showingLA.length} results of {this.props.localAuthorities.length} <span className="close-search" onClick={this.handleCloseSearch}>Close X</span></p>
                 {showingLA.sort().map((item,key) =>
                   <div key={key} className="local-authorities">
                     <li>{item}</li>
@@ -105,7 +112,7 @@ class Search extends Component {
                 {this.state.compare.length > 0 ? this.state.compare.map((item, key) =>
                   <div key={key} className="compare local-authorities">
                     <li>{item}</li>
-                    <button value={item} onClick={(e) => this.handleRemove(e)}>Remove</button>
+                    <button className="remove btn btn--primary-alternative btn--bold btn--large" value={item} onClick={(e) => this.handleRemove(e)}>X</button>
                   </div>
                 ) :
                 <p>You have not selected any local authorities yet.</p>

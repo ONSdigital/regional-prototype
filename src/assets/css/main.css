@@ -7,6 +7,16 @@
   overflow: scroll;
 }
 
+.close-search {
+  float: right;
+  padding-right: 10px;
+  font-size: 1.25em
+}
+
+.close-search:hover {
+  cursor: pointer;
+}
+
 .local-authorities {
   width: 100%;
   display: inline-block;
@@ -39,6 +49,14 @@
   background-color: #0b5d30;
   color: #fff;
   text-decoration: underline;
+}
+
+.remove {
+  float: right;
+  margin: 15px 0;
+  background-color: #D32F2F;
+  color: #fff;
+  border-radius: 0;
 }
 
 /* Region */
