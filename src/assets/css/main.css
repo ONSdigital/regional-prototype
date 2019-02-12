@@ -54,8 +54,8 @@
 .remove {
   float: right;
   margin: 15px 0;
-  background-color: #D32F2F;
-  color: #fff;
+  font-weight: 600;
+  color: #D32F2F;
   border-radius: 0;
 }
 
