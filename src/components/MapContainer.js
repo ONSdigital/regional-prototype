@@ -37,6 +37,8 @@ class MapContainer extends Component {
           }
       });
     });
+
+    map.fitBounds(this.props.zoom, {padding: 20});
   }
 
   render() {

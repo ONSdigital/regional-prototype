@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import MapContainer from './MapContainer';
 import PopulationData from './Data/PopulationData';
 import ChartTab from './ChartTab';
-import area from '@turf/area';
 import {polygon} from '@turf/helpers';
+import turf from 'turf-extent'
 
 class Region extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class Region extends Component {
       loaded: false,
       polygon: [],
       mapCenter: [],
-      zoom: 8
+      zoom: null
     }
   }
 
@@ -30,11 +30,11 @@ class Region extends Component {
     })
 
     var pg = polygon(this.state.polygon)
-    var size = area(pg)
+    var size = turf(pg)
 
     this.setState({
       loaded: true,
-      zoom: Math.round(size)
+      zoom: size
     })
 
   }
@@ -44,7 +44,7 @@ class Region extends Component {
       <div>
         {this.state.loaded ?
           <div>
-            {this.state.polygon.length > 0 ? <MapContainer polygon={this.state.polygon} mapCenter={this.state.mapCenter}/> : <div className="map-placeholder"></div>}
+            {this.state.polygon.length > 0 ? <MapContainer polygon={this.state.polygon} mapCenter={this.state.mapCenter} zoom={this.state.zoom}/> : <div className="map-placeholder"></div>}
           </div>
           :
             <p>Loading map data for {this.props.location.state.label}...</p>

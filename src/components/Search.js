@@ -7,7 +7,8 @@ class Search extends Component {
     super(props)
     this.state = {
       query: '',
-      compare: []
+      compare: [],
+      show: false
     }
   }
 
@@ -45,6 +46,13 @@ class Search extends Component {
     }
   }
 
+  handleSearch(e) {
+    e.preventDefault()
+    this.setState({
+      show: true
+    })
+  }
+
   render() {
     let showingLA
     if(this.state.query) {
@@ -68,7 +76,7 @@ class Search extends Component {
                 value={this.state.query}
                 onChange={(event) => this.updateQuery(event.target.value)}
               />
-              <button type="submit" className="search__button search__button--results-page col--md-3 col--lg-3" id="nav-search-submit">
+            <button type="submit" className="search__button search__button--results-page col--md-3 col--lg-3" id="nav-search-submit" onClick={(e) => this.handleSearch(e)}>
                 <span className="visuallyhidden">Search</span>
                 <span className="icon icon-search--light"></span>
               </button>
@@ -77,7 +85,7 @@ class Search extends Component {
         </div>
         <div className="wrapper">
           <div className="col-wrap">
-            {this.state.query ?
+            {this.state.query || this.state.show ?
               <div className="col col--md-two-thirds col--lg-two-thirds results">
               <p>Showing {showingLA.length} results of {this.props.localAuthorities.length}</p>
                 {showingLA.sort().map((item,key) =>
