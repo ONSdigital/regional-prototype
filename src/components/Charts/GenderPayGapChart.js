@@ -6,20 +6,30 @@ class GenderPayGapChart extends Component {
     super(props)
     this.state = {
       lower: 0,
-      upper: 0
+      upper: 0,
+      from: 0,
+      to: 0
     }
   }
 
   setDomain(array) {
     let that = this
     let earnings = []
+    let date = []
     array.forEach(function(time) {
       earnings.push(time.y)
+      date.push(time.x)
+    })
+    let dateLength = new Set(date).size
+    this.setState({
+      length: dateLength
     })
     if (earnings.length === array.length) {
       that.setState({
           lower: that.getLowest(earnings),
-          upper: that.getHighest(earnings)
+          upper: that.getHighest(earnings),
+          from: that.getLowest(date),
+          to: that.getHighest(date)
       })
     }
   }
@@ -39,7 +49,7 @@ class GenderPayGapChart extends Component {
   render() {
     return (
       <VictoryChart
-        domain={{y: [this.state.lower - 2, this.state.upper + 2]}}
+        domain={{y: [this.state.lower - 2, this.state.upper + 2], x: [this.state.from, this.state.to]}}
         domainPadding={{x: [20, 10]}}
         animate={{duration: 100}}
       >
