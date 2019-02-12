@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryChart, VictoryLine, VictoryScatter, VictoryGroup, VictoryTooltip, VictoryAxis, VictoryLegend } from 'victory';
+import { VictoryChart, VictoryLine, VictoryScatter, VictoryGroup, VictoryTooltip, VictoryAxis, VictoryLegend, VictoryLabel } from 'victory';
 
 class GenderPayGapChart extends Component {
   constructor(props) {
@@ -101,9 +101,9 @@ class GenderPayGapChart extends Component {
         <VictoryAxis
           tickFormat={(d) => `${d.toString()}`}
           style={{
-            ticks: {stroke: "black", size: 5},
-            tickLabels: {padding: 120}
+            ticks: {stroke: "black", size: 5}
           }}
+          tickLabelComponent={<VictoryLabel y={270}/>}
           />
           <VictoryLegend x={0} y={0}
             orientation="horizontal"

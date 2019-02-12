@@ -162,6 +162,15 @@ class GenderPayGapData extends Component {
 
 
   render() {
+    let fullTime = this.state.fullTime.filter((date) =>
+        date.x === this.state.date ? date : null
+      )
+    let partTime = this.state.partTime.filter((date) =>
+        date.x === this.state.date ? date : null
+      )
+    let all = this.state.all.filter((date) =>
+        date.x === this.state.date ? date : null
+      )
     return (
       <div>
         {this.state.loaded && this.props.show ?
@@ -169,20 +178,16 @@ class GenderPayGapData extends Component {
             <div className="col-10">
               <h2>Gender Pay Gap</h2>
             </div>
-            <div className="col-5">
+            <div className="col-3">
               <h3>Key Figures ({this.state.date}):</h3>
-              <h4>Full Time: {this.state.fullTime.map((date) =>
-                  date.x === this.state.date ? `${date.y.toFixed(2)}%` : null
-                )}</h4>
-              <h4>Part Time: {this.state.partTime.map((date) =>
-                  date.x === this.state.date ? `${date.y.toFixed(2)}%` : null
-                )}</h4>
-              <h4>All Working Patterns: {this.state.all.map((date) =>
-                  date.x === this.state.date ? `${date.y.toFixed(2)}%` : null
-                )}</h4>
+              <h4>Full Time: {fullTime.length > 0 ? `${fullTime[0].y.toFixed(2)}%` : "No data"}</h4>
+              <h4>Part Time: {partTime.length > 0 ? `${partTime[0].y.toFixed(2)}%` : "No data"}</h4>
+              <h4>All Working Patterns: {all.length > 0 ? `${all[0].y.toFixed(2)}%` : "No data"}</h4>
             </div>
             <div className="col-5">
               <GenderPayGapChart fullTime={this.state.fullTime} partTime={this.state.partTime}  all={this.state.all}/>
+            </div>
+            <div className="col-2">
             </div>
           </div>
           : null}
