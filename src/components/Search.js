@@ -99,7 +99,7 @@ class Search extends Component {
                   <div key={key} className="local-authorities">
                     <li>{item}</li>
                     <div className="btn-group">
-                      <Link className="btn btn--primary" to={{pathname: '/' + item.replace(/\s+/g, '-').toLowerCase(), state: this.addCode(item) }}>Go To</Link>
+                      <Link className="btn btn--primary" to={{pathname: '/local-authority/' + item.replace(/\s+/g, '-').toLowerCase(), state: this.addCode(item) }}>Go To</Link>
                       <button className="btn btn--secondary" value={item} onClick={(e) => this.handleAdd(e)}>Add</button>
                     </div>
                   </div>

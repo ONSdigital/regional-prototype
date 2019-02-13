@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Search from './components/Search';
 import Region from './components/Region';
 import Footer from './components/Footer';
+import Compare from './components/Compare';
 
 class App extends Component {
   constructor(props) {
@@ -39,7 +40,8 @@ class App extends Component {
           <Header />
           <Switch>
             <Route exact path="/" component={() => <Search localAuthorities={this.state.localAuthorities} />} />
-            <Route path="/:region" render={(props) => <Region {...props} places={this.state.places} />} />
+            <Route path="/local-authority/:region" render={(props) => <Region {...props} places={this.state.places} />} />
+            <Route exact path="/compare" component={() => <Compare />} />
           </Switch>
           <Footer />
         </div>
