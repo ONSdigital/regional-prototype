@@ -59,7 +59,7 @@ class ChartTab extends Component {
       <div className="container-fluid chart-tab">
         <div className="row justify-content-md-center">
           <div className="col-10">
-            <div className="background--ship-grey padding-top-md--1">
+            <div className="tab padding-top-md--1">
                 <nav className="tabs--js">
                     <ul className="list--neutral flush">
                         <li className="tab__item width-sm--6">

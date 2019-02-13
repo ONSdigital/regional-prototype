@@ -13,7 +13,6 @@ class CMDLink extends Component {
     let datasetID = this.props.dataset
     let locationID = this.props.localAuth
     let body = this.props.body
-    console.log(body)
     let query =
         '{"dataset":{"id": "' + datasetID + '","edition": "time-series","version": 1},"dimensions": [{"name": "geography","options": ["' + locationID +'"]}, ' + body + ']}'
 
