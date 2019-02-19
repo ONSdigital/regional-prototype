@@ -51,7 +51,6 @@ class GenderPayGapChart extends Component {
       <VictoryChart
         domain={{y: [this.state.lower - 2, this.state.upper + 2], x: [this.state.from, this.state.to]}}
         domainPadding={{x: [20, 10]}}
-        animate={{duration: 100}}
       >
         <VictoryGroup
           labels={(data) => `${data.y.toFixed(2)}%`}

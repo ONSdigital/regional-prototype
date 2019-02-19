@@ -51,12 +51,37 @@
   text-decoration: underline;
 }
 
+.btn--secondary-disabled:hover {
+  cursor: not-allowed !important;
+}
+
 .remove {
   float: right;
   margin: 15px 0;
   font-weight: 600;
   color: #D32F2F;
   border-radius: 0;
+}
+
+.compare-btn {
+  border-radius: 0;
+  margin-top: 10px;
+  float: right;
+}
+
+.btn--secondary-disabled:hover {
+  color: #6D6E72 !important;
+  background: #D0D2D3 !important;
+  cursor: not-allowed !important;
+}
+
+.btn--secondary-disabled:focus {
+  box-shadow: none;
+}
+
+.compare-btn:hover {
+  background-color: #323132;
+  color: #fff;
 }
 
 /* Region */
@@ -104,7 +129,7 @@
 
 .map {
   height: 500px;
-  width: 100vw;
+  width: 100%;
   border-bottom: 1px solid #000;
 }
 
@@ -127,7 +152,30 @@
   border-left: 1px solid #414042;
   border-right: 1px solid #414042;
 }
+/* Compare */
 
-.col-5 {
-  height: 100%
+.compare-title {
+  background-color: #3B7A9E;
+}
+
+.compare-title h1 {
+  padding: 70px 0;
+  color: #fff;
+}
+
+.map-card .map {
+  border: 1px solid;
+  height: 300px;
+}
+
+.radio-buttons {
+  padding: 20px
+}
+
+label {
+  font-size: 18px;
+}
+
+table tr td {
+  padding: 15px;
 }

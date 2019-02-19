@@ -9,7 +9,7 @@ class MapContainer extends Component {
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
     mapboxgl.accessToken = 'pk.eyJ1IjoibWljaGFlbHJveW5vcnRvbiIsImEiOiJjanI5MGs3aWcwMnFvNGFsOWE3NTl2ZWR4In0.wm4DHL_Gb3gGIj7k8VSkgQ';
     var map = new mapboxgl.Map({
-      container: 'map-container',
+      container: this.props.container,
       style: 'mapbox://styles/michaelroynorton/cjr932llm00h52tpeao9pjk5u',
       center: that.props.mapCenter,
       zoom: 8
@@ -43,7 +43,7 @@ class MapContainer extends Component {
 
   render() {
     return (
-        <div id="map-container" className="map"></div>
+        <div id={this.props.container} className="map"></div>
     );
   }
 }

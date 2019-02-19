@@ -41,7 +41,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={() => <Search localAuthorities={this.state.localAuthorities} />} />
             <Route path="/local-authority/:region" render={(props) => <Region {...props} places={this.state.places} />} />
-            <Route exact path="/compare" component={() => <Compare />} />
+            <Route exact path="/compare" render={(props) => <Compare {...props} places={this.state.places} />} />
           </Switch>
           <Footer />
         </div>

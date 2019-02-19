@@ -18,20 +18,20 @@ class Search extends Component {
 
   handleAdd(e) {
     this.setState({
-      compare: [...this.state.compare, e.target.value]
+      compare: [...this.state.compare, this.addCode(e.target.value)]
     })
   }
 
   handleRemove(e) {
     this.state.compare.map((item) =>
-      (item === e.target.value ?
+      (item.label === e.target.value ?
         this.removeLA(e.target.value): null)
     )
   }
 
   removeLA(target) {
   var array = [...this.state.compare];
-  var index = array.indexOf(target)
+  var index = array.map((item) => item.label).indexOf(target)
   if (index !== -1) {
       array.splice(index, 1);
       this.setState({compare: array});
@@ -100,7 +100,7 @@ class Search extends Component {
                     <li>{item}</li>
                     <div className="btn-group">
                       <Link className="btn btn--primary" to={{pathname: '/local-authority/' + item.replace(/\s+/g, '-').toLowerCase(), state: this.addCode(item) }}>Go To</Link>
-                      <button className="btn btn--secondary" value={item} onClick={(e) => this.handleAdd(e)}>Add</button>
+                      <button className={this.state.compare.length === 4 ? "btn btn--secondary btn--secondary-disabled" : "btn btn--secondary"} value={item} onClick={this.state.compare.length === 4 ? null : (e) => this.handleAdd(e)}>Add</button>
                     </div>
                   </div>
                 )}
@@ -111,12 +111,13 @@ class Search extends Component {
                 <h2>Compare Local Authorities</h2>
                 {this.state.compare.length > 0 ? this.state.compare.map((item, key) =>
                   <div key={key} className="compare local-authorities">
-                    <li>{item}</li>
-                    <button className="remove btn btn--primary-alternative btn--bold btn--large" value={item} onClick={(e) => this.handleRemove(e)}>X</button>
+                    <li>{item.label}</li>
+                    <button className="remove btn btn--primary-alternative btn--bold btn--large" value={item.label} onClick={(e) => this.handleRemove(e)}>X</button>
                   </div>
                 ) :
                 <p>You have not selected any local authorities yet.</p>
                 }
+                {this.state.compare.length === 1 ? <Link className="compare-btn btn btn--secondary-disabled" to="">Compare</Link>: <Link className="compare-btn btn btn--secondary" to={{pathname: '/compare', state: this.state.compare}}>Compare</Link>}
               </div>
               : null}
 

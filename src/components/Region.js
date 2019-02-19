@@ -44,7 +44,7 @@ class Region extends Component {
       <div>
         {this.state.loaded ?
           <div>
-            {this.state.polygon.length > 0 ? <MapContainer polygon={this.state.polygon} mapCenter={this.state.mapCenter} zoom={this.state.zoom}/> : <div className="map-placeholder"></div>}
+            {this.state.polygon.length > 0 ? <MapContainer container={this.props.location.state.id} polygon={this.state.polygon} mapCenter={this.state.mapCenter} zoom={this.state.zoom}/> : <div className="map-placeholder"></div>}
           </div>
           :
             <p>Loading map data for {this.props.location.state.label}...</p>

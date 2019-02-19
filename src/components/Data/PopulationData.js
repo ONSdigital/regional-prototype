@@ -81,7 +81,7 @@ class PopulationData extends Component {
     let body = '{ "name": "sex", "options": [ "0", "1", "2" ] }, { "name": "time", "options": [ "2016" ] }, { "name": "age", "options": [] }'
     return (
       <div id="population">
-        <h3>Population: {this.state.total}</h3>
+        <h3>Population: {this.state.total.toLocaleString('en')}</h3>
         <p className="label male">Male</p>
         <p className="label female">Female</p>
         {this.state.loaded ? <PopulationChart totalPop={this.state.total} fData={this.state.fData.sort(this.compareNumbers)} mData={this.state.mData.sort(this.compareNumbers)} /> : <p>Loading Population Pyramid...</p> }
