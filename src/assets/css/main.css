@@ -179,3 +179,7 @@ label {
 table tr td {
   padding: 15px;
 }
+
+.well-being-title {
+  margin-bottom: 0;
+}

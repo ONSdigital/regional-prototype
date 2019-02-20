@@ -99,11 +99,22 @@ class ComparePartTimeEarningsData extends Component {
           {this.state.loadedAll && this.state.loadedMale && this.state.loadedFemale ?
             <div className="row justify-content-md-center">
               {Object.keys(this.state.data).map((item, key) =>
-                <div className="col">
+                <div key={key} className="col">
                   <table>
-                    <tr><td><strong>All:</strong> {this.state.data[item]['all'].map((item, index) => index === 0 ? `£${item.y.toLocaleString('en')} (${item.x})` : null)}</td></tr>
-                    <tr><td><strong>Male:</strong> {this.state.data[item]['male'].map((item, index) => index === 0 ? `£${item.y.toLocaleString('en')} (${item.x})` : null)}</td></tr>
-                    <tr><td><strong>Female:</strong> {this.state.data[item]['female'].map((item, index) => index === 0 ? `£${item.y.toLocaleString('en')} (${item.x})` : null)}</td></tr>
+                    <tbody>
+                      <tr>
+                        <td><strong>All:</strong></td>
+                        <td>{this.state.data[item]['all'].map((item, index) => index === 0 ? `£${item.y.toLocaleString('en')} (${item.x})` : null)}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Male:</strong></td>
+                        <td>{this.state.data[item]['male'].map((item, index) => index === 0 ? `£${item.y.toLocaleString('en')} (${item.x})` : null)}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Female:</strong></td>
+                        <td>{this.state.data[item]['female'].map((item, index) => index === 0 ? `£${item.y.toLocaleString('en')} (${item.x})` : null)}</td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
               )}

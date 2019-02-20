@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import CompareEarningsData from './CompareData/CompareEarningsData';
 import ComparePartTimeEarningsData from './CompareData/ComparePartTimeEarningsData';
-import WellBeingData from './Data/WellBeingData';
+import CompareWellBeingData from './CompareData/CompareWellBeingData';
 import MapContainer from './MapContainer';
 import {polygon} from '@turf/helpers';
 import turf from 'turf-extent';
@@ -83,11 +83,7 @@ class Compare extends Component {
           </div>
           <h3>Well-Being</h3>
           <div className="row justify-content-md-center">
-            {this.props.location.state.map((item, key) =>
-              <div key={key} className="col">
-                <WellBeingData localAuth={item.id} compare={true}/>
-              </div>
-            )}
+            <CompareWellBeingData localAuth={this.props.location.state} />
           </div>
 
         </div>
