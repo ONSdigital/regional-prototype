@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import CompareEarningsData from './CompareData/CompareEarningsData';
 import ComparePartTimeEarningsData from './CompareData/ComparePartTimeEarningsData';
 import CompareWellBeingData from './CompareData/CompareWellBeingData';
+import CompareGenderPayGapData from './CompareData/CompareGenderPayGapData';
 import MapContainer from './MapContainer';
 import {polygon} from '@turf/helpers';
 import turf from 'turf-extent';
@@ -85,7 +86,10 @@ class Compare extends Component {
           <div className="row justify-content-md-center">
             <CompareWellBeingData localAuth={this.props.location.state} />
           </div>
-
+          <h3>Gender Pay Gap</h3>
+          <div className="row justify-content-md-center">
+            <CompareGenderPayGapData localAuth={this.props.location.state} />
+          </div>
         </div>
       </div>
     )
