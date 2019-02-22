@@ -74,19 +74,27 @@ class Compare extends Component {
               </div>
             )}
           </div>
-          <h3>Full-Time Earnings</h3>
+          <div className="col-12">
+            <h2>Full-Time Earnings</h2>
+          </div>
           <div className="row justify-content-md-center">
             <CompareEarningsData localAuth={this.props.location.state} />
           </div>
-          <h3>Part-Time Earnings</h3>
+          <div className="col-12">
+            <h2>Part-Time Earnings</h2>
+          </div>
           <div className="row justify-content-md-center">
             <ComparePartTimeEarningsData localAuth={this.props.location.state} />
           </div>
-          <h3>Well-Being</h3>
+          <div className="col-12">
+            <h2>Well-Being</h2>
+          </div>
           <div className="row justify-content-md-center">
             <CompareWellBeingData localAuth={this.props.location.state} />
           </div>
-          <h3>Gender Pay Gap</h3>
+          <div className="col-12">
+            <h2>Gender Pay Gap</h2>
+          </div>
           <div className="row justify-content-md-center">
             <CompareGenderPayGapData localAuth={this.props.location.state} />
           </div>

@@ -7,58 +7,67 @@ class CompareEarningsData extends Component {
     super(props)
     this.state = {
       data: {},
-      loadedAll: false,
-      loadedMale: false,
-      loadedFemale: false,
+      loaded: false,
       showAll: true,
       showMale: false,
-      showFemale: false
+      showFemale: false,
+      date: 2017,
     }
   }
 
   componentDidMount() {
     let that = this
+    let count = 0
     let localAuthority = {}
     this.props.localAuth.forEach(function(item) {
       localAuthority[item.id] = {all: [], male: [], female: []}
       getEarnings(item.id)
       .then((response) => {
+        count = count + 1
         response.observations.forEach(function(time) {
           if (time.observation === '') {
             return null
           } else {
             localAuthority[item.id]['all'].push({x: Number(time.dimensions.Time.label), y: Number(time.observation)})
           }
-          that.setState({
-            loadedAll: true
-          })
         })
+        if (count === (that.props.localAuth.length * 3)) {
+          that.setState({
+            loaded: true
+          })
+        }
       })
       getEarningsMale(item.id)
       .then((response) => {
+        count = count + 1
         response.observations.forEach(function(time) {
           if (time.observation === '') {
             return null
           } else {
             localAuthority[item.id]['male'].push({x: Number(time.dimensions.Time.label), y: Number(time.observation)})
           }
-          that.setState({
-            loadedMale: true
-          })
         })
+        if (count === (that.props.localAuth.length * 3)) {
+          that.setState({
+            loaded: true
+          })
+        }
       })
       getEarningsFemale(item.id)
       .then((response) => {
+        count = count + 1
         response.observations.forEach(function(time) {
           if (time.observation === '') {
             return null
           } else {
             localAuthority[item.id]['female'].push({x: Number(time.dimensions.Time.label), y: Number(time.observation)})
           }
-          that.setState({
-            loadedFemale: true
-          })
         })
+        if (count === (that.props.localAuth.length * 3)) {
+          that.setState({
+            loaded: true
+          })
+        }
       })
     })
 
@@ -89,13 +98,47 @@ class CompareEarningsData extends Component {
     })
   }
 
+  handleDate(e) {
+    this.setState({
+      date: Number(e.target.value)
+    })
+  }
+
+  getFigure(data, date) {
+    let figure = "No data"
+    data.forEach(function(i) {
+      console.log(i.x)
+      if (i.x === date) {
+        figure = `£${i.y.toLocaleString('en')}`
+      }
+    })
+    return figure
+  }
+
     render() {
       this.handleShowAll = this.handleShowAll.bind(this)
       this.handleShowMale = this.handleShowMale.bind(this)
       this.handleShowFemale = this.handleShowFemale.bind(this)
       return(
         <div>
-          {this.state.loadedAll && this.state.loadedMale && this.state.loadedFemale ?
+          {this.state.loaded ?
+            <div className="key-figures">
+              <form>
+                <div className="form-group row">
+                  <label forHTML="exampleFormControlSelect1">Key Figures:</label>
+                  <select onChange={(e)=> {this.handleDate(e)}} className="col-2 form-control" id="exampleFormControlSelect1">
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                    <option value="2013">2013</option>
+                    <option value="2012">2012</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+            : null}
+          {this.state.loaded ?
             <div className="row justify-content-md-center">
               {Object.keys(this.state.data).map((item, key) =>
                 <div key={key} className="col">
@@ -103,15 +146,15 @@ class CompareEarningsData extends Component {
                     <tbody>
                       <tr>
                         <td><strong>All:</strong></td>
-                        <td>{this.state.data[item]['all'].map((item, index) => index === 0 ? `£${item.y.toLocaleString('en')} (${item.x})` : null)}</td>
+                        <td>{this.getFigure(this.state.data[item]['all'], this.state.date)}</td>
                       </tr>
                       <tr>
                         <td><strong>Male:</strong></td>
-                        <td>{this.state.data[item]['male'].map((item, index) => index === 0 ? `£${item.y.toLocaleString('en')} (${item.x})` : null)}</td>
+                        <td>{this.getFigure(this.state.data[item]['male'], this.state.date)}</td>
                       </tr>
                       <tr>
                         <td><strong>Female:</strong></td>
-                        <td>{this.state.data[item]['female'].map((item, index) => index === 0 ? `£${item.y.toLocaleString('en')} (${item.x})` : null)}</td>
+                        <td>{this.getFigure(this.state.data[item]['female'], this.state.date)}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -120,7 +163,7 @@ class CompareEarningsData extends Component {
             </div>
             : null
           }
-          {this.state.loadedAll && this.state.loadedMale && this.state.loadedFemale ?
+          {this.state.loaded ?
             <div className="row justify-content-md-center">
               <div className="col-12 radio-buttons">
                 <form>

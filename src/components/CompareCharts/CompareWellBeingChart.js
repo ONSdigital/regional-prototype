@@ -30,6 +30,7 @@ class CompareWellBeingChart extends Component {
       <VictoryChart>
         {Object.keys(this.props.data).map((item, key) =>
           <VictoryBar
+            key={key}
             data={[{x: "Poor", y: 60}, {x: "Fair", y: 60}, {x: "Good", y: 60}, {x: "Very good", y: 60},]}
             style={{
               data: {
@@ -46,6 +47,7 @@ class CompareWellBeingChart extends Component {
           >
           {Object.keys(this.props.data).map((item, key) =>
             <VictoryBar
+              key={key}
               data={this.props.data[item][this.props.title]}
               labels={(data) => `${data.y}%`}
               labelComponent={
