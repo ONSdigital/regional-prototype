@@ -107,7 +107,6 @@ class CompareEarningsData extends Component {
   getFigure(data, date) {
     let figure = "No data"
     data.forEach(function(i) {
-      console.log(i.x)
       if (i.x === date) {
         figure = `£${i.y.toLocaleString('en')}`
       }
