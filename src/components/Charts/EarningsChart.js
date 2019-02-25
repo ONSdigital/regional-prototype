@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { VictoryChart, VictoryLine, VictoryScatter, VictoryGroup, VictoryTooltip, VictoryAxis, VictoryLegend } from 'victory';
+import { VictoryChart, VictoryLine, VictoryScatter, VictoryGroup, VictoryTooltip, VictoryAxis, VictoryLegend, VictoryLabel } from 'victory';
 
 class EarningsChart extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class EarningsChart extends Component {
 
   render() {
     return (
-      <VictoryChart domain={{y: [this.state.lower - 2000, this.state.upper + 2000], x: [this.state.from, this.state.to]}} domainPadding={{x: [20, 10]}} >
+      <VictoryChart domain={{y: [this.state.lower - 2000, this.state.upper + 2000], x: [2012, 2017]}} domainPadding={{x: [20, 20]}} >
         <VictoryGroup
           data={this.props.dataFull}
           labels={(data) => `£${data.y}`}
@@ -101,6 +101,8 @@ class EarningsChart extends Component {
         </VictoryGroup>
         <VictoryAxis
           dependentAxis
+          label="£"
+          axisLabelComponent={<VictoryLabel y={40} x={50} angle={0}/>}
           style={{
             ticks: {stroke: "black", size: 5},
             grid: {stroke: "grey"},
@@ -111,7 +113,7 @@ class EarningsChart extends Component {
           style={{
             ticks: {stroke: "black", size: 5}
           }}
-          tickCount={this.state.length}
+          tickCount={5}
           />
         <VictoryLegend x={0} y={0}
           orientation="horizontal"

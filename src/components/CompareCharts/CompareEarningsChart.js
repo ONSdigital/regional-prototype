@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { VictoryChart, VictoryLine, VictoryScatter, VictoryGroup, VictoryTooltip, VictoryAxis, VictoryLegend } from 'victory';
+import { VictoryChart, VictoryLine, VictoryScatter, VictoryGroup, VictoryTooltip, VictoryAxis, VictoryLegend, VictoryLabel } from 'victory';
 
 class CompareEarningsChart extends Component {
   constructor(props) {
@@ -109,6 +109,8 @@ class CompareEarningsChart extends Component {
           tickCount={8}
           />
         <VictoryAxis
+          label="£"
+          axisLabelComponent={<VictoryLabel y={30} x={50} angle={0}/>}
           tickFormat={(data) => `${data.toString()}`}
           style={{
             ticks: {stroke: "black", size: 5},

@@ -16,7 +16,6 @@ class PopulationData extends Component {
 
   async componentDidMount() {
 
-
     let that = this;
 
     await getPop(that.props.localAuth)
@@ -76,12 +75,17 @@ class PopulationData extends Component {
     return a.x - b.x;
   }
 
+  handleDate(e) {
+    this.setState({
+      date: Number(e.target.value)
+    })
+  }
 
   render() {
     let body = '{ "name": "sex", "options": [ "0", "1", "2" ] }, { "name": "time", "options": [ "2016" ] }, { "name": "age", "options": [] }'
     return (
       <div id="population">
-        <h3>Population: {this.state.total.toLocaleString('en')}</h3>
+        <h3>Population: {this.state.total.toLocaleString('en')} (2017)</h3>
         <p className="label male">Male</p>
         <p className="label female">Female</p>
         {this.state.loaded ? <PopulationChart totalPop={this.state.total} fData={this.state.fData.sort(this.compareNumbers)} mData={this.state.mData.sort(this.compareNumbers)} /> : <p>Loading Population Pyramid...</p> }
