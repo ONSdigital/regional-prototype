@@ -179,7 +179,7 @@ class GenderPayGapData extends Component {
           <div className="row justify-content-md-center">
             <div className="col-10">
               <h2>Gender Pay Gap</h2>
-              <p>The gender pay gap is calculated by subtracting the mean hourly pay rate for women from the mean hourly pay rate for men, dividing the result by the mean hourly pay rate for men and multiplying that by 100. This gives you the mean gender pay gap in hourly pay as a percentage of men’s pay. A positive number indicates men being paid more than women. A negative number indicates women being paid more than men.</p>
+              <p>The gender pay gap is calculated as the difference between average hourly earnings (excluding overtime) of men and women as a proportion of average hourly earnings (excluding overtime) of men’s earnings. For example, a 4.0% gender pay gap denotes that women earn 4.0% less per hour, on average, than men. Conversely, a negative 4.0% gender pay gap denotes that women earn 4.0% more, on average, then men.</p>
             </div>
             <div className="col-3">
               <h3>Key Figures ({this.state.date}):</h3>
