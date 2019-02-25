@@ -196,8 +196,9 @@ class GenderPayGapData extends Component {
             <div className="col-5">
               <GenderPayGapChart fullTime={this.state.fullTime} partTime={this.state.partTime}  all={this.state.all}/>
             </div>
-            <div className="col-2">
-            </div>
+            <div className="col-10">
+             <p>Estimates with a Coefficient of variation greater than 20% are suppressed from publication on quality grounds, along with those for which there is a risk of disclosure of individual employees or employers.</p>
+           </div> 
           </div>
           : null}
       </div>
