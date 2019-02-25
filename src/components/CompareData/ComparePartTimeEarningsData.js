@@ -108,7 +108,6 @@ class ComparePartTimeEarningsData extends Component {
   getFigure(data, date) {
     let figure = "No data"
     data.forEach(function(i) {
-      console.log(i.x)
       if (i.x === date) {
         figure = `£${i.y.toLocaleString('en')}`
       }
@@ -127,7 +126,7 @@ class ComparePartTimeEarningsData extends Component {
             <div className="key-figures">
               <form>
                 <div className="form-group row">
-                  <label forHTML="exampleFormControlSelect1">Key Figures:</label>
+                  <label htmlFor="exampleFormControlSelect1">Key Figures:</label>
                   <select onChange={(e)=> {this.handleDate(e)}} className="col-2 form-control" id="exampleFormControlSelect1">
                     <option value="2017">2017</option>
                     <option value="2016">2016</option>
