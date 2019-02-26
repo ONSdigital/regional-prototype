@@ -201,19 +201,19 @@ class EarningsData extends Component {
                 <tr>
                   <td><strong>Place of Work</strong></td>
                   <td>
-                    {powAll.length > 0 ? `£${powAll[0].y.toLocaleString('en')}` : "No data"}
+                    {powAll.length > 0 ? `£${powAll[0].y.toLocaleString('en')}` : "No data*"}
                      <sub>
                        &#177;{powAll.length > 0 ? `${powAll[0].cv}` : null}
                      </sub>
                   </td>
                   <td>
-                    {powMale.length > 0 ? `£${powMale[0].y.toLocaleString('en')}` : "No data"}
+                    {powMale.length > 0 ? `£${powMale[0].y.toLocaleString('en')}` : "No data*"}
                      <sub>
                        &#177;{powMale.length > 0 ? `${powMale[0].cv}` : null}
                      </sub>
                   </td>
                   <td>
-                    {powFemale.length > 0 ? `£${powFemale[0].y.toLocaleString('en')}` : "No data"}
+                    {powFemale.length > 0 ? `£${powFemale[0].y.toLocaleString('en')}` : "No data*"}
                      <sub>
                        &#177;{powFemale.length > 0 ? `${powFemale[0].cv}` : null}
                      </sub>
@@ -222,19 +222,19 @@ class EarningsData extends Component {
                 <tr>
                   <td><strong>Place of Residence</strong></td>
                     <td>
-                      {porAll.length > 0 ? `£${porAll[0].y.toLocaleString('en')}` : "No data"}
+                      {porAll.length > 0 ? `£${porAll[0].y.toLocaleString('en')}` : "No data*"}
                       <sub>
                         &#177;{porAll.length > 0 ? `${porAll[0].cv}` : null}
                       </sub>
                     </td>
                     <td>
-                      {porMale.length > 0 ? `£${porMale[0].y.toLocaleString('en')}` : "No data"}
+                      {porMale.length > 0 ? `£${porMale[0].y.toLocaleString('en')}` : "No data*"}
                       <sub>
                         &#177;{porMale.length > 0 ? `${porMale[0].cv}` : null}
                       </sub>
                     </td>
                     <td>
-                      {porFemale.length > 0 ? `£${porFemale[0].y.toLocaleString('en')}` : "No data"}
+                      {porFemale.length > 0 ? `£${porFemale[0].y.toLocaleString('en')}` : "No data*"}
                       <sub>
                         &#177;{porFemale.length > 0 ? `${porFemale[0].cv}` : null}
                       </sub>

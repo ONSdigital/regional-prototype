@@ -162,7 +162,7 @@ class GenderPayGapData extends Component {
       male.forEach(function(m) {
         if(f.x === m.x && f.x === date && m.x === date) {
           if(f.y === 0 || m.y === 0) {
-            figure = "No data"
+            figure = "No data*"
           } else {
              figure = (((m.y - f.y) / m.y) * 100).toFixed(2) + '%'
           }
@@ -225,6 +225,7 @@ class GenderPayGapData extends Component {
                       )}
                     </tbody>
                   </table>
+                  <p>*Estimates with a Coefficient of variation greater than 20% are suppressed from publication on quality grounds, along with those for which there is a risk of disclosure of individual employees or employers.</p>
               </div>
                : null}
             {this.state.loaded ?
@@ -246,9 +247,6 @@ class GenderPayGapData extends Component {
                   <CompareGenderPayGapChart data={this.state.data} localAuth={this.props.localAuth} showAll={this.state.showAll} showFT={this.state.showFT} showPT={this.state.showPT}/>
                 </div>
               : null}
-              <div className="col-10">
-                <p>Estimates with a Coefficient of variation greater than 20% are suppressed from publication on quality grounds, along with those for which there is a risk of disclosure of individual employees or employers.</p>
-              </div>
           </div>
         : null}
       </div>

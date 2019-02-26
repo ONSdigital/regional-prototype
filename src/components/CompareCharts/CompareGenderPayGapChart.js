@@ -122,12 +122,14 @@ class CompareGenderPayGapChart extends Component {
           </VictoryGroup>
         )}
         <VictoryAxis
-          dependentAxis tickFormat={(t) => `${t}%`}
+          dependentAxis
+          tickFormat={(t) => `${t}%`}
           style={{
             ticks: {stroke: "black", size: 5},
             grid: {stroke: "grey"},
             tickLabels: {fontSize: 12}
           }}
+          tickCount={8}
           />
         <VictoryAxis
           tickFormat={(d) => `${d.toString()}`}
