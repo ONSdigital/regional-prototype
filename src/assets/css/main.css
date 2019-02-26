@@ -153,6 +153,14 @@
   border-right: 1px solid #414042;
 }
 
+.earnings-table {
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
 /* Compare */
 
 .compare-title {

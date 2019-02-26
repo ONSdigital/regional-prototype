@@ -53,7 +53,7 @@ class Region extends Component {
           <h1>{this.props.location.state.label}</h1>
           <PopulationData localAuth={this.props.location.state.id}/>
         </div>
-        <ChartTab localAuth={this.props.location.state.id} />
+        <ChartTab localAuthLabel={this.props.location.state.label} localAuth={this.props.location.state.id} />
       </div>
     )
   }

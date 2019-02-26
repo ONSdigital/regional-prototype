@@ -21,14 +21,14 @@ class CompareEarningsData extends Component {
     let localAuthority = {}
     this.props.localAuth.forEach(function(item) {
       localAuthority[item.id] = {all: [], male: [], female: []}
-      getEarnings(item.id)
+      getEarnings(item.id, 7)
       .then((response) => {
         count = count + 1
         response.observations.forEach(function(time) {
           if (time.observation === '') {
             return null
           } else {
-            localAuthority[item.id]['all'].push({x: Number(time.dimensions.Time.label), y: Number(time.observation)})
+            localAuthority[item.id]['all'].push({x: Number(time.dimensions.Time.label), y: Number(time.observation), cv: time.metadata["Coefficient of variation"]})
           }
         })
         if (count === (that.props.localAuth.length * 3)) {
@@ -37,14 +37,14 @@ class CompareEarningsData extends Component {
           })
         }
       })
-      getEarningsMale(item.id)
+      getEarningsMale(item.id, 7)
       .then((response) => {
         count = count + 1
         response.observations.forEach(function(time) {
           if (time.observation === '') {
             return null
           } else {
-            localAuthority[item.id]['male'].push({x: Number(time.dimensions.Time.label), y: Number(time.observation)})
+            localAuthority[item.id]['male'].push({x: Number(time.dimensions.Time.label), y: Number(time.observation), cv: time.metadata["Coefficient of variation"]})
           }
         })
         if (count === (that.props.localAuth.length * 3)) {
@@ -53,14 +53,14 @@ class CompareEarningsData extends Component {
           })
         }
       })
-      getEarningsFemale(item.id)
+      getEarningsFemale(item.id, 7)
       .then((response) => {
         count = count + 1
         response.observations.forEach(function(time) {
           if (time.observation === '') {
             return null
           } else {
-            localAuthority[item.id]['female'].push({x: Number(time.dimensions.Time.label), y: Number(time.observation)})
+            localAuthority[item.id]['female'].push({x: Number(time.dimensions.Time.label), y: Number(time.observation), cv: time.metadata["Coefficient of variation"]})
           }
         })
         if (count === (that.props.localAuth.length * 3)) {
@@ -106,12 +106,14 @@ class CompareEarningsData extends Component {
 
   getFigure(data, date) {
     let figure = "No data"
+    let cv
     data.forEach(function(i) {
       if (i.x === date) {
         figure = `£${i.y.toLocaleString('en')}`
+        cv = ` \u00B1${i.cv}`
       }
     })
-    return figure
+    return (<span>{figure}<sub> {cv}</sub></span>)
   }
 
     render() {

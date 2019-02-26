@@ -198,7 +198,7 @@ class GenderPayGapData extends Component {
             </div>
             <div className="col-10">
              <p>Estimates with a Coefficient of variation greater than 20% are suppressed from publication on quality grounds, along with those for which there is a risk of disclosure of individual employees or employers.</p>
-           </div> 
+           </div>
           </div>
           : null}
       </div>
