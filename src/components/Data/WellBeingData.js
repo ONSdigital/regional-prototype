@@ -15,7 +15,8 @@ class WellBeingData extends Component {
       localAnxiety: [],
       localHappiness: [],
       localWorthwhile: [],
-      localLifeSatisfaction: []
+      localLifeSatisfaction: [],
+      date: "2017-18"
     }
   }
 
@@ -67,7 +68,7 @@ class WellBeingData extends Component {
         })
       })
 
-    await getLocalWellBeing(this.props.localAuth, 'anxiety')
+    await getLocalWellBeing(this.props.localAuth, this.state.date, 'anxiety')
       .then((response) => {
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {
@@ -85,7 +86,7 @@ class WellBeingData extends Component {
         })
       })
 
-    await getLocalWellBeing(this.props.localAuth, 'happiness')
+    await getLocalWellBeing(this.props.localAuth, this.state.date, 'happiness')
       .then((response) => {
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {
@@ -102,7 +103,7 @@ class WellBeingData extends Component {
         })
       })
 
-    await getLocalWellBeing(this.props.localAuth, 'worthwhile')
+    await getLocalWellBeing(this.props.localAuth, this.state.date, 'worthwhile')
       .then((response) => {
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {
@@ -119,7 +120,7 @@ class WellBeingData extends Component {
         })
       })
 
-    await getLocalWellBeing(this.props.localAuth, 'life-satisfaction')
+    await getLocalWellBeing(this.props.localAuth, this.state.date, 'life-satisfaction')
       .then((response) => {
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {
@@ -153,7 +154,14 @@ class WellBeingData extends Component {
     }
   }
 
+  handleDate(e) {
+    this.setState({
+      date: e.target.value
+    })
+  }
+
   render() {
+    console.log(this.state)
     let bodyAnxiety = '{ "name": "allmeasuresofwellbeing", "options": [ "anxiety" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
     let bodyHappiness = '{ "name": "allmeasuresofwellbeing", "options": [ "happiness" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
     let bodyWorthwhile = '{ "name": "allmeasuresofwellbeing", "options": [ "worthwhile" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
@@ -164,10 +172,70 @@ class WellBeingData extends Component {
           <div className="row justify-content-md-center">
             <div className="col-10">
               <h2>Personal Well-being</h2>
+              <p>Estimates of anxiety, happiness, worthwhile and life satisfaction compared with the UK estimates for the year ending March 2018</p>
+              <h4>Key Figures (2017-18):</h4>
+              <table className="wellbeing-table">
+                <tbody>
+                  <tr>
+                    <th></th>
+                    <th className="table-border-left" colSpan="4">Anxiety</th>
+                    <th className="table-border-left" colSpan="4">Happiness</th>
+                    <th className="table-border-left" colSpan="4">Worthwhile</th>
+                    <th className="table-border-left table-border-right" colSpan="4">Life Satisfaction</th>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <th className="table-border-left">Poor</th>
+                    <th>Fair</th>
+                    <th>Good</th>
+                    <th>Very Good</th>
+                    <th className="table-border-left">Poor</th>
+                    <th>Fair</th>
+                    <th>Good</th>
+                    <th>Very Good</th>
+                    <th className="table-border-left">Poor</th>
+                    <th>Fair</th>
+                    <th>Good</th>
+                    <th>Very Good</th>
+                    <th className="table-border-left">Poor</th>
+                    <th>Fair</th>
+                    <th>Good</th>
+                    <th className="table-border-right">Very Good</th>
+                  </tr>
+                  <tr className="wellbeing-table-data">
+                    <td>{this.props.localAuthLabel}</td>
+                    {this.state.localAnxiety.sort((a,b) => a.z - b.z).map((item) =>
+                      <td>{item.y}</td>)}
+                    {this.state.localHappiness.sort((a,b) => a.z - b.z).map((item) =>
+                      <td>{item.y}</td>)}
+                    {this.state.localWorthwhile.sort((a,b) => a.z - b.z).map((item) =>
+                      <td>{item.y}</td>)}
+                    {this.state.localLifeSatisfaction.sort((a,b) => a.z - b.z).map((item) =>
+                      <td>{item.y}</td>)}
+                  </tr>
+                  <tr className="wellbeing-table-data">
+                    <td>UK</td>
+                    {this.state.ukAnxiety.sort((a,b) => a.z - b.z).map((item) =>
+                      <td>{item.y}</td>)}
+                    {this.state.ukHappiness.sort((a,b) => a.z - b.z).map((item) =>
+                      <td>{item.y}</td>)}
+                    {this.state.ukWorthwhile.sort((a,b) => a.z - b.z).map((item) =>
+                      <td>{item.y}</td>)}
+                    {this.state.ukLifeSatisfaction.sort((a,b) => a.z - b.z).map((item) =>
+                      <td>{item.y}</td>)}
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <div className="col-5">
               <h3>Anxiety</h3>
               <WellBeingChart local={this.state.localAnxiety} uk={this.state.ukAnxiety} color={["rgb(15, 130, 67)", "#3B7A9E"]} title="Anxiety" />
+            </div>
+            <div className="col-5">
+              <h3>Happiness</h3>
+              <WellBeingChart local={this.state.localHappiness} uk={this.state.ukHappiness} color={["rgb(255, 178, 76)", "#3B7A9E"]} title="Happiness"/>
+            </div>
+            <div className="col-5">
               <CMDLink className="cmd-anxiety"
                 localAuth={this.props.localAuth}
                 dataset="wellbeing-local-authority"
@@ -176,8 +244,6 @@ class WellBeingData extends Component {
                  />
             </div>
             <div className="col-5">
-              <h3>Happiness</h3>
-              <WellBeingChart local={this.state.localHappiness} uk={this.state.ukHappiness} color={["rgb(255, 178, 76)", "#3B7A9E"]} title="Happiness"/>
               <CMDLink className="cmd-happiness"
                 localAuth={this.props.localAuth}
                 dataset="wellbeing-local-authority"

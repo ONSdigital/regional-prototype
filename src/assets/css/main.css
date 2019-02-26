@@ -161,6 +161,38 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
+.wellbeing-table tr:nth-child(2) {
+  background-color: #ffffff;
+}
+
+.table-border-left {
+  border-left: 1px solid #333;
+}
+
+.table-border-right {
+  border-right: 1px solid #333;
+}
+
+.wellbeing-table-data td:nth-child(2) {
+  border-left: 1px solid #333;
+}
+
+.wellbeing-table-data td:nth-child(5) {
+  border-right: 1px solid #333;
+}
+
+.wellbeing-table-data td:nth-child(9) {
+  border-right: 1px solid #333;
+}
+
+.wellbeing-table-data td:nth-child(13) {
+  border-right: 1px solid #333;
+}
+
+.wellbeing-table-data td:nth-child(17) {
+  border-right: 1px solid #333;
+}
+
 /* Compare */
 
 .compare-title {

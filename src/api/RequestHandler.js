@@ -100,14 +100,14 @@ export function getPartTimeEarningsFemale(code, table) {
 // Get Well-Being data
 
 export function getUKWellBeing(measure) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/wellbeing-year-ending/editions/time-series/versions/1/observations?time=January%202017%20-%20December%202017&geography=K02000001&estimate=*&allmeasuresofwellbeing=${measure}`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/wellbeing-local-authority/editions/time-series/versions/1/observations?time=2017-18&geography=K02000001&estimate=*&allmeasuresofwellbeing=${measure}`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);
   });
 }
 
-export function getLocalWellBeing(code, measure) {
+export function getLocalWellBeing(code, time, measure) {
   return fetch(`https://api.beta.ons.gov.uk/v1/datasets/wellbeing-local-authority/editions/time-series/versions/1/observations?time=2017-18&geography=${code}&estimate=*&allmeasuresofwellbeing=${measure}`)
     .then((response) => response.json())
     .catch((error) => {

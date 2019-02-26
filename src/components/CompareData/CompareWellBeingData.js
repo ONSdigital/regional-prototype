@@ -11,7 +11,8 @@ class CompareWellBeingData extends Component {
       loadedHappiness: false,
       loadedWorthwhile: false,
       loadedLifeSatisfaction: false,
-      data: {}
+      data: {},
+      date: '2017-18'
     }
   }
 
@@ -21,7 +22,7 @@ class CompareWellBeingData extends Component {
     let localAuthority = {}
     this.props.localAuth.forEach(function(localAuth) {
       localAuthority[localAuth.id] = {anxiety: [], happiness: [], worthwhile: [], lifeSatisfaction: []}
-      getLocalWellBeing(localAuth.id, 'anxiety')
+      getLocalWellBeing(localAuth.id, that.state.date, 'anxiety')
         .then((response) => {
           response.observations.forEach(function(item) {
             if(item.dimensions.estimate.id !== "average-mean") {
@@ -37,7 +38,7 @@ class CompareWellBeingData extends Component {
           })
         })
 
-      getLocalWellBeing(localAuth.id, 'happiness')
+      getLocalWellBeing(localAuth.id, that.state.date, 'happiness')
         .then((response) => {
           response.observations.forEach(function(item) {
             if(item.dimensions.estimate.id !== "average-mean") {
@@ -53,7 +54,7 @@ class CompareWellBeingData extends Component {
           })
         })
 
-      getLocalWellBeing(localAuth.id, 'worthwhile')
+      getLocalWellBeing(localAuth.id, that.state.date, 'worthwhile')
         .then((response) => {
           response.observations.forEach(function(item) {
             if(item.dimensions.estimate.id !== "average-mean") {
@@ -69,7 +70,7 @@ class CompareWellBeingData extends Component {
           })
         })
 
-      getLocalWellBeing(localAuth.id, 'life-satisfaction')
+      getLocalWellBeing(localAuth.id, that.state.date, 'life-satisfaction')
         .then((response) => {
           response.observations.forEach(function(item) {
             if(item.dimensions.estimate.id !== "average-mean") {
