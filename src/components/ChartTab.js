@@ -87,7 +87,7 @@ class ChartTab extends Component {
             </div> : null}
         </div>
           <WellBeingData localAuth={this.props.localAuth} show={this.state.wellbeing} />
-          <GenderPayGapData localAuth={this.props.localAuth} show={this.state.genderPayGap}/>
+          <GenderPayGapData localAuthLabel={this.props.localAuthLabel} localAuth={[{label: this.props.localAuthLabel, id: this.props.localAuth}, {label: 'UK', id: 'K02000001'}]} show={this.state.genderPayGap}/>
       </div>
     )
   }

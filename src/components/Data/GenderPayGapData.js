@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GenderPayGapChart from '../Charts/GenderPayGapChart';
+import CompareGenderPayGapChart from '../CompareCharts/CompareGenderPayGapChart';
 import {getHourlyEarnings} from '../../api/RequestHandler';
 import CMDLink from '../CMDLink';
 
@@ -7,162 +7,184 @@ class GenderPayGapData extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      femaleFT: [],
-      maleFT: [],
-      femalePT: [],
-      malePT: [],
-      femaleAll: [],
-      maleAll: [],
+      data: {},
+      paygapData: {},
+      date: 2017,
       fullTime: [],
       partTime: [],
       all: [],
-      date: 0,
-      loaded: false
+      loaded: false,
+      showAll: true,
+      showFT: false,
+      showPT: false
     }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     let that = this
-
-    await getHourlyEarnings(this.props.localAuth, "full-time", "male")
-      .then((response) => {
-        response.observations.forEach(function(item) {
-          if(item.observation === "") {
+    let count = 0
+    let localAuthority = {}
+    this.props.localAuth.forEach(function(localAuth) {
+      localAuthority[localAuth.id] = {all: {male: [], female: []}, partTime: {male: [], female: []}, fullTime: {male:[], female: []}}
+      getHourlyEarnings(localAuth.id, "full-time", "male")
+        .then((response) => {
+          count = count + 1
+          response.observations.forEach(function(item) {
+            if(item.observation === "") {
+              localAuthority[localAuth.id]["fullTime"]["male"].push({x: Number(item.dimensions.Time.label), y: 0})
+            } else {
+              localAuthority[localAuth.id]["fullTime"]["male"].push({x: Number(item.dimensions.Time.label) , y: Number(item.observation)})
+            }
+          })
+          if (count === that.props.localAuth.length * 6) {
             that.setState({
-              maleFT: [...that.state.maleFT, {x: Number(item.dimensions.Time.label), y: 0}]
-            })
-          } else {
-            that.setState({
-              maleFT: [...that.state.maleFT, {x: Number(item.dimensions.Time.label) , y: Number(item.observation)}]
-            })
-          }
-        })
-      })
-
-    await getHourlyEarnings(this.props.localAuth, "full-time", "female")
-      .then((response) => {
-        response.observations.forEach(function(item) {
-          if(item.observation === "") {
-            that.setState({
-              femaleFT: [...that.state.femaleFT, {x: Number(item.dimensions.Time.label) , y: 0}]
-            })
-          } else {
-            that.setState({
-              femaleFT: [...that.state.femaleFT, {x: Number(item.dimensions.Time.label) , y: Number(item.observation)}]
+              loaded: true
             })
           }
         })
-      })
 
-    await getHourlyEarnings(this.props.localAuth, "part-time", "male")
-      .then((response) => {
-        response.observations.forEach(function(item) {
-          if(item.observation === "") {
+      getHourlyEarnings(localAuth.id, "full-time", "female")
+        .then((response) => {
+          count = count + 1
+          response.observations.forEach(function(item) {
+            if(item.observation === "") {
+              localAuthority[localAuth.id]['fullTime']["female"].push({x: Number(item.dimensions.Time.label), y: 0})
+            } else {
+              localAuthority[localAuth.id]['fullTime']["female"].push({x: Number(item.dimensions.Time.label) , y: Number(item.observation)})
+            }
+          })
+          if (count === (that.props.localAuth.length * 6)) {
             that.setState({
-              malePT: [...that.state.malePT, {x:Number(item.dimensions.Time.label), y: 0}]
-            })
-          } else {
-            that.setState({
-              malePT: [...that.state.malePT, {x: Number(item.dimensions.Time.label) , y: Number(item.observation)}]
+              loaded: true
             })
           }
         })
-      })
 
-    await getHourlyEarnings(this.props.localAuth, "part-time", "female")
-      .then((response) => {
-        response.observations.forEach(function(item) {
-          if(item.observation === "") {
+      getHourlyEarnings(localAuth.id, "part-time", "male")
+        .then((response) => {
+          count = count + 1
+          response.observations.forEach(function(item) {
+            if(item.observation === "") {
+              localAuthority[localAuth.id]['partTime']["male"].push({x: Number(item.dimensions.Time.label), y: 0})
+            } else {
+              localAuthority[localAuth.id]['partTime']["male"].push({x: Number(item.dimensions.Time.label) , y: Number(item.observation)})
+            }
+          })
+          if (count === (that.props.localAuth.length * 6)) {
             that.setState({
-              femalePT: [...that.state.femalePT, {x: Number(item.dimensions.Time.label) , y: 0}]
-            })
-          } else {
-            that.setState({
-              femalePT: [...that.state.femalePT, {x: Number(item.dimensions.Time.label) , y: Number(item.observation)}]
-            })
-          }
-        })
-      })
-
-    await getHourlyEarnings(this.props.localAuth, "all", "male")
-      .then((response) => {
-        response.observations.forEach(function(item) {
-          if(item.observation === "") {
-            that.setState({
-              maleAll: [...that.state.maleAll, {x: Number(item.dimensions.Time.label) , y: 0}]
-            })
-          } else {
-            that.setState({
-              maleAll: [...that.state.maleAll, {x: Number(item.dimensions.Time.label) , y: Number(item.observation)}]
+              loaded: true
             })
           }
         })
-      })
 
-    await getHourlyEarnings(this.props.localAuth, "all", "female")
-      .then((response) => {
-        response.observations.forEach(function(item) {
-          if(item.observation === "") {
+      getHourlyEarnings(localAuth.id, "part-time", "female")
+        .then((response) => {
+          count = count + 1
+          response.observations.forEach(function(item) {
+            if(item.observation === "") {
+              localAuthority[localAuth.id]['partTime']["female"].push({x: Number(item.dimensions.Time.label), y: 0})
+            } else {
+              localAuthority[localAuth.id]['partTime']["female"].push({x: Number(item.dimensions.Time.label) , y: Number(item.observation)})
+            }
+          })
+          if (count === (that.props.localAuth.length * 6)) {
             that.setState({
-              femaleAll: [...that.state.femaleAll, {x: Number(item.dimensions.Time.label) , y: 0}]
-            })
-          } else {
-            that.setState({
-              femaleAll: [...that.state.femaleAll, {x: Number(item.dimensions.Time.label) , y: Number(item.observation)}]
+              loaded: true
             })
           }
         })
-      })
 
-    await this.getPercentage(this.state.femaleFT, this.state.maleFT, "fullTime")
-    await this.getPercentage(this.state.femalePT, this.state.malePT, "partTime")
-    await this.getPercentage(this.state.femaleAll, this.state.maleAll, "all")
+      getHourlyEarnings(localAuth.id, "all", "male")
+        .then((response) => {
+          count = count + 1
+          response.observations.forEach(function(item) {
+            if(item.observation === "") {
+              localAuthority[localAuth.id]['all']["male"].push({x: Number(item.dimensions.Time.label), y: 0})
+            } else {
+              localAuthority[localAuth.id]['all']["male"].push({x: Number(item.dimensions.Time.label) , y: Number(item.observation)})
+            }
+          })
+          if (count === (that.props.localAuth.length * 6)) {
+            that.setState({
+              loaded: true
+            })
+          }
+        })
 
-    await this.setDate([...this.state.fullTime, ...this.state.partTime, ...this.state.all])
-
-    this.setState({
-      loaded: true
+      getHourlyEarnings(localAuth.id, "all", "female")
+        .then((response) => {
+          count = count + 1
+          response.observations.forEach(function(item) {
+            if(item.observation === "") {
+              localAuthority[localAuth.id]['all']["female"].push({x: Number(item.dimensions.Time.label), y: 0})
+            } else {
+              localAuthority[localAuth.id]['all']["female"].push({x: Number(item.dimensions.Time.label) , y: Number(item.observation)})
+            }
+          })
+          if (count === (that.props.localAuth.length * 6)) {
+            that.setState({
+              loaded: true
+            })
+          }
+        })
     })
 
+    this.setState({
+      data: localAuthority
+    })
   }
 
-  getPercentage(female, male, hours) {
-    let that = this
+  handleShowAll() {
+    this.setState({
+      showAll: true,
+      showFT: false,
+      showPT: false
+    })
+  }
+  handleShowFT() {
+    this.setState({
+      showAll: false,
+      showFT: true,
+      showPT: false
+    })
+  }
+  handleShowPT() {
+    this.setState({
+      showAll: false,
+      showFT: false,
+      showPT: true
+    })
+  }
+
+  getPercentage(female, male, date) {
+    let figure = 0
     female.forEach(function(f) {
       male.forEach(function(m) {
-        if(f.x === m.x) {
+        if(f.x === m.x && f.x === date && m.x === date) {
           if(f.y === 0 || m.y === 0) {
-            return null
+            figure = "No data"
           } else {
-            that.setState({
-              [hours]: [...that.state[hours], {x: f.x, y: ((m.y - f.y) / m.y) * 100}]
-            })
+             figure = (((m.y - f.y) / m.y) * 100).toFixed(2) + '%'
           }
         }
       })
     })
+    return figure
   }
 
-  setDate(array) {
-    let that = this
-    let data = []
-    array.forEach(function(date) {
-      data.push(date.x)
+  handleDate(e) {
+    this.setState({
+      date: Number(e.target.value)
     })
-    if (data.length === array.length) {
-      that.setState({
-          date: that.getHighest(data)
-      })
-    }
-  }
-
-  getHighest(array) {
-    return Math.max.apply(Math, array);
   }
 
 
 
   render() {
+    console.log(this.state)
+    this.handleShowAll = this.handleShowAll.bind(this)
+    this.handleShowFT = this.handleShowFT.bind(this)
+    this.handleShowPT = this.handleShowPT.bind(this)
     let fullTime = this.state.fullTime.filter((date) =>
         date.x === this.state.date ? date : null
       )
@@ -175,34 +197,61 @@ class GenderPayGapData extends Component {
     let body = '{"name": "earnings", "options": [ "hourly-pay-excluding-overtime" ] }, { "name": "sex", "options": [ "all", "female", "male" ] }, {"name": "statistics", "options": [ "median" ] }, { "name": "time", "options": [ "2017" ] }, { "name": "workingpattern", "options": ["part-time", "full-time", "all"] }'
     return (
       <div>
-        {this.state.loaded && this.props.show ?
+        {this.props.show ?
           <div className="row justify-content-md-center">
             <div className="col-10">
               <h2>Gender Pay Gap</h2>
               <p>The gender pay gap is calculated as the difference between average hourly earnings (excluding overtime) of men and women as a proportion of average hourly earnings (excluding overtime) of men’s earnings. For example, a 4.0% gender pay gap denotes that women earn 4.0% less per hour, on average, than men. Conversely, a negative 4.0% gender pay gap denotes that women earn 4.0% more, on average, then men.</p>
             </div>
-            <div className="col-3">
-              <h3>Key Figures ({this.state.date}):</h3>
-              <h4>Full Time: {fullTime.length > 0 ? `${fullTime[0].y.toFixed(2)}%` : "No data"}</h4>
-              <h4>Part Time: {partTime.length > 0 ? `${partTime[0].y.toFixed(2)}%` : "No data"}</h4>
-              <h4>All Working Patterns: {all.length > 0 ? `${all[0].y.toFixed(2)}%` : "No data"}</h4>
-              <CMDLink
-                localAuth={this.props.localAuth}
-                dataset="ashe-table-7-earnings"
-                body={body}
-                icon="dark"
-                 />
-            </div>
-            <div className="col-5">
-              <GenderPayGapChart fullTime={this.state.fullTime} partTime={this.state.partTime}  all={this.state.all}/>
-            </div>
-            <div className="col-10">
-             <p>Estimates with a Coefficient of variation greater than 20% are suppressed from publication on quality grounds, along with those for which there is a risk of disclosure of individual employees or employers.</p>
-           </div>
+            {this.state.loaded ?
+              <div className="col-5">
+                <h4>Key Figures (2017):</h4>
+                  <table>
+                    <caption>Comparison of the gender pay gap between {this.props.localAuthLabel} and the UK</caption>
+                    <tbody>
+                      <tr>
+                        <th></th>
+                        <th>All</th>
+                        <th>Full-Time</th>
+                        <th>Part-Time</th>
+                      </tr>
+                      {Object.keys(this.state.data).map((item, key) =>
+                        <tr key={key}>
+                          <td><strong>{this.props.localAuth[key]['label']}</strong></td>
+                          <td>{this.getPercentage(this.state.data[item]['all']['female'], this.state.data[item]['all']['male'], this.state.date)}</td>
+                          <td>{this.getPercentage(this.state.data[item]['fullTime']['female'], this.state.data[item]['fullTime']['male'], this.state.date)}</td>
+                          <td>{this.getPercentage(this.state.data[item]['partTime']['female'], this.state.data[item]['partTime']['male'], this.state.date)}</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+              </div>
+               : null}
+            {this.state.loaded ?
+                <div className="col-5 radio-buttons">
+                  <form>
+                    <div className="form-check form-check-inline">
+                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked={this.state.showAll} onChange={this.handleShowAll}/>
+                      <label className="form-check-label" htmlFor="inlineRadio1">All working patterns</label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked={this.state.showFT} onChange={this.handleShowFT} />
+                      <label className="form-check-label" htmlFor="inlineRadio2">Full-Time</label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" checked={this.state.showPT} onChange={this.handleShowPT}/>
+                      <label className="form-check-label" htmlFor="inlineRadio3">Part-Time</label>
+                    </div>
+                  </form>
+                  <CompareGenderPayGapChart data={this.state.data} localAuth={this.props.localAuth} showAll={this.state.showAll} showFT={this.state.showFT} showPT={this.state.showPT}/>
+                </div>
+              : null}
+              <div className="col-10">
+                <p>Estimates with a Coefficient of variation greater than 20% are suppressed from publication on quality grounds, along with those for which there is a risk of disclosure of individual employees or employers.</p>
+              </div>
           </div>
-          : null}
+        : null}
       </div>
-
 
     )
   }

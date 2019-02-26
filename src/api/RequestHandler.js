@@ -118,7 +118,7 @@ export function getLocalWellBeing(code, measure) {
 // Get Gender Pay Gap data
 
 export function getHourlyEarnings(code, hours, gender) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-7-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=hourly-pay-excluding-overtime&Sex=${gender}&Workingpattern=${hours}&Statistics=median&Geography=${code}`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-7-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=hourly-pay-excluding-overtime&Sex=${gender}&Workingpattern=${hours}&Statistics=mean&Geography=${code}`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);

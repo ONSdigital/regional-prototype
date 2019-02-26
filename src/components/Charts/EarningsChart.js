@@ -49,84 +49,86 @@ class EarningsChart extends Component {
 
   render() {
     return (
-      <VictoryChart domain={{ x: [2012, 2017]}} domainPadding={{y: [20,20], x: [20, 20]}} >
-        <VictoryGroup
-          data={this.props.dataFull}
-          labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv})`}
-          labelComponent={
-              <VictoryTooltip
-                style={{ fontSize: 10 }}
-              />
-            }
-          >
-          <VictoryLine
-            style={{
-                  data: { stroke: "#3B7A9E" }
-                }}
+        <VictoryChart domain={{ x: [2012, 2017]}} domainPadding={{y: [20,20], x: [20, 20]}} >
+          <VictoryGroup
+            data={this.props.dataFull}
+            labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv})`}
+            labelComponent={
+                <VictoryTooltip
+                  style={{ fontSize: 10 }}
+                />
+              }
+            >
+            <VictoryLine
+              style={{
+                    data: { stroke: "#3B7A9E" }
+                  }}
 
-          />
-        <VictoryScatter size={5} style={{ data: { fill: "#3B7A9E" } }}/>
-        </VictoryGroup>
-        <VictoryGroup
-          data={this.props.dataMale}
-          labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv})`}
-          labelComponent={
-              <VictoryTooltip
-                style={{ fontSize: 10 }}
-              />
-            }
-          >
-          <VictoryLine
-            style={{
-                  data: { stroke: "tomato" }
-                }}
             />
-          <VictoryScatter size={5} style={{ data: { fill: "tomato" } }}/>
-        </VictoryGroup>
-        <VictoryGroup
-          data={this.props.dataFemale}
-          labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv})`}
-          labelComponent={
-              <VictoryTooltip
-                style={{ fontSize: 10 }}
+          <VictoryScatter size={5} style={{ data: { fill: "#3B7A9E" } }}/>
+          </VictoryGroup>
+          <VictoryGroup
+            data={this.props.dataMale}
+            labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv})`}
+            labelComponent={
+                <VictoryTooltip
+                  style={{ fontSize: 10 }}
+                />
+              }
+            >
+            <VictoryLine
+              style={{
+                    data: { stroke: "tomato" }
+                  }}
               />
-            }
-          >
-          <VictoryLine
+            <VictoryScatter size={5} style={{ data: { fill: "tomato" } }}/>
+          </VictoryGroup>
+          <VictoryGroup
+            data={this.props.dataFemale}
+            labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv})`}
+            labelComponent={
+                <VictoryTooltip
+                  style={{ fontSize: 10 }}
+                />
+              }
+            >
+            <VictoryLine
+              style={{
+                    data: { stroke: "orange" }
+                  }}
+              />
+            <VictoryScatter size={5} style={{ data: { fill: "orange" } }}/>
+          </VictoryGroup>
+          <VictoryAxis
+            dependentAxis
+            label="£"
+            axisLabelComponent={<VictoryLabel y={40} x={50} angle={0}/>}
             style={{
-                  data: { stroke: "orange" }
-                }}
+              ticks: {stroke: "black", size: 5},
+              grid: {stroke: "grey"},
+              tickLabels: {fontSize: 12}
+            }}
+            tickCount={8}
             />
-          <VictoryScatter size={5} style={{ data: { fill: "orange" } }}/>
-        </VictoryGroup>
-        <VictoryAxis
-          dependentAxis
-          label="£"
-          axisLabelComponent={<VictoryLabel y={40} x={50} angle={0}/>}
-          style={{
-            ticks: {stroke: "black", size: 5},
-            grid: {stroke: "grey"},
-          }}
-          tickCount={8}
+          <VictoryAxis
+            tickFormat={(data) => `${data.toString()}`}
+            style={{
+              ticks: {stroke: "black", size: 5},
+              tickLabels: {fontSize: 12}
+            }}
+            tickCount={6}
+            />
+          <VictoryLegend x={0} y={0}
+            orientation="horizontal"
+            gutter={20}
+            style={{ title: {fontSize: 20 } }}
+            data={[
+              { name: "All", symbol: { fill: "#3B7A9E" } },
+              { name: "Male", symbol: { fill: "tomato" } },
+              { name: "Female", symbol: { fill: "orange" } }
+            ]}
           />
-        <VictoryAxis
-          tickFormat={(data) => `${data.toString()}`}
-          style={{
-            ticks: {stroke: "black", size: 5}
-          }}
-          tickCount={6}
-          />
-        <VictoryLegend x={0} y={0}
-          orientation="horizontal"
-          gutter={20}
-          style={{ title: {fontSize: 20 } }}
-          data={[
-            { name: "All", symbol: { fill: "#3B7A9E" } },
-            { name: "Male", symbol: { fill: "tomato" } },
-            { name: "Female", symbol: { fill: "orange" } }
-          ]}
-        />
-     </VictoryChart>
+       </VictoryChart>
     );
   }
 }

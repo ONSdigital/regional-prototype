@@ -3,7 +3,7 @@ import CompareGenderPayGapChart from '../CompareCharts/CompareGenderPayGapChart'
 import {getHourlyEarnings} from '../../api/RequestHandler';
 import CMDLink from '../CMDLink';
 
-class GenderPayGapData extends Component {
+class CompareGenderPayGapData extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -266,4 +266,4 @@ class GenderPayGapData extends Component {
   }
 }
 
-export default GenderPayGapData;
+export default CompareGenderPayGapData;
