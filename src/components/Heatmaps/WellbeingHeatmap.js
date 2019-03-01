@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {getLocalWellBeing} from '../../api/RequestHandler';
+import * as ss from 'simple-statistics';
 
 class WellbeingHeatmap extends Component {
   constructor(props) {
@@ -33,6 +34,8 @@ class WellbeingHeatmap extends Component {
       data: data
     })
 
+    let array = this.state.dataWellBeing.map((item) => item.observation)
+
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
     mapboxgl.accessToken = 'pk.eyJ1IjoibWljaGFlbHJveW5vcnRvbiIsImEiOiJjanI5MGs3aWcwMnFvNGFsOWE3NTl2ZWR4In0.wm4DHL_Gb3gGIj7k8VSkgQ';
     var map = new mapboxgl.Map({
@@ -52,7 +55,7 @@ class WellbeingHeatmap extends Component {
               'data': place
             },
             'paint': {
-              'fill-color': that.getColor(place.properties.density),
+              'fill-color': that.getColor(place.properties.density, ss.ckmeans(array, 7)),
               'fill-opacity': 0.7,
               'fill-outline-color': '#000000'
             }
@@ -61,19 +64,17 @@ class WellbeingHeatmap extends Component {
     });
   }
 
-  getColor(d) {
-  return d > 4 ? '#810f7c' :
-         d > 3.5 ? '#88419d' :
-         d > 3 ? '#8c6bb1' :
-         d > 2.5 ? '#8c96c6' :
-         d > 2 ? '#9ebcda' :
-         d > 1.5 ? '#bfd3e6' :
-         d >= 1 ? '#e0ecf4' :
-                  '#f7fcfd' ;
+  getColor(d, array) {
+  return d > array[6][0]  ? '#88419d' :
+         d > array[5][0]  ? '#8c6bb1' :
+         d > array[4][0]  ? '#8c96c6' :
+         d > array[3][0]  ? '#9ebcda' :
+         d > array[2][0]  ? '#bfd3e6' :
+         d >= array[1][0] ? '#e0ecf4' :
+                            '#f7fcfd' ;
   }
 
   render() {
-    console.log(this.state)
     return (
         <div id={this.props.measure + "-wellbeing"} className="map"></div>
     );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {getLifeExpectancy, getLifeExpectancyFemale} from '../../api/RequestHandler';
+import * as ss from 'simple-statistics';
 
 class LifeExpectancyHeatmap extends Component {
   constructor(props) {
@@ -29,9 +30,13 @@ class LifeExpectancyHeatmap extends Component {
         }
       })
     })
+
     that.setState({
       data: data
     })
+
+
+    let array = this.state.dataLE.map((item) => item.observation)
 
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
     mapboxgl.accessToken = 'pk.eyJ1IjoibWljaGFlbHJveW5vcnRvbiIsImEiOiJjanI5MGs3aWcwMnFvNGFsOWE3NTl2ZWR4In0.wm4DHL_Gb3gGIj7k8VSkgQ';
@@ -52,7 +57,7 @@ class LifeExpectancyHeatmap extends Component {
               'data': place
             },
             'paint': {
-              'fill-color': that.getColor(place.properties.density),
+              'fill-color': that.getColor(place.properties.density, ss.ckmeans(array, 7)),
               'fill-opacity': 0.7,
               'fill-outline-color': '#000000'
             }
@@ -61,15 +66,14 @@ class LifeExpectancyHeatmap extends Component {
     });
   }
 
-  getColor(d) {
-  return d > 84 ? '#00441b' :
-         d > 83 ? '#006d2c' :
-         d > 82 ? '#238b45' :
-         d > 81 ? '#41ae76' :
-         d > 80 ? '#66c2a4' :
-         d > 79 ? '#99d8c9' :
-         d >= 1 ? '#ccece6' :
-                  '#bdbdbd' ;
+  getColor(d, array) {
+  return d > array[6][0]  ? '#006d2c' :
+         d > array[5][0]  ? '#238b45' :
+         d > array[4][0]  ? '#41ae76' :
+         d > array[3][0]  ? '#66c2a4' :
+         d > array[2][0]  ? '#99d8c9' :
+         d >= array[1][0] ? '#ccece6' :
+                            '#bdbdbd' ;
 }
 
   render() {
