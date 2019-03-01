@@ -53,6 +53,16 @@ export function getPop(code) {
   });
 }
 
+// Get Earnings
+
+export function getAllEarnings(code, sex, pattern, table) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=2017&Earnings=annual-pay-gross&Sex=${sex}&Workingpattern=${pattern}&Statistics=mean&Geography=${code}`)
+    .then((response) => response.json())
+    .catch((error) => {
+    console.error(error);
+  });
+}
+
 // Get Full Time Earnings
 
 export function getEarnings(code, table) {

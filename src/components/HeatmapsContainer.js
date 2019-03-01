@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import LifeExpectancyHeatmap from './Heatmaps/LifeExpectancyHeatmap';
 import WellbeingHeatmap from './Heatmaps/WellbeingHeatmap';
+import EarningsHeatmap from './Heatmaps/EarningsHeatmap';
 
 class HeatmapsContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      gender: "females",
-      wellbeing: "anxiety"
+      lifeExpectancy: "females",
+      wellbeing: "anxiety",
+      earningsFT: "female",
+      earningsPT: "female"
     }
   }
 
@@ -29,10 +32,24 @@ class HeatmapsContainer extends Component {
     })
   }
 
+  handleEarningsFT(e) {
+    this.setState({
+      earningsFT: e.target.value
+    })
+  }
+
+  handleEarningsPT(e) {
+    this.setState({
+      earningsPT: e.target.value
+    })
+  }
+
   render() {
     this.handleShowMale = this.handleShowMale.bind(this)
     this.handleShowFemale = this.handleShowFemale.bind(this)
     this.handleShowWellbeing = this.handleShowWellbeing.bind(this)
+    this.handleEarningsFT = this.handleEarningsFT.bind(this)
+    this.handleEarningsPT = this.handleEarningsPT.bind(this)
     return (
       <div className="container">
         {this.props.loaded ?
@@ -41,16 +58,16 @@ class HeatmapsContainer extends Component {
               <h3>Life Expectancy</h3>
                 <form>
                   <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked={this.state.gender === "females"} onChange={this.handleShowFemale} />
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked={this.state.lifeExpectancy === "females"} onChange={this.handleShowFemale} />
                     <label className="form-check-label" htmlFor="inlineRadio2">Female</label>
                   </div>
                   <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked={this.state.gender === "males"} onChange={this.handleShowMale}/>
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked={this.state.lifeExpectancy === "males"} onChange={this.handleShowMale}/>
                     <label className="form-check-label" htmlFor="inlineRadio1">Male</label>
                   </div>
                 </form>
-              {this.state.gender === "males" ? <LifeExpectancyHeatmap data={this.props.places} gender={this.state.gender} /> : null }
-              {this.state.gender === "females" ? <LifeExpectancyHeatmap data={this.props.places} gender={this.state.gender} /> : null }
+              {this.state.lifeExpectancy === "males" ? <LifeExpectancyHeatmap data={this.props.places} gender={this.state.lifeExpectancy} /> : null }
+              {this.state.lifeExpectancy === "females" ? <LifeExpectancyHeatmap data={this.props.places} gender={this.state.lifeExpectancy} /> : null }
             </div>
             <div className="col-6">
               <h3>Wellbeing</h3>
@@ -77,11 +94,45 @@ class HeatmapsContainer extends Component {
               {this.state.wellbeing === "life-satisfaction" ? <WellbeingHeatmap data={this.props.places} measure="life-satisfaction"/> : null}
               {this.state.wellbeing === "worthwhile" ? <WellbeingHeatmap data={this.props.places} measure="worthwhile"/> : null}
             </div>
-            <div className="col-5">
+            <div className="col-6">
               <h3>Average Full-time earnings</h3>
+              <form>
+                <div className="form-check form-check-inline">
+                  <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female" checked={this.state.earningsFT === "female"} onChange={(e) => {this.handleEarningsFT(e)}} />
+                  <label className="form-check-label" htmlFor="inlineRadio2">Female</label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male" checked={this.state.earningsFT === "male"} onChange={(e) => {this.handleEarningsFT(e)}}/>
+                  <label className="form-check-label" htmlFor="inlineRadio1">Male</label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="all" checked={this.state.earningsFT === "all"} onChange={(e) => {this.handleEarningsFT(e)}}/>
+                  <label className="form-check-label" htmlFor="inlineRadio1">All</label>
+                </div>
+              </form>
+              {this.state.earningsFT === "female" ? <EarningsHeatmap data={this.props.places} gender={this.state.earningsFT} pattern="full-time" table="7" /> : null}
+              {this.state.earningsFT === "male" ? <EarningsHeatmap data={this.props.places} gender={this.state.earningsFT} pattern="full-time" table="7" /> : null}
+              {this.state.earningsFT === "all" ? <EarningsHeatmap data={this.props.places} gender={this.state.earningsFT} pattern="full-time" table="7" /> : null}
             </div>
-            <div className="col-5">
+            <div className="col-6">
               <h3>Average Part-time earnings</h3>
+                <form>
+                  <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female" checked={this.state.earningsPT === "female"} onChange={(e) => {this.handleEarningsPT(e)}} />
+                    <label className="form-check-label" htmlFor="inlineRadio2">Female</label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male" checked={this.state.earningsPT === "male"} onChange={(e) => {this.handleEarningsPT(e)}}/>
+                    <label className="form-check-label" htmlFor="inlineRadio1">Male</label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="all" checked={this.state.earningsPT === "all"} onChange={(e) => {this.handleEarningsPT(e)}}/>
+                    <label className="form-check-label" htmlFor="inlineRadio1">All</label>
+                  </div>
+                </form>
+                {this.state.earningsPT === "female" ? <EarningsHeatmap data={this.props.places} gender={this.state.earningsPT} pattern="part-time" table="7" /> : null}
+                {this.state.earningsPT === "male" ? <EarningsHeatmap data={this.props.places} gender={this.state.earningsPT} pattern="part-time" table="7" /> : null}
+                {this.state.earningsPT === "all" ? <EarningsHeatmap data={this.props.places} gender={this.state.earningsPT} pattern="part-time" table="7" /> : null}
             </div>
           </div>
            : null}
