@@ -68,7 +68,7 @@ class WellBeingData extends Component {
         })
       })
 
-    await getLocalWellBeing(this.props.localAuth, this.state.date, 'anxiety')
+    await getLocalWellBeing(this.props.localAuth, "*", 'anxiety')
       .then((response) => {
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {
@@ -86,7 +86,7 @@ class WellBeingData extends Component {
         })
       })
 
-    await getLocalWellBeing(this.props.localAuth, this.state.date, 'happiness')
+    await getLocalWellBeing(this.props.localAuth, "*", 'happiness')
       .then((response) => {
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {
@@ -103,7 +103,7 @@ class WellBeingData extends Component {
         })
       })
 
-    await getLocalWellBeing(this.props.localAuth, this.state.date, 'worthwhile')
+    await getLocalWellBeing(this.props.localAuth, "*", 'worthwhile')
       .then((response) => {
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {
@@ -120,7 +120,7 @@ class WellBeingData extends Component {
         })
       })
 
-    await getLocalWellBeing(this.props.localAuth, this.state.date, 'life-satisfaction')
+    await getLocalWellBeing(this.props.localAuth, "*", 'life-satisfaction')
       .then((response) => {
         response.observations.forEach(function(item) {
           if(item.dimensions.estimate.id !== "average-mean") {

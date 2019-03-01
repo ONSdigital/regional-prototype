@@ -1,5 +1,9 @@
 /* Custom css */
+/* Choropleth Maps */
 
+.hide {
+  height: 0;
+}
 /* Search */
 
 .results {

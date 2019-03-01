@@ -19,6 +19,14 @@ export function getGeoData() {
   });
 }
 
+export function getGeoJSON() {
+  return fetch('https://opendata.arcgis.com/datasets/b2d5f4f8e9eb469bb22af910bdc1de22_3.geojson')
+    .then((response) => response.json())
+    .catch((error) => {
+    console.error(error);
+  });
+}
+
 // Get Population Data
 
 export function getMalePop(code) {
@@ -107,8 +115,8 @@ export function getUKWellBeing(measure) {
   });
 }
 
-export function getLocalWellBeing(code, time, measure) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/wellbeing-local-authority/editions/time-series/versions/1/observations?time=2017-18&geography=${code}&estimate=*&allmeasuresofwellbeing=${measure}`)
+export function getLocalWellBeing(code, estimate, measure) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/wellbeing-local-authority/editions/time-series/versions/1/observations?time=2017-18&geography=${code}&estimate=${estimate}&allmeasuresofwellbeing=${measure}`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);
@@ -118,7 +126,17 @@ export function getLocalWellBeing(code, time, measure) {
 // Get Gender Pay Gap data
 
 export function getHourlyEarnings(code, hours, gender) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-7-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=hourly-pay-excluding-overtime&Sex=${gender}&Workingpattern=${hours}&Statistics=mean&Geography=${code}`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-7-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=hourly-pay-excluding-overtime&Sex=${gender}&Workingpattern=${hours}&Statistics=median&Geography=${code}`)
+    .then((response) => response.json())
+    .catch((error) => {
+    console.error(error);
+  });
+}
+
+// Get Life Expectancy data
+
+export function getLifeExpectancy(cohort) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/life-expectancy-local-authority/editions/time-series/versions/1/observations?lifeexpectancyvariable=life-expectancy&time=2015-17&geography=*&birthcohort=birth-${cohort}`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);
