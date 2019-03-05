@@ -25,6 +25,12 @@ class WellbeingHeatmap extends Component {
 
     this.props.data.forEach(function(place, index) {
       that.state.dataWellBeing.forEach(function(item) {
+        if(item.dimensions.geography.id === 'S12000024') {
+          item.dimensions.geography.id = 'S12000048'
+        }
+        if(item.dimensions.geography.id === 'S12000015') {
+          item.dimensions.geography.id = 'S12000047'
+        }
         if(item.dimensions.geography.id === place.properties.lad18cd) {
           data.push({type: place.type, geometry: {type: place.geometry.type, coordinates: place.geometry.coordinates}, properties: {objectid: place.properties.objectid, lad18cd: place.properties.lad18cd, lad18nm: place.properties.lad18nm, lad18nmw: place.properties.lad18nmw, bng_e: place.properties.bng_e, bng_n: place.properties.bng_n, lat: place.properties.lat, long: place.properties.long, st_areashape: place.properties.st_areashape, st_lengthshape: place.properties.st_lengthshape, density: item.observation}})
         }
