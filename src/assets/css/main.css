@@ -4,6 +4,20 @@
 .hide {
   height: 0;
 }
+
+.legend {
+  position: absolute;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.key {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  margin-right: 10px;
+  border: 1px solid #333;
+}
 /* Search */
 
 .results {

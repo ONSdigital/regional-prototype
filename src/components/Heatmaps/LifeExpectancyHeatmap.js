@@ -7,7 +7,9 @@ class LifeExpectancyHeatmap extends Component {
     super(props)
     this.state = {
       data: [],
-      dataLE: {}
+      dataLE: {},
+      legend: [],
+      loaded: false
     }
   }
 
@@ -41,8 +43,9 @@ class LifeExpectancyHeatmap extends Component {
       data: data
     })
 
-
     let array = this.state.dataLE.map((item) => item.observation)
+
+    await this.setLegend(ss.ckmeans(array, 7))
 
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
     mapboxgl.accessToken = 'pk.eyJ1IjoibWljaGFlbHJveW5vcnRvbiIsImEiOiJjanI5MGs3aWcwMnFvNGFsOWE3NTl2ZWR4In0.wm4DHL_Gb3gGIj7k8VSkgQ';
@@ -68,23 +71,78 @@ class LifeExpectancyHeatmap extends Component {
               'fill-outline-color': '#000000'
             }
         });
+
+        var popup = new mapboxgl.Popup({
+          closeButton: false,
+          closeOnClick: false
+        });
+
+        map.on('mouseenter', place.properties.objectid.toString(), function(e) {
+
+          map.getCanvas().style.cursor = 'pointer';
+
+          var coordinates = [e.features[0].properties.long, e.features[0].properties.lat ];
+          var description = ''
+          if (e.features[0].properties.density === "") {
+            description = `<h3>${e.features[0].properties.lad18nm}</h3>No data`;
+          } else {
+            description = `<h3>${e.features[0].properties.lad18nm}</h3><h4>${Number(e.features[0].properties.density).toFixed(2)}</h4>`;
+          }
+
+          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+          }
+
+          popup.setLngLat(coordinates)
+          .setHTML(description)
+          .addTo(map);
+        });
+
+        map.on('mouseleave', place.properties.objectid.toString(), function() {
+          map.getCanvas().style.cursor = '';
+          popup.remove();
+        });
       })
     });
+
+    this.setState({
+      loaded: true
+    })
   }
 
   getColor(d, array) {
-  return d > array[6][0]  ? '#006d2c' :
-         d > array[5][0]  ? '#238b45' :
-         d > array[4][0]  ? '#41ae76' :
-         d > array[3][0]  ? '#66c2a4' :
-         d > array[2][0]  ? '#99d8c9' :
-         d >= array[1][0] ? '#ccece6' :
-                            '#bdbdbd' ;
-}
+    return Number(d) >= Number(array[6][0])  ? '#006d2c' :
+           Number(d) >= Number(array[5][0])  ? '#238b45' :
+           Number(d) >= Number(array[4][0])  ? '#41ae76' :
+           Number(d) >= Number(array[3][0])  ? '#66c2a4' :
+           Number(d) >= Number(array[2][0])  ? '#99d8c9' :
+           Number(d) >= Number(array[1][0])  ? '#ccece6' :
+                                               '#bdbdbd' ;
+  }
+
+  setLegend(array) {
+    this.setState({
+      legend: [
+        {key: `No data`, color: '#bdbdbd'},
+        {key: `${Number(array[1][0]).toFixed(2)} - ${(Number(array[2][0]) - 0.01).toFixed(2)}`, color: '#ccece6'},
+        {key: `${Number(array[2][0]).toFixed(2)} - ${(Number(array[3][0]) - 0.01).toFixed(2)}`, color: '#99d8c9'},
+        {key: `${Number(array[3][0]).toFixed(2)} - ${(Number(array[4][0]) - 0.01).toFixed(2)}`, color: '#66c2a4'},
+        {key: `${Number(array[4][0]).toFixed(2)} - ${(Number(array[5][0]) - 0.01).toFixed(2)}`, color: '#41ae76'},
+        {key: `${Number(array[5][0]).toFixed(2)} - ${(Number(array[6][0]) - 0.01).toFixed(2)}`, color: '#238b45'},
+        {key: `${Number(array[6][0]).toFixed(2)} +`, color: '#006d2c'},
+      ]
+    })
+  }
 
   render() {
     return (
-        <div id={this.props.gender + "-life-expectancy"} className="map"></div>
+        <div id={this.props.gender + "-life-expectancy"} className="map">
+          {this.state.loaded ?
+             <div className="legend">
+               {this.state.legend.map((item, key) => <div key={key}><span className="key" style={{backgroundColor: `${item.color}`}}></span><span className="range">{item.key}</span></div>)}
+             </div>
+         : null}
+        </div>
     );
   }
 }
