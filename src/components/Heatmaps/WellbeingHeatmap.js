@@ -55,7 +55,7 @@ class WellbeingHeatmap extends Component {
       zoom: 4
     })
 
-    map.on('load', function () {
+    await map.on('load', function () {
       that.state.data.forEach(function(place) {
         map.addLayer({
             'id': place.properties.objectid.toString(),
@@ -117,7 +117,7 @@ class WellbeingHeatmap extends Component {
          Number(d) >= Number(array[3][0]) ? '#9ebcda' :
          Number(d) >= Number(array[2][0]) ? '#bfd3e6' :
          Number(d) >= Number(array[1][0]) ? '#e0ecf4' :
-                            '#bdbdbd' ;
+                                            '#bdbdbd' ;
   }
 
   setLegend(array) {
