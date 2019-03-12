@@ -161,7 +161,6 @@ class WellBeingData extends Component {
   }
 
   render() {
-    console.log(this.state)
     let bodyAnxiety = '{ "name": "allmeasuresofwellbeing", "options": [ "anxiety" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
     let bodyHappiness = '{ "name": "allmeasuresofwellbeing", "options": [ "happiness" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
     let bodyWorthwhile = '{ "name": "allmeasuresofwellbeing", "options": [ "worthwhile" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'

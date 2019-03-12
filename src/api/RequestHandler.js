@@ -46,7 +46,7 @@ export function getFemalePop(code) {
 }
 
 export function getPop(code) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=2017&geography=${code}&sex=0&age=*`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/mid-year-pop-est/editions/time-series/versions/4/observations?time=*&geography=${code}&sex=0&age=total`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);

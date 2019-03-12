@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PopulationData from './Data/PopulationData';
 import EarningsData from './Data/EarningsData';
 import PartTimeEarningsData from './Data/PartTimeEarningsData';
 import WellBeingData from './Data/WellBeingData';
@@ -8,17 +9,29 @@ class ChartTab extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      earnings: true,
+      demographics: true,
+      earnings: false,
       genderPayGap: false,
       wellbeing: false
     }
+  }
+
+  handleDemographicsClick(e) {
+    this.setState({
+      earnings: false,
+      genderPayGap: false,
+      wellbeing: false,
+      demographics: true,
+    })
+    this.updateClass(e)
   }
 
   handleEarningsClick(e) {
     this.setState({
       earnings: true,
       genderPayGap: false,
-      wellbeing: false
+      wellbeing: false,
+      demographics: false
     })
     this.updateClass(e)
   }
@@ -27,7 +40,8 @@ class ChartTab extends Component {
     this.setState({
       earnings: false,
       genderPayGap: true,
-      wellbeing: false
+      wellbeing: false,
+      demographics: false
     })
     this.updateClass(e)
   }
@@ -36,7 +50,8 @@ class ChartTab extends Component {
     this.setState({
       earnings: false,
       genderPayGap: false,
-      wellbeing: true
+      wellbeing: true,
+      demographics: false
     })
     this.updateClass(e)
   }
@@ -62,8 +77,11 @@ class ChartTab extends Component {
             <div className="tab padding-top-md--1">
                 <nav className="tabs--js">
                     <ul className="list--neutral flush">
+                      <li className="tab__item width-sm--6">
+                          <span className="tab__link tab__link--active" onClick={(e) => {this.handleDemographicsClick(e)}}>Demographics</span>
+                      </li>
                         <li className="tab__item width-sm--6">
-                            <span className="tab__link tab__link--active" onClick={(e) => {this.handleEarningsClick(e)}}>Earnings</span>
+                            <span className="tab__link tab__link" onClick={(e) => {this.handleEarningsClick(e)}}>Earnings</span>
                         </li>
                         <li className="tab__item width-sm--6">
                             <span className="tab__link tab__link" onClick={(e) => {this.handleWellBeingClick(e)}}>Well-Being</span>
@@ -76,6 +94,7 @@ class ChartTab extends Component {
             </div>
           </div>
         </div>
+        <PopulationData localAuth={this.props.localAuth}  localAuthLabel={this.props.localAuthLabel} show={this.state.demographics}/>
         <div className="row justify-content-md-center">
           {this.state.earnings ? <div className="col-10">
             <h2>Annual Earnings for Full Time and Part Time workers</h2>

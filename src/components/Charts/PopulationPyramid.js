@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { VictoryBar, VictoryAxis, VictoryLabel, VictoryStack } from 'victory';
+import { VictoryBar, VictoryAxis, VictoryLabel, VictoryChart } from 'victory';
 
-class PopulationChart extends Component {
+class PopulationPyramid extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -32,27 +32,23 @@ class PopulationChart extends Component {
 
   render() {
     const width = 150;
-    const height = this.props.fData.length * 1.25;
+    const height = this.props.fData.length * 1.75;
     const padding = { top: 5, bottom: 5, left: 0, right: 0 };
     const domain = { x: [-this.state.upper.toFixed(2), this.state.upper.toFixed(2)]}
-
     return (
-      <svg viewBox={`0 0 ${width} ${height}`}
+      <svg viewBox={`0 0 ${width} ${height + 20}`}
         style={{ width: "100%", height: "auto" }}
       >
-        <VictoryStack horizontal
+        <VictoryChart
+          horizontal
           standalone={false}
           domain={domain}
           padding={padding}
           height={height}
           width={width}
-          style={{ data: { width: 0.75 }, labels: { fontSize: 11, fill:"#fff" } }}
-          animate={{duration: 500}}
-
         >
           <VictoryBar
-
-            style={{ data: { fill: "tomato" } }}
+            style={{ data: { width: 1.25, fill: "tomato" }, labels: {fontSize: 5} }}
             data={this.props.mData}
             labels={(data) => ""}
             labelComponent={<VictoryLabel x={10} textAnchor="middle"/>}
@@ -87,7 +83,7 @@ class PopulationChart extends Component {
             ]}
           />
           <VictoryBar
-            style={{ data: { fill: "orange" } }}
+            style={{ data: { width: 1.25, fill: "orange" }, labels: {fontSize: 5}}}
             data={this.props.fData}
             labels={(data) => ""}
             labelComponent={<VictoryLabel x={140} textAnchor="middle"/>}
@@ -124,9 +120,21 @@ class PopulationChart extends Component {
           <VictoryAxis
             dependentAxis
             tickLabelComponent={<VictoryLabel x={75} textAnchor="middle" />}
+            style={{axis: {stroke: "transparent"}, tickLabels: { fill: '#000000', fontSize: 2.5}}}
+            tickCount={45}
+            tickFormat={(t) => t === '90' ? '90+' : t}
+          />
+          <VictoryAxis
+            tickLabelComponent={<VictoryLabel y={160} textAnchor="middle" />}
+            axisLabelComponent={<VictoryLabel y={165}/>}
+            style={{ axis: {stroke: "#000000"}, axisLabel: {fontSize: 4}, tickLabels: {fontSize: 4, padding: 20}, ticks: {stroke: "black", size: 2.5},}}
+            offsetY={2.5}
+            tickCount={6}
+            tickFormat={(t) => `${(t).toString().replace(/-/g, "")}%`}
+            label="Percentage of Population"
           />
 
-        </VictoryStack>
+      </VictoryChart>
 
 
       </svg>
@@ -134,4 +142,4 @@ class PopulationChart extends Component {
   }
 }
 
-export default PopulationChart;
+export default PopulationPyramid;
