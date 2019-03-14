@@ -38,6 +38,54 @@ class CompareGenderPayGapChart extends Component {
     this.setState({
       paygapData: laData
     })
+    if(this.props.region) {
+      if(this.props.showAll) {
+        document.getElementById('GPG-all').children[1].children[0].id = `${this.props.localAuth[0].id}-GPG-all`
+      }
+      if(this.props.showFT) {
+        document.getElementById('GPG-FT').children[1].children[0].id = `${this.props.localAuth[0].id}-GPG-FT`
+      }
+      if(this.props.showPT) {
+        document.getElementById('GPG-PT').children[1].children[0].id = `${this.props.localAuth[0].id}-GPG-PT`
+      }
+    }
+
+    if(this.props.compare) {
+      if(this.props.showAll) {
+        document.getElementById('GPG-all').children[0].children[0].id = `compare-GPG-all`
+      }
+      if(this.props.showFT) {
+        document.getElementById('GPG-FT').children[0].children[0].id = `compare-GPG-FT`
+      }
+      if(this.props.showPT) {
+        document.getElementById('GPG-PT').children[0].children[0].id = `compare-GPG-PT`
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    if(this.props.region) {
+      if(this.props.showAll) {
+        document.getElementById('GPG-all').children[1].children[0].id = `${this.props.localAuth[0].id}-GPG-all`
+      }
+      if(this.props.showFT) {
+        document.getElementById('GPG-FT').children[1].children[0].id = `${this.props.localAuth[0].id}-GPG-FT`
+      }
+      if(this.props.showPT) {
+        document.getElementById('GPG-PT').children[1].children[0].id = `${this.props.localAuth[0].id}-GPG-PT`
+      }
+    }
+    if(this.props.compare) {
+      if(this.props.showAll) {
+        document.getElementById('GPG-all').children[0].children[0].id = `compare-GPG-all`
+      }
+      if(this.props.showFT) {
+        document.getElementById('GPG-FT').children[0].children[0].id = `compare-GPG-FT`
+      }
+      if(this.props.showPT) {
+        document.getElementById('GPG-PT').children[0].children[0].id = `compare-GPG-PT`
+      }
+    }
   }
 
   assignColor(index) {

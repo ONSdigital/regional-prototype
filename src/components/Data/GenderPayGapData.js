@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CompareGenderPayGapChart from '../CompareCharts/CompareGenderPayGapChart';
 import {getHourlyEarnings} from '../../api/RequestHandler';
 import CMDLink from '../CMDLink';
+import {saveSvgAsPng} from 'save-svg-as-png';
 
 class GenderPayGapData extends Component {
   constructor(props) {
@@ -178,7 +179,9 @@ class GenderPayGapData extends Component {
     })
   }
 
-
+  handleDownload(e) {
+    saveSvgAsPng(document.getElementById(e.target.value), `${e.target.value}.png`, {scale: 2});
+  }
 
   render() {
     this.handleShowAll = this.handleShowAll.bind(this)
@@ -194,6 +197,17 @@ class GenderPayGapData extends Component {
         date.x === this.state.date ? date : null
       )
     let body = '{"name": "earnings", "options": [ "hourly-pay-excluding-overtime" ] }, { "name": "sex", "options": [ "all", "female", "male" ] }, {"name": "statistics", "options": [ "median" ] }, { "name": "time", "options": [ "2017" ] }, { "name": "workingpattern", "options": ["part-time", "full-time", "all"] }'
+    let id = "GPG-all"
+    if(this.state.showAll) {
+      id = "GPG-all"
+    }
+    if(this.state.showFT) {
+      id = "GPG-FT"
+    }
+    if(this.state.showPT) {
+      id = "GPG-PT"
+    }
+
     return (
       <div>
         {this.props.show ?
@@ -228,7 +242,7 @@ class GenderPayGapData extends Component {
               </div>
                : null}
             {this.state.loaded ?
-                <div className="col-5 radio-buttons">
+                <div id={id} className="col-5 radio-buttons">
                   <form>
                     <div className="form-check form-check-inline">
                       <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked={this.state.showAll} onChange={this.handleShowAll}/>
@@ -243,7 +257,10 @@ class GenderPayGapData extends Component {
                       <label className="form-check-label" htmlFor="inlineRadio3">Part-Time</label>
                     </div>
                   </form>
-                  <CompareGenderPayGapChart data={this.state.data} localAuth={this.props.localAuth} showAll={this.state.showAll} showFT={this.state.showFT} showPT={this.state.showPT}/>
+                  <CompareGenderPayGapChart region={true} data={this.state.data} localAuth={this.props.localAuth} showAll={this.state.showAll} showFT={this.state.showFT} showPT={this.state.showPT}/>
+                  {this.state.showAll ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value={this.props.localAuth[0].id + '-GPG-all'}>Save this chart</button> : null}
+                  {this.state.showFT ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value={this.props.localAuth[0].id + '-GPG-FT'}>Save this chart</button> : null}
+                  {this.state.showPT ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value={this.props.localAuth[0].id + '-GPG-PT'}>Save this chart</button> : null}
                 </div>
               : null}
           </div>

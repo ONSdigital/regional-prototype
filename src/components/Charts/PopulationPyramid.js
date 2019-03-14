@@ -36,7 +36,7 @@ class PopulationPyramid extends Component {
     const padding = { top: 5, bottom: 5, left: 0, right: 0 };
     const domain = { x: [-this.state.upper.toFixed(2), this.state.upper.toFixed(2)]}
     return (
-      <svg viewBox={`0 0 ${width} ${height + 20}`}
+      <svg id={this.props.localAuth + "-populationPyramid"} viewBox={`0 0 ${width} ${height + 20}`}
         style={{ width: "100%", height: "auto" }}
       >
         <VictoryChart

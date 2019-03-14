@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {getEarnings, getEarningsMale, getEarningsFemale } from '../../api/RequestHandler';
 import CompareEarningsChart from '../CompareCharts/CompareEarningsChart';
+import {saveSvgAsPng} from 'save-svg-as-png';
 
 class CompareEarningsData extends Component {
   constructor(props) {
@@ -116,10 +117,25 @@ class CompareEarningsData extends Component {
     return (<span>{figure}<sub> {cv}</sub></span>)
   }
 
+  handleDownload(e) {
+    saveSvgAsPng(document.getElementById(e.target.value), `${e.target.value}.png`, {scale: 2});
+  }
+
+
     render() {
       this.handleShowAll = this.handleShowAll.bind(this)
       this.handleShowMale = this.handleShowMale.bind(this)
       this.handleShowFemale = this.handleShowFemale.bind(this)
+      let id = "earningsFTComparisonAll"
+      if(this.state.showAll) {
+        id = "earningsFTComparisonAll"
+      }
+      if(this.state.showMale) {
+        id = "earningsFTComparisonMale"
+      }
+      if(this.state.showFemale) {
+        id = "earningsFTComparisonFemale"
+      }
       return(
         <div>
           {this.state.loaded ?
@@ -182,8 +198,11 @@ class CompareEarningsData extends Component {
                   </div>
                 </form>
               </div>
-              <div className="col-8">
-                <CompareEarningsChart localAuth={this.props.localAuth} data={this.state.data} showAll={this.state.showAll} showMale={this.state.showMale} showFemale={this.state.showFemale}/>
+              <div id={id} className="col-8">
+                <CompareEarningsChart fullTime={true} localAuth={this.props.localAuth} data={this.state.data} showAll={this.state.showAll} showMale={this.state.showMale} showFemale={this.state.showFemale}/>
+                {this.state.showAll ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value="compareFTEarningsAll">Save this chart</button> : null}
+                {this.state.showMale ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value="compareFTEarningsMale">Save this chart</button> : null}
+                {this.state.showFemale ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value="compareFTEarningsFemale">Save this chart</button> : null}
               </div>
             </div>
           : null}

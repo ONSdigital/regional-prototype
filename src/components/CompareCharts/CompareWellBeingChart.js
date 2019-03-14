@@ -10,6 +10,13 @@ class CompareWellBeingChart extends Component {
     }
   }
 
+  componentDidMount() {
+    document.getElementById('anxiety').children[1].children[0].id = `compareAnxiety`
+    document.getElementById('happiness').children[1].children[0].id = `compareHappiness`
+    document.getElementById('worthwhile').children[1].children[0].id = `compareWorthwhile`
+    document.getElementById('lifeSatisfaction').children[1].children[0].id = `compareLifeSatisfaction`
+  }
+
   assignColor(index) {
     return this.state.colors[index]
   }
@@ -21,6 +28,7 @@ class CompareWellBeingChart extends Component {
     )
     return legend
   }
+
 
   render() {
     Object.keys(this.props.data).map((item, key) =>
@@ -61,7 +69,6 @@ class CompareWellBeingChart extends Component {
         <VictoryAxis
           dependentAxis
           style={{
-            grid: {stroke: "grey"},
             axis: {stroke: "transparent"},
             tickLabels: {fontSize: 0}
           }}

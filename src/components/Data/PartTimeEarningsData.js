@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getPartTimeEarnings, getPartTimeEarningsMale, getPartTimeEarningsFemale } from '../../api/RequestHandler';
 import EarningsChart from '../Charts/EarningsChart';
 import CMDLink from '../CMDLink';
+import {saveSvgAsPng} from 'save-svg-as-png';
 
 class PartTimeEarningsData extends Component {
   constructor(props) {
@@ -164,6 +165,9 @@ class PartTimeEarningsData extends Component {
     }
   }
 
+  handleDownload(e) {
+    saveSvgAsPng(document.getElementById(e.target.value), `${e.target.value}.png`);
+  }
 
   render() {
     let powMale = this.state.pow.male.filter((date) =>
@@ -256,27 +260,29 @@ class PartTimeEarningsData extends Component {
                   </div>
                 </form>
                 {this.state.showPOW ?
-                  <div>
-                    <EarningsChart dataFull={this.state.pow.all} dataMale={this.state.pow.male} dataFemale={this.state.pow.female}/>
+                  <div id="pow-PT">
+                    <EarningsChart localAuth={this.props.localAuth} partTime={true} showPOW={this.state.showPOW} dataFull={this.state.pow.all} dataMale={this.state.pow.male} dataFemale={this.state.pow.female}/>
                     <CMDLink
                       localAuth={this.props.localAuth}
                       dataset="ashe-table-7-earnings"
                       body={body}
                       icon="dark"
                        />
+                     <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value={this.props.localAuth + '-pow-PT'}>Save this chart</button>
                   </div>
                    :
                    null
                  }
                  {this.state.showPOR ?
-                   <div>
-                     <EarningsChart dataFull={this.state.por.all} dataMale={this.state.por.male} dataFemale={this.state.por.female}/>
+                   <div id="por-PT">
+                     <EarningsChart localAuth={this.props.localAuth} partTime={true} showPOR={this.state.showPOR} dataFull={this.state.por.all} dataMale={this.state.por.male} dataFemale={this.state.por.female}/>
                      <CMDLink
                        localAuth={this.props.localAuth}
                        dataset="ashe-table-8-earnings"
                        body={body}
                        icon="dark"
                         />
+                      <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value={this.props.localAuth + '-por-PT'}>Save this chart</button>
                    </div>
                     :
                     null

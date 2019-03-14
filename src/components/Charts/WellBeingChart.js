@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { VictoryChart, VictoryBar, VictoryAxis, VictoryGroup, VictoryTooltip, VictoryLegend } from 'victory';
+import { VictoryChart, VictoryBar, VictoryAxis, VictoryGroup, VictoryLabel, VictoryLegend } from 'victory';
 
 class WellBeingChart extends Component {
+  componentDidMount() {
+    document.getElementById('anxiety').children[1].children[0].id = `${this.props.localAuth}-anxiety`
+    document.getElementById('happiness').children[1].children[0].id = `${this.props.localAuth}-happiness`
+    document.getElementById('worthwhile').children[1].children[0].id = `${this.props.localAuth}-worthwhile`
+    document.getElementById('lifeSatisfaction').children[1].children[0].id = `${this.props.localAuth}-lifeSatisfaction`
+  }
 
   render() {
     const local = this.props.local.sort((a,b) => a.z - b.z)
@@ -10,23 +16,23 @@ class WellBeingChart extends Component {
     return(
       <VictoryChart>
         <VictoryGroup
-          offset={25}
-          style={{ data: { width: 20 } }}
+          offset={35}
+          style={{ data: { width: 25 } }}
           colorScale={this.props.color}
           >
           <VictoryBar
             data={local}
-            labels={(data) => `${data.y}%`}
+            labels={(data) => data.y === 0 ? 'No data' : `${data.y}%`}
             labelComponent={
-              <VictoryTooltip
+              <VictoryLabel
                 style={{ fontSize: 10 }}
               />}
           />
           <VictoryBar
             data={uk}
-            labels={(data) => `${data.y}%`}
+            labels={(data) => data.y === 0 ? 'No data' : `${data.y}%`}
             labelComponent={
-              <VictoryTooltip
+              <VictoryLabel
                 style={{ fontSize: 10 }}
               />}
           />
@@ -34,7 +40,6 @@ class WellBeingChart extends Component {
         <VictoryAxis
           dependentAxis
           style={{
-          grid: {stroke: "grey"},
           axis: {stroke: "transparent"},
           tickLabels: {fontSize: 0}
         }}/>

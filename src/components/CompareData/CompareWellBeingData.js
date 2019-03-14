@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getLocalWellBeing, getUKWellBeing } from '../../api/RequestHandler';
 import CompareWellBeingChart from '../CompareCharts/CompareWellBeingChart';
 import CMDLink from '../CMDLink';
+import {saveSvgAsPng} from 'save-svg-as-png';
 
 class CompareWellBeingData extends Component {
   constructor(props) {
@@ -103,6 +104,10 @@ class CompareWellBeingData extends Component {
     }
   }
 
+  handleDownload(e) {
+    saveSvgAsPng(document.getElementById(e.target.value), `${e.target.value}.png`, {scale: 2});
+  }
+
   render() {
     let bodyAnxiety = '{ "name": "allmeasuresofwellbeing", "options": [ "anxiety" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
     let bodyHappiness = '{ "name": "allmeasuresofwellbeing", "options": [ "happiness" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
@@ -112,21 +117,25 @@ class CompareWellBeingData extends Component {
       <div>
         {this.state.loadedAnxiety && this.state.loadedHappiness && this.state.loadedWorthwhile && this.state.loadedLifeSatisfaction ?
           <div className="row justify-content-md-center">
-            <div className="col-6">
+            <div id="anxiety" className="col-6 compare-wellbeing">
               <h4 className="well-being-title">Anxiety</h4>
               <CompareWellBeingChart localAuth={this.props.localAuth} data={this.state.data} title="anxiety" />
+              <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compareAnxiety'>Save this chart</button>
             </div>
-            <div className="col-6">
+            <div id="happiness" className="col-6 compare-wellbeing">
               <h4 className="well-being-title">Happiness</h4>
               <CompareWellBeingChart localAuth={this.props.localAuth} data={this.state.data} title="happiness"/>
+              <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compareHappiness'>Save this chart</button>
             </div>
-            <div className="col-6">
+            <div id="worthwhile" className="col-6 compare-wellbeing">
               <h4 className="well-being-title">Worthwhile</h4>
               <CompareWellBeingChart localAuth={this.props.localAuth} data={this.state.data} title="worthwhile" />
+              <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compareWorthwhile'>Save this chart</button>
             </div>
-            <div className="col-6">
+            <div id="lifeSatisfaction" className="col-6 compare-wellbeing">
               <h4 className="well-being-title">Life Satisfaction</h4>
               <CompareWellBeingChart localAuth={this.props.localAuth} data={this.state.data} title="lifeSatisfaction" />
+              <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compareLifeSatisfaction'>Save this chart</button>
             </div>
           </div>
            : null}

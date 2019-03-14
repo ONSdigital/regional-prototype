@@ -4,7 +4,7 @@ import { VictoryLabel, VictoryTooltip, VictoryPie, VictoryLegend } from 'victory
 class PopulationPie extends Component {
   render() {
     return (
-      <svg viewBox="0 0 400 400" style={{ width: "100%", height: "auto", padding: "0 150px" }}>
+      <svg id={this.props.localAuth + '-populationPie'} viewBox="0 0 400 400" style={{ width: "100%", height: "auto", padding: "0 150px" }}>
         <VictoryPie
           standalone={false}
           style={{ data: {stroke: '#ffffff'}, labels: { fill: "black" } }}

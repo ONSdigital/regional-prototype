@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CompareGenderPayGapChart from '../CompareCharts/CompareGenderPayGapChart';
 import {getHourlyEarnings} from '../../api/RequestHandler';
 import CMDLink from '../CMDLink';
+import {saveSvgAsPng} from 'save-svg-as-png';
 
 class CompareGenderPayGapData extends Component {
   constructor(props) {
@@ -178,6 +179,10 @@ class CompareGenderPayGapData extends Component {
     })
   }
 
+  handleDownload(e) {
+    saveSvgAsPng(document.getElementById(e.target.value), `${e.target.value}.png`, {scale: 2});
+  }
+
   render() {
     this.handleShowAll = this.handleShowAll.bind(this)
     this.handleShowFT = this.handleShowFT.bind(this)
@@ -192,6 +197,16 @@ class CompareGenderPayGapData extends Component {
         date.x === this.state.date ? date : null
       )
     let body = '{"name": "earnings", "options": [ "hourly-pay-excluding-overtime" ] }, { "name": "sex", "options": [ "all", "female", "male" ] }, {"name": "statistics", "options": [ "median" ] }, { "name": "time", "options": [ "2017" ] }, { "name": "workingpattern", "options": ["part-time", "full-time", "all"] }'
+    let id = "GPG-all"
+    if(this.state.showAll) {
+      id = "GPG-all"
+    }
+    if(this.state.showFT) {
+      id = "GPG-FT"
+    }
+    if(this.state.showPT) {
+      id = "GPG-PT"
+    }
     return (
       <div>
         {this.state.loaded ?
@@ -255,8 +270,11 @@ class CompareGenderPayGapData extends Component {
                 </div>
               </form>
             </div>
-            <div className="col-8">
-              <CompareGenderPayGapChart data={this.state.data} localAuth={this.props.localAuth} showAll={this.state.showAll} showFT={this.state.showFT} showPT={this.state.showPT}/>
+            <div id={id} className="col-8">
+              <CompareGenderPayGapChart compare={true} data={this.state.data} localAuth={this.props.localAuth} showAll={this.state.showAll} showFT={this.state.showFT} showPT={this.state.showPT}/>
+              {this.state.showAll ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compare-GPG-all'>Save this chart</button> : null}
+              {this.state.showFT ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compare-GPG-FT'>Save this chart</button> : null}
+              {this.state.showPT ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compare-GPG-PT'>Save this chart</button> : null}
             </div>
           </div>
           : null}

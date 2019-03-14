@@ -240,6 +240,15 @@ tr:nth-child(even) {
   border-right: 1px solid #333;
 }
 
+.wellbeing-col {
+  height: 100%;
+}
+
+.save {
+  float: right;
+  border-radius: 0
+}
+
 /* Compare */
 
 .compare-title {
@@ -279,6 +288,10 @@ table tr td {
 
 .well-being-title {
   margin-bottom: 0;
+}
+
+.compare-wellbeing {
+  height: 100%;
 }
 
 /* Footer */

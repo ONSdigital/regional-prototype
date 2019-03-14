@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { VictoryContainer, VictoryGroup, VictoryTooltip, VictoryScatter, VictoryLabel, VictoryChart, VictoryLine, VictoryAxis } from 'victory';
 
 class PopulationGraph extends Component {
+  componentDidMount() {
+    document.getElementById('popGraph').children[0].children[0].id = `${this.props.localAuth}-populationGraph`
+  }
   render() {
     return (
-      <VictoryChart domainPadding={{y: [20,20], x: [20, 20]}} >
+      <VictoryChart domainPadding={{y: [20,20], x: [20, 20]}}>
         <VictoryGroup
           data={this.props.data}
           labels={(data) => `${data.y.toLocaleString('en')}`}
@@ -29,6 +32,7 @@ class PopulationGraph extends Component {
             grid: {stroke: "grey"},
             tickLabels: {fontSize: 12}
           }}
+          tickLabelComponent={<VictoryLabel angle={-45}/>}
           tickCount={8}
           />
         <VictoryAxis

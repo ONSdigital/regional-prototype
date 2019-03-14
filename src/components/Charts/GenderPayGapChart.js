@@ -43,7 +43,17 @@ class GenderPayGapChart extends Component {
   }
 
   componentDidMount() {
-    this.setDomain([...this.props.fullTime, ...this.props.partTime, ...this.props.all])
+    this.set Domain([...this.props.fullTime, ...this.props.partTime, ...this.props.all])
+    console.log(document.getElementById('GPG'))
+    if(this.props.showAll) {
+      document.getElementById('GPG').children[1].children[0].id = `${this.props.localAuth[0].id}-GPG-all`
+    }
+    if(this.props.showFT) {
+      document.getElementById('GPG').children[1].children[0].id = `${this.props.localAuth[0].id}-GPG-FT`
+    }
+    if(this.props.showAll) {
+      document.getElementById('GPG').children[1].children[0].id = `${this.props.localAuth[0].id}-GPG-PT`
+    }
   }
 
   render() {

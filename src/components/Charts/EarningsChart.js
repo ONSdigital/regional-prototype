@@ -45,6 +45,19 @@ class EarningsChart extends Component {
 
   componentDidMount() {
     this.setDomain([...this.props.dataFull, ...this.props.dataMale, ...this.props.dataFemale])
+    if(this.props.showPOR && this.props.fullTime) {
+      document.getElementById('por-FT').children[0].children[0].id = `${this.props.localAuth}-por-FT`
+
+    }
+    if(this.props.showPOR && this.props.partTime) {
+      document.getElementById('por-PT').children[0].children[0].id = `${this.props.localAuth}-por-PT`
+    }
+    if(this.props.showPOW && this.props.fullTime) {
+      document.getElementById('pow-FT').children[0].children[0].id = `${this.props.localAuth}-pow-FT`
+    }
+    if(this.props.showPOW && this.props.partTime) {
+      document.getElementById('pow-PT').children[0].children[0].id = `${this.props.localAuth}-pow-PT`
+    }
   }
 
   render() {
@@ -129,6 +142,7 @@ class EarningsChart extends Component {
             ]}
           />
        </VictoryChart>
+
     );
   }
 }

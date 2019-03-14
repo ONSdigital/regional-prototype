@@ -10,6 +10,56 @@ class CompareEarningsChart extends Component {
     }
   }
 
+  componentDidMount() {
+    if(this.props.fullTime) {
+      if(this.props.showAll) {
+        document.getElementById('earningsFTComparisonAll').children[0].children[0].id = 'compareFTEarningsAll'
+      }
+      if(this.props.showMale) {
+        document.getElementById('earningsFTComparisonMale').children[0].children[0].id = 'compareFTEarningsMale'
+      }
+      if(this.props.showFemale) {
+        document.getElementById('earningsFTComparisonFemale').children[0].children[0].id = 'compareFTEarningsFemale'
+      }
+    }
+    if(this.props.partTime) {
+      if(this.props.showAll) {
+        document.getElementById('earningsPTComparisonAll').children[0].children[0].id = 'comparePTEarningsAll'
+      }
+      if(this.props.showMale) {
+        document.getElementById('earningsPTComparisonMale').children[0].children[0].id = 'comparePTEarningsMale'
+      }
+      if(this.props.showFemale) {
+        document.getElementById('earningsPTComparisonFemale').children[0].children[0].id = 'comparePTEarningsFemale'
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    if(this.props.fullTime) {
+      if(this.props.showAll) {
+        document.getElementById('earningsFTComparisonAll').children[0].children[0].id = 'compareFTEarningsAll'
+      }
+      if(this.props.showMale) {
+        document.getElementById('earningsFTComparisonMale').children[0].children[0].id = 'compareFTEarningsMale'
+      }
+      if(this.props.showFemale) {
+        document.getElementById('earningsFTComparisonFemale').children[0].children[0].id = 'compareFTEarningsFemale'
+      }
+    }
+    if(this.props.partTime) {
+      if(this.props.showAll) {
+        document.getElementById('earningsPTComparisonAll').children[0].children[0].id = 'comparePTEarningsAll'
+      }
+      if(this.props.showMale) {
+        document.getElementById('earningsPTComparisonMale').children[0].children[0].id = 'comparePTEarningsMale'
+      }
+      if(this.props.showFemale) {
+        document.getElementById('earningsPTComparisonFemale').children[0].children[0].id = 'comparePTEarningsFemale'
+      }
+    }
+  }
+
 
   assignColor(index) {
     return this.state.colors[index]
