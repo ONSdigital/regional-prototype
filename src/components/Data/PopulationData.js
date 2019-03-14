@@ -104,7 +104,6 @@ class PopulationData extends Component {
   }
 
   render() {
-    console.log(this.state)
     let body = '{ "name": "sex", "options": [ "0", "1", "2" ] }, { "name": "time", "options": [ "2016" ] }, { "name": "age", "options": [] }'
     return (
       <div>

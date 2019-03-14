@@ -16,7 +16,8 @@ class WellBeingData extends Component {
       localHappiness: [],
       localWorthwhile: [],
       localLifeSatisfaction: [],
-      date: "2017-18"
+      date: "2017-18",
+      noData: false
     }
   }
 
@@ -74,11 +75,13 @@ class WellBeingData extends Component {
           if(item.dimensions.estimate.id !== "average-mean") {
             if(item.metadata.data_markings === "x") {
               that.setState({
-                localAnxiety: [...that.state.localAnxiety, {x: item.dimensions.estimate.label , y: 0, z: that.assignValue(item.dimensions.estimate.label)}]
+                localAnxiety: [...that.state.localAnxiety, {x: item.dimensions.estimate.label , y: 0, z: that.assignValue(item.dimensions.estimate.label)}],
+                noData: true
               })
             } else {
               that.setState({
-                localAnxiety: [...that.state.localAnxiety, {x: item.dimensions.estimate.label , y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
+                localAnxiety: [...that.state.localAnxiety, {x: item.dimensions.estimate.label , y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}],
+                noData: false
               })
             }
 
@@ -92,11 +95,13 @@ class WellBeingData extends Component {
           if(item.dimensions.estimate.id !== "average-mean") {
             if(item.metadata.Data_Marking === "x") {
               that.setState({
-                localHappiness: [...that.state.localHappiness, {x: item.dimensions.estimate.label , y: 0, z: that.assignValue(item.dimensions.estimate.label)}]
+                localHappiness: [...that.state.localHappiness, {x: item.dimensions.estimate.label , y: 0, z: that.assignValue(item.dimensions.estimate.label)}],
+                noData: true
               })
             } else {
               that.setState({
-                localHappiness: [...that.state.localHappiness, {x: item.dimensions.estimate.label , y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
+                localHappiness: [...that.state.localHappiness, {x: item.dimensions.estimate.label , y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}],
+                noData: false
               })
             }
           }
@@ -109,11 +114,13 @@ class WellBeingData extends Component {
           if(item.dimensions.estimate.id !== "average-mean") {
             if(item.metadata.Data_Marking === "x") {
               that.setState({
-                localWorthwhile: [...that.state.localWorthwhile, {x: item.dimensions.estimate.label , y: 0, z: that.assignValue(item.dimensions.estimate.label)}]
+                localWorthwhile: [...that.state.localWorthwhile, {x: item.dimensions.estimate.label , y: 0, z: that.assignValue(item.dimensions.estimate.label)}],
+                noData: true
               })
             } else {
               that.setState({
-                localWorthwhile: [...that.state.localWorthwhile, {x: item.dimensions.estimate.label , y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
+                localWorthwhile: [...that.state.localWorthwhile, {x: item.dimensions.estimate.label , y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}],
+                noData: false
               })
             }
           }
@@ -126,11 +133,13 @@ class WellBeingData extends Component {
           if(item.dimensions.estimate.id !== "average-mean") {
             if(item.metadata.Data_Marking === "x") {
               that.setState({
-                localLifeSatisfaction: [...that.state.localLifeSatisfaction, {x: item.dimensions.estimate.label , y: 0, z: that.assignValue(item.dimensions.estimate.label)}]
+                localLifeSatisfaction: [...that.state.localLifeSatisfaction, {x: item.dimensions.estimate.label , y: 0, z: that.assignValue(item.dimensions.estimate.label)}],
+                noData: true
               })
             } else {
               that.setState({
-                localLifeSatisfaction: [...that.state.localLifeSatisfaction, {x: item.dimensions.estimate.label , y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}]
+                localLifeSatisfaction: [...that.state.localLifeSatisfaction, {x: item.dimensions.estimate.label , y: Number(item.observation), z: that.assignValue(item.dimensions.estimate.label)}],
+                noData: false
               })
             }
           }
@@ -161,6 +170,7 @@ class WellBeingData extends Component {
   }
 
   render() {
+    console.log(this.state.noData)
     let bodyAnxiety = '{ "name": "allmeasuresofwellbeing", "options": [ "anxiety" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
     let bodyHappiness = '{ "name": "allmeasuresofwellbeing", "options": [ "happiness" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
     let bodyWorthwhile = '{ "name": "allmeasuresofwellbeing", "options": [ "worthwhile" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'

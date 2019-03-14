@@ -9,6 +9,7 @@ class EarningsHeatmap extends Component {
       data: [],
       dataEarnings: {},
       legend: [],
+      mapLoaded: false,
       loaded: false
     }
   }

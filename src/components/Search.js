@@ -22,6 +22,16 @@ class Search extends Component {
     })
   }
 
+  disableButton(array, item) {
+    let found = false
+    for(var i = 0; i < array.length; i++) {
+      if (array[i].label === item) {
+        found = true
+      }
+    }
+    return found
+  }
+
   handleRemove(e) {
     this.state.compare.map((item) =>
       (item.label === e.target.value ?
@@ -72,9 +82,9 @@ class Search extends Component {
     return (
       <div>
         <div className="search search--results-page print--hide" id="searchBar">
-          <div className="wrapper">
+          <div className="container">
             <form className="col-wrap search__form" action="/search">
-              <h1>Find a Region</h1>
+              <h1>Filter by Local Authorities</h1>
               <input
                 aria-label="search for Local Authorities"
                 className="search__input search__input--results-page col col--md-29 col--lg-29"
@@ -90,37 +100,40 @@ class Search extends Component {
             </form>
           </div>
         </div>
-        <div className="wrapper">
-          <div className="col-wrap">
+        <div className="container">
+          <div className="row justify-content-md-center">
             {this.state.query || this.state.show ?
-              <div className="col col--md-two-thirds col--lg-two-thirds results">
-              <p>Showing {showingLA.length} results of {this.props.localAuthorities.length} <span className="close-search" onClick={this.handleCloseSearch}>Close X</span></p>
+              <div className="col-8 results">
+              <p>Showing {showingLA.length} results of {this.props.localAuthorities.length} Local Authorities<span className="close-search" onClick={this.handleCloseSearch}>Close X</span></p>
                 {showingLA.sort().map((item,key) =>
                   <div key={key} className="local-authorities">
                     <li>{item}</li>
                     <div className="btn-group">
                       <Link className="btn btn--primary" to={{pathname: '/local-authority/' + item.replace(/\s+/g, '-').toLowerCase(), state: this.addCode(item) }}>Go To</Link>
-                      <button className={this.state.compare.length === 4 ? "btn btn--secondary btn--secondary-disabled" : "btn btn--secondary"} value={item} onClick={this.state.compare.length === 4 ? null : (e) => this.handleAdd(e)}>Add</button>
+                      <button className={this.state.compare.length === 4 || this.disableButton(this.state.compare, item) ? "btn btn--secondary btn--secondary-disabled" : "btn btn--secondary"} value={item} onClick={this.state.compare.length === 4 || this.disableButton(this.state.compare, item) ? null : (e) => this.handleAdd(e)}>Compare</button>
                     </div>
                   </div>
                 )}
               </div>
             : null }
             {this.state.compare.length > 0 ?
-              <div className="col col--md-one-third col--lg-one-third">
-                <h2>Compare Local Authorities</h2>
-                {this.state.compare.length > 0 ? this.state.compare.map((item, key) =>
+              <div className={this.state.show || this.state.query ? "col-4" : "col-12"}>
+                <h2 className="compare-heading">Compare Local Authorities</h2>
+                {this.state.compare.map((item, key) =>
                   <div key={key} className="compare local-authorities">
                     <li>{item.label}</li>
                     <button className="remove btn btn--primary-alternative btn--bold btn--large" value={item.label} onClick={(e) => this.handleRemove(e)}>X</button>
                   </div>
-                ) :
-                <p>You have not selected any local authorities yet.</p>
-                }
-                {this.state.compare.length === 1 ? <Link className="compare-btn btn btn--secondary-disabled" to="">Compare</Link>: <Link className="compare-btn btn btn--secondary" to={{pathname: '/compare', state: this.state.compare}}>Compare</Link>}
+                )}
+                {this.state.compare.length === 1 ? <Link className="compare-btn btn btn--secondary-disabled" to="">Go To Comparison</Link>: <Link className="compare-btn btn btn--secondary" to={{pathname: '/compare', state: this.state.compare}}>Go To Comparison</Link>}
               </div>
-              : null}
-
+              : null
+            }
+            {this.state.query || this.state.show && this.state.compare.length === 0 ?
+              <div className={this.state.show || this.state.query ? "col-4" : "col-12"}>
+                <h2 className="compare-heading">Compare Local Authorities</h2>
+                <p>You have not selected any Local Authorities to compare. Please select at least 2 (maximum 4) Local Authrorities to compare</p>
+              </div> : null }
           </div>
         </div>
       </div>

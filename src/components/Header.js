@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Header = () => (
-  <div className="wrapper">
+  <div className="container">
   	<div className="header col-wrap">
   		<div className="col col--lg-one-third col--md-one-third">
   			<a href="/">

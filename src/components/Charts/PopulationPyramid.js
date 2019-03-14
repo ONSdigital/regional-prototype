@@ -46,6 +46,7 @@ class PopulationPyramid extends Component {
           padding={padding}
           height={height}
           width={width}
+          domainPadding={{x: [5,5], y: [0, 5]}}
         >
           <VictoryBar
             style={{ data: { width: 1.25, fill: "tomato" }, labels: {fontSize: 5} }}
@@ -119,8 +120,10 @@ class PopulationPyramid extends Component {
           />
           <VictoryAxis
             dependentAxis
+            label="Age"
+            axisLabelComponent={<VictoryLabel x={75} y={5} textAnchor="middle" angle={0}/>}
             tickLabelComponent={<VictoryLabel x={75} textAnchor="middle" />}
-            style={{axis: {stroke: "transparent"}, tickLabels: { fill: '#000000', fontSize: 2.5}}}
+            style={{axis: {stroke: "transparent"}, axisLabel: {fontSize: 4}, tickLabels: { fill: '#000000', fontSize: 2.5}}}
             tickCount={45}
             tickFormat={(t) => t === '90' ? '90+' : t}
           />
