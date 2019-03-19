@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getGeoData } from '../api/RequestHandler';
 import MapContainer from './MapContainer';
 import PopulationData from './Data/PopulationData';
 import ChartTab from './ChartTab';
@@ -9,6 +10,8 @@ class Region extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      places: [],
+      localAuthLabel: '',
       loaded: false,
       polygon: [],
       mapCenter: [],
@@ -20,9 +23,17 @@ class Region extends Component {
 
     let that = this;
 
-    await this.props.places.forEach(function(place) {
-      if(place.attributes.lad18cd === that.props.location.state.id) {
+    await getGeoData()
+      .then((response) => {
+        this.setState({
+          places: response.features
+        })
+      })
+
+    this.state.places.forEach(function(place) {
+      if(place.attributes.lad18cd === that.props.match.params.id) {
         that.setState({
+          localAuthLabel: place.attributes.lad18nm,
           polygon: place.geometry.rings,
           mapCenter: [place.attributes.long, place.attributes.lat]
         })
@@ -40,19 +51,22 @@ class Region extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div>
         {this.state.loaded ?
           <div>
-            {this.state.polygon.length > 0 ? <MapContainer container={this.props.location.state.id} polygon={this.state.polygon} mapCenter={this.state.mapCenter} zoom={this.state.zoom}/> : <div className="map-placeholder"></div>}
+            {this.state.polygon.length > 0 ? <MapContainer container={this.props.match.params.id} polygon={this.state.polygon} mapCenter={this.state.mapCenter} zoom={this.state.zoom}/> : <div className="map-placeholder"></div>}
           </div>
           :
-            <p>Loading map data for {this.props.location.state.label}...</p>
+          <div className="map-placeholder">
+            <p>Loading map data for {this.props.match.params.region}...</p>
+          </div>
         }
         <div className="region-info">
-          <h1>{this.props.location.state.label}</h1>
+          <h1>{this.state.localAuthLabel}</h1>
         </div>
-        <ChartTab localAuthLabel={this.props.location.state.label} localAuth={this.props.location.state.id} />
+        <ChartTab localAuthLabel={this.state.localAuthLabel} localAuth={this.props.match.params.id} />
       </div>
     )
   }

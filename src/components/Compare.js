@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { getGeoData } from '../api/RequestHandler';
 import CompareEarningsData from './CompareData/CompareEarningsData';
 import ComparePartTimeEarningsData from './CompareData/ComparePartTimeEarningsData';
 import CompareWellBeingData from './CompareData/CompareWellBeingData';
@@ -11,6 +12,8 @@ class Compare extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      places: [],
+      localAuths: [],
       loaded: false
     }
   }
@@ -18,32 +21,46 @@ class Compare extends Component {
   async componentDidMount() {
 
     let that = this;
+    let ids = this.props.match.params.id.split("&")
 
-    await this.props.places.forEach(function(place) {
-      that.props.location.state.map((item, key) =>
-        place.attributes.lad18cd === item.id ?
+    await getGeoData()
+      .then((response) => {
+        this.setState({
+          places: response.features
+        })
+      })
+
+    await this.state.places.forEach(function(place) {
+      ids.forEach(function(item) {
+        if(place.attributes.lad18cd === item) {
           that.setState({
-            [item.label]: {
+            [item]: {
               polygon: place.geometry.rings,
               mapCenter: [place.attributes.long, place.attributes.lat]
-            }
-
-          }) : null
-        )
+            },
+            localAuths: [
+              ...that.state.localAuths,
+              {label: place.attributes.lad18nm, id: place.attributes.lad18cd}
+            ]
+          })
+        } else {
+          return null
+        }
+      })
     })
 
 
     let pg, size
 
-    await this.props.location.state.map((item) => {
-      if(this.state[item.label]) {
-        pg = polygon(that.state[item.label].polygon)
+    await ids.forEach(function(item) {
+      if(that.state[item]) {
+        pg = polygon(that.state[item].polygon)
         size = turf(pg)
       }
 
-      this.setState({
-        [item.label]: {
-          ...this.state[item.label],
+      that.setState({
+        [item]: {
+          ...that.state[item],
           zoom: size
         }
       })
@@ -63,12 +80,12 @@ class Compare extends Component {
         </div>
         <div className="container">
           <div className="row justify-content-md-center">
-            {this.props.location.state.map((item, key) =>
+            {this.state.localAuths.map((item, key) =>
               <div key={key} className="col map-card">
-                {this.state.loaded && this.state[item.label].polygon ?
+                {this.state.loaded && this.state[item.id].polygon ?
                   <div>
                     <h2>{item.label}</h2>
-                    <MapContainer container={item.id} polygon={this.state[item.label].polygon} mapCenter={this.state[item.label].mapCenter} zoom={this.state[item.label].zoom}/>
+                    <MapContainer container={item.id} polygon={this.state[item.id].polygon} mapCenter={this.state[item.id].mapCenter} zoom={this.state[item.id].zoom}/>
                   </div>
                    : <div className="">Loading map...</div>}
               </div>
@@ -78,25 +95,25 @@ class Compare extends Component {
             <h2>Full-Time Earnings</h2>
           </div>
           <div className="row justify-content-md-center">
-            <CompareEarningsData localAuth={this.props.location.state} />
+            {this.state.loaded ? <CompareEarningsData localAuth={this.state.localAuths} /> : null}
           </div>
           <div className="col-12">
             <h2>Part-Time Earnings</h2>
           </div>
           <div className="row justify-content-md-center">
-            <ComparePartTimeEarningsData localAuth={this.props.location.state} />
+            {this.state.loaded ? <ComparePartTimeEarningsData localAuth={this.state.localAuths} /> : null}
           </div>
           <div className="col-12">
             <h2>Well-Being</h2>
           </div>
           <div className="row justify-content-md-center">
-            <CompareWellBeingData localAuth={this.props.location.state} />
+            {this.state.loaded ? <CompareWellBeingData localAuth={this.state.localAuths} /> : null}
           </div>
           <div className="col-12">
             <h2>Gender Pay Gap</h2>
           </div>
           <div className="row justify-content-md-center">
-            <CompareGenderPayGapData localAuth={this.props.location.state} />
+            {this.state.loaded ? <CompareGenderPayGapData localAuth={this.state.localAuths} /> : null}
           </div>
         </div>
       </div>

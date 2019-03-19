@@ -53,8 +53,8 @@ class App extends Component {
           <Header />
           <Switch>
             <Route exact path="/" component={() => <div><Search localAuthorities={this.state.localAuthorities} /><HeatmapsContainer places={this.state.data} loaded={this.state.loaded} /></div>} />
-            <Route path="/local-authority/:region" render={(props) => <Region {...props} places={this.state.places} />} />
-            <Route exact path="/compare" render={(props) => <Compare {...props} places={this.state.places} />} />
+            <Route path="/local-authority/:id/:region" render={(props, match) => <Region {...props} />} />
+            <Route exact path="/compare/:id" render={(props, match) => <Compare {...props} places={this.state.places} />} />
           </Switch>
           <Footer />
         </div>
