@@ -36,9 +36,10 @@
 }
 
 .local-authorities {
+  position: relative;
   width: 100%;
   display: inline-block;
-  border-bottom: 1px solid #333
+  border-bottom: 1px solid #EAEAEA;
 }
 
 .local-authorities li {
@@ -51,16 +52,12 @@
   margin: 16px 0;
 }
 
+.btn {
+  border-radius: 0;
+}
+
 .btn-group .btn+.btn {
   margin: 0
-}
-
-.btn-group>.btn-group:not(:last-child)>.btn, .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
-  border-radius: 0
-}
-
-.btn-group>.btn-group:not(:first-child)>.btn, .btn-group>.btn:not(:first-child) {
-  border-radius: 0;
 }
 
 .btn--primary:hover, .btn--primary:focus{
@@ -73,15 +70,55 @@
   cursor: not-allowed !important;
 }
 
+.compare-col {
+  margin-top: 15px;
+  padding: 0;
+}
+
 .compare-heading {
-  margin-top: 20px;
+  margin-top: 0;
+  padding: 15px;
+  background-color: #EAEAEA;
+}
+
+.compare-count {
+  background-color: #EAEAEA;
+}
+
+.compare-count .remove {
+  position: absolute;
+  right: 0;
+  background: transparent
+}
+
+
+
+.compare-col h3 {
+  font-weight: bold;
+}
+
+.compare-helper {
+  padding: 0 15px;
+}
+
+.compare {
+  padding: 0 15px;
+  border: 1px solid #EAEAEA;
+  border-top: 0;
 }
 
 .remove {
   float: right;
   margin: 15px 0;
-  font-weight: 600;
-  color: #D32F2F;
+  color: #206095;
+  text-decoration: underline;
+  border-radius: 0;
+}
+.remove:hover {
+  float: right;
+  margin: 15px 0;
+  color: #206095;
+  text-decoration: underline;
   border-radius: 0;
 }
 
@@ -102,7 +139,7 @@
 }
 
 .compare-btn:hover {
-  background-color: #323132;
+  background-color: #0b5d30;
   color: #fff;
 }
 

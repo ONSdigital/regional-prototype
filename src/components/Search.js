@@ -17,9 +17,14 @@ class Search extends Component {
   }
 
   handleAdd(e) {
+    console.log(e.target)
     this.setState({
       compare: [...this.state.compare, this.addCode(e.target.value)]
     })
+    this.state.compare.map((item) =>
+      (item.label === e.target.value ?
+        this.removeLA(e.target.value): null
+    ))
   }
 
   disableButton(array, item) {
@@ -37,6 +42,12 @@ class Search extends Component {
       (item.label === e.target.value ?
         this.removeLA(e.target.value): null)
     )
+  }
+
+  handleRemoveAll() {
+    this.setState({
+      compare: []
+    })
   }
 
   removeLA(target) {
@@ -88,7 +99,6 @@ class Search extends Component {
     }
 
     let url = ""
-
     if(this.state.compare) {
       this.state.compare.forEach((item, index, array) => {
         if(index === array.length - 1) {
@@ -100,6 +110,7 @@ class Search extends Component {
     }
 
     this.handleCloseSearch = this.handleCloseSearch.bind(this)
+    this.handleRemoveAll = this.handleRemoveAll.bind(this)
     return (
       <div>
         <div className="search search--results-page print--hide" id="searchBar">
@@ -130,7 +141,7 @@ class Search extends Component {
                   <div key={key} className="local-authorities">
                     <li>{item}</li>
                     <div className="btn-group">
-                      <Link className="btn btn--primary" to={{pathname: '/local-authority/' + `${this.getCode(item)}/` + item.replace(/\s+/g, '-').toLowerCase(), state: this.addCode(item) }}>Go To</Link>
+                      <Link className="btn btn--primary" to={{pathname: '/local-authority/' + `${this.getCode(item)}/` + item.replace(/\s+/g, '-').toLowerCase(), state: this.addCode(item) }}>Go to Local Authority</Link>
                       <button className={this.state.compare.length === 4 || this.disableButton(this.state.compare, item) ? "btn btn--secondary btn--secondary-disabled" : "btn btn--secondary"} value={item} onClick={this.state.compare.length === 4 || this.disableButton(this.state.compare, item) ? null : (e) => this.handleAdd(e)}>Compare</button>
                     </div>
                   </div>
@@ -138,22 +149,30 @@ class Search extends Component {
               </div>
             : null }
             {this.state.compare.length > 0 ?
-              <div className={this.state.show || this.state.query ? "col-4" : "col-12"}>
+              <div className={this.state.show || this.state.query ? "col-4 compare-col" : "col-12 compare-col"}>
                 <h2 className="compare-heading">Compare Local Authorities</h2>
+                <div className="col-12">
+                  <div className="compare-count row">
+                    <h3 className="compare-heading">{this.state.compare.length} {this.state.compare.length === 1 ? "item" : "items"} added</h3>
+                    <button className="remove btn btn--primary-alternative btn--bold btn--large" onClick={this.handleRemoveAll}>Remove all</button>
+                  </div>
+                </div>
+
                 {this.state.compare.map((item, key) =>
                   <div key={key} className="compare local-authorities">
                     <li>{item.label}</li>
-                    <button className="remove btn btn--primary-alternative btn--bold btn--large" value={item.label} onClick={(e) => this.handleRemove(e)}>X</button>
+                    <button className="remove btn btn--primary-alternative btn--bold btn--large" value={item.label} onClick={(e) => this.handleRemove(e)}>Remove</button>
                   </div>
                 )}
-                {this.state.compare.length === 1 ? <Link className="compare-btn btn btn--secondary-disabled" to="">Go To Comparison</Link>: <Link className="compare-btn btn btn--secondary" to={{pathname: '/compare/' + url, state: this.state.compare}}>Go To Comparison</Link>}
+                {this.state.compare.length === 1 ? <Link className="compare-btn btn btn--secondary-disabled" to="">Go To Comparison</Link>: <Link className="compare-btn btn btn--primary" to={{pathname: '/compare/' + url, state: this.state.compare}}>Go To Comparison</Link>}
               </div>
               : null
             }
             {this.state.query || this.state.show && this.state.compare.length === 0 ?
-              <div className={this.state.show || this.state.query ? "col-4" : "col-12"}>
+              <div className={this.state.show || this.state.query ? "col-4 compare-col" : "col-12 compare-col"}>
                 <h2 className="compare-heading">Compare Local Authorities</h2>
-                <p>You have not selected any Local Authorities to compare. Please select at least 2 (maximum 4) Local Authrorities to compare</p>
+                <h3 className="compare-heading">{this.state.compare.length} {this.state.compare.length === 1 ? "item" : "items"} added</h3>
+                <p className="compare-helper">You have not selected any Local Authorities to compare. Please select at least 2 (maximum 4) Local Authrorities to compare</p>
               </div> : null }
           </div>
         </div>
