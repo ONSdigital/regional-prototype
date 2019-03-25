@@ -220,7 +220,7 @@ class EarningsData extends Component {
                   <p className="no-data">Unfortunately no personal well-being data is avaliable for {this.props.localAuthLabel}</p>
                   :
                   <div>
-                    <h3>Full Time</h3>
+                    <h3>Annual Earnings for Full Time workers</h3>
                     <h4>Key Figures ({this.state.date}):</h4>
                     <table className="earnings-table">
                       <caption>Comparison of annual summary of earnings between place of work and place of residence</caption>

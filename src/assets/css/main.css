@@ -301,6 +301,18 @@ tr:nth-child(even) {
 .map-card .map {
   border: 1px solid;
   height: 300px;
+  width: 94%;
+}
+
+.map-card {
+  position: relative;
+  height: 400px;
+}
+
+.map-div {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .key-figures {

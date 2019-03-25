@@ -17,7 +17,6 @@ class Search extends Component {
   }
 
   handleAdd(e) {
-    console.log(e.target)
     this.setState({
       compare: [...this.state.compare, this.addCode(e.target.value)]
     })

@@ -177,6 +177,10 @@ class ComparePartTimeEarningsData extends Component {
                   </table>
                 </div>
               )}
+              <div className="col-12">
+                <p>The &#177; value represents the coefficient of variation (CV) and shows the extent of variability expressed as a percentage.</p>
+                <p>*Estimates with a Coefficient of variation greater than 20% are suppressed from publication on quality grounds, along with those for which there is a risk of disclosure of individual employees or employers.</p>
+              </div>
             </div>
             : null
           }

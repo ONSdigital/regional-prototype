@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { getGeoData } from '../api/RequestHandler';
+import { getGeoJSON } from '../api/RequestHandler';
 import CompareEarningsData from './CompareData/CompareEarningsData';
 import ComparePartTimeEarningsData from './CompareData/ComparePartTimeEarningsData';
 import CompareWellBeingData from './CompareData/CompareWellBeingData';
@@ -23,7 +23,7 @@ class Compare extends Component {
     let that = this;
     let ids = this.props.match.params.id.split("&")
 
-    await getGeoData()
+    await getGeoJSON()
       .then((response) => {
         this.setState({
           places: response.features
@@ -32,15 +32,15 @@ class Compare extends Component {
 
     await this.state.places.forEach(function(place) {
       ids.forEach(function(item) {
-        if(place.attributes.lad18cd === item) {
+        if(place.properties.lad18cd === item) {
           that.setState({
             [item]: {
-              polygon: place.geometry.rings,
-              mapCenter: [place.attributes.long, place.attributes.lat]
+              polygon: place.geometry.coordinates,
+              mapCenter: [place.properties.long, place.properties.lat]
             },
             localAuths: [
               ...that.state.localAuths,
-              {label: place.attributes.lad18nm, id: place.attributes.lad18cd}
+              {label: place.properties.lad18nm, id: place.properties.lad18cd}
             ]
           })
         } else {
@@ -83,11 +83,11 @@ class Compare extends Component {
             {this.state.localAuths.map((item, key) =>
               <div key={key} className="col map-card">
                 {this.state.loaded && this.state[item.id].polygon ?
-                  <div>
+                  <div className="map-div">
                     <h2>{item.label}</h2>
                     <MapContainer container={item.id} polygon={this.state[item.id].polygon} mapCenter={this.state[item.id].mapCenter} zoom={this.state[item.id].zoom}/>
                   </div>
-                   : <div className="">Loading map...</div>}
+                   : <div className="map">Loading map...</div>}
               </div>
             )}
           </div>

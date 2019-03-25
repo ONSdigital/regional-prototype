@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getGeoData } from '../api/RequestHandler';
+import { getGeoJSON } from '../api/RequestHandler';
 import MapContainer from './MapContainer';
 import PopulationData from './Data/PopulationData';
 import ChartTab from './ChartTab';
@@ -23,19 +23,20 @@ class Region extends Component {
 
     let that = this;
 
-    await getGeoData()
+    await getGeoJSON()
       .then((response) => {
+        console.log(response)
         this.setState({
           places: response.features
         })
       })
 
     this.state.places.forEach(function(place) {
-      if(place.attributes.lad18cd === that.props.match.params.id) {
+      if(place.properties.lad18cd === that.props.match.params.id) {
         that.setState({
-          localAuthLabel: place.attributes.lad18nm,
-          polygon: place.geometry.rings,
-          mapCenter: [place.attributes.long, place.attributes.lat]
+          localAuthLabel: place.properties.lad18nm,
+          polygon: place.geometry.coordinates,
+          mapCenter: [place.properties.long, place.properties.lat]
         })
       }
     })
@@ -51,7 +52,6 @@ class Region extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div>
         {this.state.loaded ?
