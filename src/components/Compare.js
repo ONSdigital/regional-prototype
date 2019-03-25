@@ -26,6 +26,7 @@ class Compare extends Component {
 
     await getGeoJSON()
       .then((response) => {
+        console.log(response)
         this.setState({
           places: response.features
         })
@@ -34,16 +35,29 @@ class Compare extends Component {
     await this.state.places.forEach(function(place) {
       ids.forEach(function(item) {
         if(place.properties.lad18cd === item) {
-          that.setState({
-            [item]: {
-              polygon: place.geometry.coordinates,
-              mapCenter: [place.properties.long, place.properties.lat]
-            },
-            localAuths: [
-              ...that.state.localAuths,
-              {label: place.properties.lad18nm, id: place.properties.lad18cd}
-            ]
-          })
+          if(place.geometry.type === 'MultiPolygon') {
+            that.setState({
+              [item]: {
+                polygon: place.geometry.coordinates[0],
+                mapCenter: [place.properties.long, place.properties.lat]
+              },
+              localAuths: [
+                ...that.state.localAuths,
+                {label: place.properties.lad18nm, id: place.properties.lad18cd}
+              ]
+            })
+          } else {
+            that.setState({
+              [item]: {
+                polygon: place.geometry.coordinates,
+                mapCenter: [place.properties.long, place.properties.lat]
+              },
+              localAuths: [
+                ...that.state.localAuths,
+                {label: place.properties.lad18nm, id: place.properties.lad18cd}
+              ]
+            })
+          }
         } else {
           return null
         }

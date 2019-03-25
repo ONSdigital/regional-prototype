@@ -206,7 +206,6 @@ class GenderPayGapData extends Component {
   }
 
   render() {
-    console.log(this.state)
     this.handleShowAll = this.handleShowAll.bind(this)
     this.handleShowFT = this.handleShowFT.bind(this)
     this.handleShowPT = this.handleShowPT.bind(this)

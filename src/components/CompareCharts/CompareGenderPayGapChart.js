@@ -92,11 +92,23 @@ class CompareGenderPayGapChart extends Component {
     return this.state.colors[index]
   }
 
-  setLegend() {
+  setFirstLegend() {
     let legend = []
-    this.props.localAuth.map((item, key) =>
-      legend.push({name: item.label, symbol: { fill: this.assignColor(key) }})
-    )
+    this.props.localAuth.map((item, key) => {
+      if(key <= 1) {
+        legend.push({name: item.label, symbol: { fill: this.assignColor(key) }})
+      }
+    })
+    return legend
+  }
+
+  setSecondLegend() {
+    let legend = []
+    this.props.localAuth.map((item, key) => {
+      if(key >= 2) {
+        legend.push({name: item.label, symbol: { fill: this.assignColor(key) }})
+      }
+    })
     return legend
   }
 
@@ -189,9 +201,15 @@ class CompareGenderPayGapChart extends Component {
           />
           <VictoryLegend x={0} y={0}
             orientation="horizontal"
-            gutter={20}
+            gutter={10}
             style={{ labels: {fontSize: 10 } }}
-            data={this.setLegend()}
+            data={this.setFirstLegend()}
+          />
+          <VictoryLegend x={0} y={15}
+            orientation="horizontal"
+            gutter={10}
+            style={{ labels: {fontSize: 10 } }}
+            data={this.setSecondLegend()}
           />
       </VictoryChart>
     )

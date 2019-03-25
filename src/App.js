@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './assets/css/main.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { getCodes, getGeoData, getGeoJSON } from './api/RequestHandler';
+import { getCodes, getGeoJSON } from './api/RequestHandler';
 import Header from './components/Header';
 import Search from './components/Search';
 import Region from './components/Region';
@@ -24,13 +24,6 @@ class App extends Component {
       .then((response) => {
         this.setState({
           localAuthorities: response.items.map(function(item) { return {label:item.label, id:item.id}})
-        })
-      })
-
-    await getGeoData()
-      .then((response) => {
-        this.setState({
-          places: response.features
         })
       })
 

@@ -11,14 +11,6 @@ export function getCodes() {
 
 // Get Geo Data
 
-export function getGeoData() {
-  return fetch('https://ons-inspire.esriuk.com/arcgis/rest/services/Administrative_Boundaries/Local_Authority_Districts_May_2018_Boundaries/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=json')
-    .then((response) => response.json())
-    .catch((error) => {
-    console.error(error);
-  });
-}
-
 export function getGeoJSON() {
   return fetch('https://opendata.arcgis.com/datasets/b2d5f4f8e9eb469bb22af910bdc1de22_3.geojson')
     .then((response) => response.json())

@@ -33,11 +33,19 @@ class Region extends Component {
 
     this.state.places.forEach(function(place) {
       if(place.properties.lad18cd === that.props.match.params.id) {
-        that.setState({
-          localAuthLabel: place.properties.lad18nm,
-          polygon: place.geometry.coordinates,
-          mapCenter: [place.properties.long, place.properties.lat]
-        })
+        if(place.geometry.type === 'MultiPolygon') {
+          that.setState({
+            localAuthLabel: place.properties.lad18nm,
+            polygon: place.geometry.coordinates[0],
+            mapCenter: [place.properties.long, place.properties.lat]
+          })
+        } else {
+          that.setState({
+            localAuthLabel: place.properties.lad18nm,
+            polygon: place.geometry.coordinates,
+            mapCenter: [place.properties.long, place.properties.lat]
+          })
+        }
       }
     })
 

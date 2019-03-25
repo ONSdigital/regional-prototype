@@ -106,7 +106,7 @@ class CompareEarningsData extends Component {
   }
 
   getFigure(data, date) {
-    let figure = "No data"
+    let figure = "No data*"
     let cv
     data.forEach(function(i) {
       if (i.x === date) {
