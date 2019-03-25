@@ -1,4 +1,9 @@
-/* Custom css */
+/* General */
+
+.breadcrumb {
+  border-radius: 0;
+  margin-bottom: 0;
+}
 /* Choropleth Maps */
 
 .hide {
@@ -148,7 +153,7 @@
 .region-info {
   width: 500px;
   position: absolute;
-  top: 525px;
+  top: 592px;
   left: 9.33%;
   background-color: #3B7A9E;
   z-index: 1;
@@ -313,6 +318,10 @@ tr:nth-child(even) {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.map-div h2 {
+  margin-bottom: 20px;
 }
 
 .key-figures {

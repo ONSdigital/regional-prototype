@@ -7,6 +7,7 @@ import CompareGenderPayGapData from './CompareData/CompareGenderPayGapData';
 import MapContainer from './MapContainer';
 import {polygon} from '@turf/helpers';
 import turf from 'turf-extent';
+import { Link } from 'react-router-dom';
 
 class Compare extends Component {
   constructor(props) {
@@ -73,6 +74,22 @@ class Compare extends Component {
   render() {
     return(
       <div>
+        <nav>
+          <div className="breadcrumb print--hide">
+            <div className="container">
+              <ol className="breadcrumb__list">
+                <li className="breadcrumb__item">
+                  <Link className="breadcrumb__link" to="/">
+                      Home
+                  </Link>
+                </li>
+                <li className="breadcrumb__item">
+                    Compare
+                </li>
+              </ol>
+            </div>
+          </div>
+        </nav>
         <div className="compare-title">
           <div className="container">
             <h1>Compare Local Authorities</h1>

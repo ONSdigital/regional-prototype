@@ -4,7 +4,8 @@ import MapContainer from './MapContainer';
 import PopulationData from './Data/PopulationData';
 import ChartTab from './ChartTab';
 import {polygon} from '@turf/helpers';
-import turf from 'turf-extent'
+import turf from 'turf-extent';
+import { Link } from 'react-router-dom';
 
 class Region extends Component {
   constructor(props) {
@@ -54,6 +55,22 @@ class Region extends Component {
   render() {
     return (
       <div>
+        <nav>
+          <div className="breadcrumb print--hide">
+            <div className="container">
+              <ol className="breadcrumb__list">
+                <li className="breadcrumb__item">
+                  <Link className="breadcrumb__link" to="/">
+                      Home
+                  </Link>
+                </li>
+                <li className="breadcrumb__item">
+                    {this.state.localAuthLabel}
+                </li>
+              </ol>
+            </div>
+          </div>
+        </nav>
         {this.state.loaded ?
           <div>
             {this.state.polygon.length > 0 ? <MapContainer container={this.props.match.params.id} polygon={this.state.polygon} mapCenter={this.state.mapCenter} zoom={this.state.zoom}/> : <div className="map-placeholder"></div>}

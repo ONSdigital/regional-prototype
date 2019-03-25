@@ -117,6 +117,7 @@ class Search extends Component {
             <form className="col-wrap search__form" action="/search">
               <h1>Filter by Local Authorities</h1>
               <input
+                placeholder="Search for a Region to view or compare"
                 aria-label="search for Local Authorities"
                 className="search__input search__input--results-page col col--md-29 col--lg-29"
                 id="nav-search"
