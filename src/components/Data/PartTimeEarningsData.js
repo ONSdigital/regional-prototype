@@ -21,7 +21,8 @@ class PartTimeEarningsData extends Component {
       date: 2017,
       showPOW: true,
       showPOR: false,
-      loaded: false
+      loaded: false,
+      error: false
     }
   }
 
@@ -38,11 +39,11 @@ class PartTimeEarningsData extends Component {
                 ...that.state.pow,
                 all: [...that.state.pow.all, {x: Number(time.dimensions.Time.label), y: Number(time.observation), cv: time.metadata["Coefficient of variation"]}]
               }
-
             })
           }
         })
       })
+      .catch((error) => this.setState({error: true}))
 
     await getPartTimeEarningsMale(this.props.localAuth, 7)
       .then((response) => {
@@ -57,9 +58,9 @@ class PartTimeEarningsData extends Component {
               }
             })
           }
-
         })
       })
+      .catch((error) => this.setState({error: true}))
 
     await getPartTimeEarningsFemale(this.props.localAuth, 7)
       .then((response) => {
@@ -76,6 +77,7 @@ class PartTimeEarningsData extends Component {
           }
         })
       })
+      .catch((error) => this.setState({error: true}))
 
       await getPartTimeEarnings(this.props.localAuth, 8)
         .then((response) => {
@@ -88,11 +90,11 @@ class PartTimeEarningsData extends Component {
                   ...that.state.por,
                   all: [...that.state.por.all, {x: Number(time.dimensions.Time.label), y: Number(time.observation), cv: time.metadata["Coefficient of variation"]}]
                 }
-
               })
             }
           })
         })
+        .catch((error) => this.setState({error: true}))
 
       await getPartTimeEarningsMale(this.props.localAuth, 8)
         .then((response) => {
@@ -107,9 +109,9 @@ class PartTimeEarningsData extends Component {
                 }
               })
             }
-
           })
         })
+        .catch((error) => this.setState({error: true}))
 
       await getPartTimeEarningsFemale(this.props.localAuth, 8)
         .then((response) => {
@@ -126,12 +128,17 @@ class PartTimeEarningsData extends Component {
             }
           })
         })
+        .catch((error) => this.setState({error: true}))
 
     this.setDate([...this.state.pow.all, ...this.state.pow.male, ...this.state.pow.female])
 
     this.setState({
       loaded: true
     })
+    
+    if(this.state.error) {
+      this.props.errorCount()
+    }
   }
 
   setDate(array) {
@@ -193,7 +200,7 @@ class PartTimeEarningsData extends Component {
       <div className="col-5">
         {this.props.show ?
           <div>
-            {this.state.loaded ?
+            {this.state.loaded && !this.state.error ?
               <div>
                 <h3>Annual Earnings for Part Time workers</h3>
                 <h4>Key Figures ({this.state.date}):</h4>
@@ -290,7 +297,7 @@ class PartTimeEarningsData extends Component {
               </div>
               :
               <div>
-                <h3>Part Time</h3>
+                <h3>Annual Earnings for Part Time workers</h3>
                 <p>The service is temporarily unavailable, please check our <a href="https://twitter.com/onsdigital">twitter</a> feed for updates.</p>
                 <p>If you still encounter problems please <a href="mailto: web.comments@ons.gov.uk">contact us</a>. We apologise for any inconvenience this may have caused.</p>
               </div>

@@ -12,8 +12,10 @@ class ChartTab extends Component {
       demographics: true,
       earnings: false,
       genderPayGap: false,
-      wellbeing: false
+      wellbeing: false,
+      errorCount: 0
     }
+    this.errorCount = this.errorCount.bind(this)
   }
 
   handleDemographicsClick(e) {
@@ -64,6 +66,12 @@ class ChartTab extends Component {
     e.target.classList.add("tab__link--active")
   }
 
+  errorCount() {
+    this.setState({
+      errorCount: this.state.errorCount + 1
+    })
+  }
+
 
 
   render() {
@@ -96,12 +104,12 @@ class ChartTab extends Component {
         </div>
         <PopulationData localAuth={this.props.localAuth}  localAuthLabel={this.props.localAuthLabel} show={this.state.demographics}/>
         <div className="row justify-content-md-center">
-          <EarningsData localAuthLabel={this.props.localAuthLabel} localAuth={this.props.localAuth} show={this.state.earnings} />
-          <PartTimeEarningsData localAuthLabel={this.props.localAuthLabel} localAuth={this.props.localAuth} show={this.state.earnings} />
-            {this.state.earnings ? <div className="col-10">
-              <p>The &#177; value represents the coefficient of variation (CV) and shows the extent of variability expressed as a percentage.</p>
-              <p>*Estimates with a Coefficient of variation greater than 20% are suppressed from publication on quality grounds, along with those for which there is a risk of disclosure of individual employees or employers.</p>
-            </div> : null}
+          <EarningsData localAuthLabel={this.props.localAuthLabel} localAuth={this.props.localAuth} show={this.state.earnings} errorCount={this.errorCount} />
+          <PartTimeEarningsData localAuthLabel={this.props.localAuthLabel} localAuth={this.props.localAuth} show={this.state.earnings} errorCount={this.errorCount}/>
+          {this.state.earnings && this.state.errorCount < 2 ? <div className="col-10">
+            <p>The &#177; value represents the coefficient of variation (CV) and shows the extent of variability expressed as a percentage.</p>
+            <p>*Estimates with a Coefficient of variation greater than 20% are suppressed from publication on quality grounds, along with those for which there is a risk of disclosure of individual employees or employers.</p>
+          </div> : null}
         </div>
           <WellBeingData localAuthLabel={this.props.localAuthLabel}  localAuth={this.props.localAuth} show={this.state.wellbeing} />
           <GenderPayGapData localAuthLabel={this.props.localAuthLabel} localAuth={[{label: this.props.localAuthLabel, id: this.props.localAuth}, {label: 'UK', id: 'K02000001'}]} show={this.state.genderPayGap}/>

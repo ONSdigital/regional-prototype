@@ -21,8 +21,9 @@ class EarningsData extends Component {
       date: 2017,
       showPOW: true,
       showPOR: false,
-      noData: false,
-      loaded: false
+      loaded: false,
+      error: false,
+      noDataCount: 0
     }
   }
 
@@ -34,116 +35,115 @@ class EarningsData extends Component {
         response.observations.forEach(function(time) {
           if (time.observation === '') {
             that.setState({
-              noData: true
+              noDataCount: that.state.noDataCount + 1
             })
           } else {
             that.setState({
               pow: {
                 ...that.state.pow,
                 all: [...that.state.pow.all, {x: Number(time.dimensions.Time.label), y: Number(time.observation), cv: time.metadata["Coefficient of variation"]}]
-              },
-              noData: false
+              }
             })
           }
         })
       })
+      .catch((error) => this.setState({error: true}))
 
     await getEarningsMale(this.props.localAuth, 7)
       .then((response) => {
         response.observations.forEach(function(time) {
           if(time.observation === '') {
             that.setState({
-              noData: true
+              noDataCount: that.state.noDataCount + 1
             })
           } else {
             that.setState({
               pow: {
                 ...that.state.pow,
                 male: [...that.state.pow.male, {x: Number(time.dimensions.Time.label), y: Number(time.observation), cv: time.metadata["Coefficient of variation"]}]
-              },
-              noData: false
+              }
             })
           }
         })
       })
+      .catch((error) => this.setState({error: true}))
 
     await getEarningsFemale(this.props.localAuth, 7)
       .then((response) => {
         response.observations.forEach(function(time) {
           if(time.observation === '') {
             that.setState({
-              noData: true
+              noDataCount: that.state.noDataCount + 1
             })
           } else {
             that.setState({
               pow: {
                 ...that.state.pow,
                 female: [...that.state.pow.female, {x: Number(time.dimensions.Time.label), y: Number(time.observation), cv: time.metadata["Coefficient of variation"]}]
-              },
-              noData: false
+              }
             })
           }
 
         })
       })
+      .catch((error) => this.setState({error: true}))
 
       await getEarnings(this.props.localAuth, 8)
         .then((response) => {
           response.observations.forEach(function(time) {
             if (time.observation === '') {
               that.setState({
-                noData: true
+                noDataCount: that.state.noDataCount + 1
               })
             } else {
               that.setState({
                 por: {
                   ...that.state.por,
                   all: [...that.state.por.all, {x: Number(time.dimensions.Time.label), y: Number(time.observation), cv: time.metadata["Coefficient of variation"]}]
-                },
-                noData: false
+                }
               })
             }
           })
         })
+        .catch((error) => this.setState({error: true}))
 
       await getEarningsMale(this.props.localAuth, 8)
         .then((response) => {
           response.observations.forEach(function(time) {
             if(time.observation === '') {
               that.setState({
-                noData: true
+                noDataCount: that.state.noDataCount + 1
               })
             } else {
               that.setState({
                 por: {
                   ...that.state.por,
                   male: [...that.state.por.male, {x: Number(time.dimensions.Time.label), y: Number(time.observation), cv: time.metadata["Coefficient of variation"]}]
-                },
-                noData: false
+                }
               })
             }
           })
         })
+        .catch((error) => this.setState({error: true}))
 
       await getEarningsFemale(this.props.localAuth, 8)
         .then((response) => {
           response.observations.forEach(function(time) {
             if(time.observation === '') {
               that.setState({
-                noData: true
+                noDataCount: that.state.noDataCount + 1
               })
             } else {
               that.setState({
                 por: {
                   ...that.state.por,
                   female: [...that.state.por.female, {x: Number(time.dimensions.Time.label), y: Number(time.observation), cv: time.metadata["Coefficient of variation"]}]
-                },
-                noData: false
+                }
               })
             }
-
           })
         })
+        .catch((error) => this.setState({error: true}))
 
     this.setDate([...this.state.pow.all, ...this.state.pow.male, ...this.state.pow.female])
 
@@ -151,8 +151,9 @@ class EarningsData extends Component {
       loaded: true
     })
 
-
-
+    if(this.state.error) {
+      this.props.errorCount()
+    }
   }
 
   setDate(array) {
@@ -210,15 +211,13 @@ class EarningsData extends Component {
         date.x === this.state.date ? date : null
       )
     let body = '{"name": "earnings", "options": [ "annual-pay-gross" ] }, { "name": "sex", "options": [ "all", "female", "male" ] }, {"name": "statistics", "options": [ "median" ] }, { "name": "time", "options": [ "2017" ] }, { "name": "workingpattern", "options": ["full-time"] }'
+
     return (
       <div className="col-5">
         {this.props.show ?
           <div>
-            {this.state.loaded ?
+            {this.state.loaded && !this.state.error ?
               <div>
-                {this.state.noData ?
-                  <p className="no-data">Unfortunately no personal well-being data is avaliable for {this.props.localAuthLabel}</p>
-                  :
                   <div>
                     <h3>Annual Earnings for Full Time workers</h3>
                     <h4>Key Figures ({this.state.date}):</h4>
@@ -313,18 +312,16 @@ class EarningsData extends Component {
                        null
                      }
                   </div>
-                }
               </div>
                 :
               <div>
-                <h3>Full Time</h3>
-                <p>The service is temporarily unavailable, please check our <a href="https://twitter.com/onsdigital">twitter</a> feed for updates.</p>
+                <h3>Annual Earnings for Full Time workers</h3>
+                <p>The service is unavailable, please check our <a href="https://twitter.com/onsdigital">twitter</a> feed for updates.</p>
                 <p>If you still encounter problems please <a href="mailto: web.comments@ons.gov.uk">contact us</a>. We apologise for any inconvenience this may have caused.</p>
               </div>
               }
           </div>
           : null}
-
       </div>
 
     )

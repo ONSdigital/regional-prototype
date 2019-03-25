@@ -18,6 +18,7 @@ class CMDLink extends Component {
 
     getCMDLink(query)
       .then((response) => this.setState({filterID: response.filter_id}))
+      .catch((error) => console.log(error))
   }
   render() {
     return(
