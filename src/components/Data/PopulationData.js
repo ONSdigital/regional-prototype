@@ -119,6 +119,7 @@ class PopulationData extends Component {
               <p className="label male">Male<span className="male-legend"></span></p>
               <p className="label female"><span className="female-legend"></span>Female</p>
               <PopulationPyramid localAuth={this.props.localAuth} totalPop={this.state.total} fData={this.state.fData.sort(this.compareNumbers)} mData={this.state.mData.sort(this.compareNumbers)} />
+              <p>Estimates of the usual resident population for the UK as at 30 June of the reference year. Provided by administrative area, single year of age and sex.</p>
               <CMDLink
                 localAuth={this.props.localAuth}
                 dataset="mid-year-pop-est"

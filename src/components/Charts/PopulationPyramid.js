@@ -62,7 +62,7 @@ class PopulationPyramid extends Component {
                     return [{
                       target: "labels",
                       mutation: (props) => {
-                        return { text: (data) => data.x === '90' ? (`90+: ${data.z}`) : (`${data.x}: ${data.z}`)  }
+                        return { text: (data) => data.x === '90' ? (`90+: ${data.y.toFixed(2)}%`) : (`${data.x}: ${data.y.toFixed(2)}%`)  }
                       }
                     }];
                   }
@@ -97,7 +97,7 @@ class PopulationPyramid extends Component {
                     return [{
                       target: "labels",
                       mutation: (props) => {
-                        return { text: (data) => data.x === '90' ? (`90+: ${data.z}`) : (`${data.x}: ${data.z}`) }
+                        return { text: (data) => data.x === '90' ? (`90+: ${data.y.toFixed(2)}%`) : (`${data.x}: ${data.y.toFixed(2)}%`) }
                       }
                     }];
                   }
