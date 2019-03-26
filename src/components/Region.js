@@ -49,6 +49,16 @@ class Region extends Component {
       }
     })
 
+    if(that.props.match.params.id === 'E11000001') {
+      this.setState({
+        localAuthLabel: 'Greater Manchester'
+      })
+    } else if (that.props.match.params.id === 'E11000002') {
+      this.setState({
+        localAuthLabel: 'Merseyside'
+      })
+    }
+
     var pg = polygon(this.state.polygon)
     var size = turf(pg)
 
@@ -80,7 +90,7 @@ class Region extends Component {
         </nav>
         {this.state.loaded ?
           <div>
-            {this.state.polygon.length > 0 ? <MapContainer container={this.props.match.params.id} polygon={this.state.polygon} mapCenter={this.state.mapCenter} zoom={this.state.zoom}/> : <div className="map-placeholder"></div>}
+            {this.state.polygon.length > 0 ? <MapContainer container={this.props.match.params.id} polygon={this.state.polygon} mapCenter={this.state.mapCenter} zoom={this.state.zoom}/> : <div className="map-placeholder col-12"><p>Unable to load map for {this.state.localAuthLabel}</p></div>}
           </div>
           :
           <div className="map-placeholder">
