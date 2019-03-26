@@ -111,7 +111,7 @@ class Search extends Component {
     this.handleCloseSearch = this.handleCloseSearch.bind(this)
     this.handleRemoveAll = this.handleRemoveAll.bind(this)
     return (
-      <div>
+      <div className={this.state.query || this.state.show || this.state.compare.length > 0 ? "search-container" : null}>
         <div className="search search--results-page print--hide" id="searchBar">
           <div className="container">
             <form className="col-wrap search__form" action="/search">

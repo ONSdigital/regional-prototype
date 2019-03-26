@@ -27,6 +27,14 @@ class App extends Component {
         })
       })
 
+      this.setState({
+        localAuthorities: [
+          ...this.state.localAuthorities,
+          {label: 'Greater Manchester', id: 'E11000001'},
+          {label: 'Merseyside', id: 'E11000002'}
+        ]
+      })
+
     await getGeoJSON()
       .then((response) => {
         this.setState({

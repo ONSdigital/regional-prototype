@@ -6,6 +6,22 @@
 }
 /* Choropleth Maps */
 
+.choropleth {
+  border: 1px solid #EAEAEA;
+  margin-top: 20px;
+}
+
+.choropleth h2 {
+  padding-left: 20px;
+  margin: 20px 0;
+}
+.choropleth form {
+  padding-left: 20px;
+}
+.choropleth .map {
+  border-bottom: none;
+}
+
 .hide {
   height: 0;
 }
@@ -28,6 +44,12 @@
 .results {
   height: 500px;
   overflow: scroll;
+}
+
+.search-container {
+  border-bottom: 2px solid #414042;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .close-search {
