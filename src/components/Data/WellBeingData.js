@@ -257,7 +257,7 @@ class WellBeingData extends Component {
                       <div id="anxiety" className="col-5 wellbeing-col">
                         <h3>Anxiety</h3>
                         <WellBeingChart localAuth={this.props.localAuth} local={this.state.localAnxiety} uk={this.state.ukAnxiety} color={["rgb(15, 130, 67)", "#3B7A9E"]} title={this.props.localAuthLabel} />
-                        <CMDLink className="cmd-anxiety"
+                        <CMDLink className="cmd-wellbeing"
                           localAuth={this.props.localAuth}
                           dataset="wellbeing-local-authority"
                           body={bodyAnxiety}

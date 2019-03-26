@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {getPartTimeEarnings, getPartTimeEarningsMale, getPartTimeEarningsFemale } from '../../api/RequestHandler';
 import CompareEarningsChart from '../CompareCharts/CompareEarningsChart';
 import {saveSvgAsPng} from 'save-svg-as-png';
+import CMDLink from '../CMDLink';
 
 class ComparePartTimeEarningsData extends Component {
   constructor(props) {
@@ -136,6 +137,7 @@ class ComparePartTimeEarningsData extends Component {
       if(this.state.showFemale) {
         id = "earningsPTComparisonFemale"
       }
+      let body = '{"name": "earnings", "options": [ "annual-pay-gross" ] }, { "name": "sex", "options": [ "all", "female", "male" ] }, {"name": "statistics", "options": [ "median" ] }, { "name": "time", "options": [ "2017" ] }, { "name": "workingpattern", "options": ["part-time"] }'
       return(
         <div>
           {this.state.loaded ?
@@ -204,6 +206,12 @@ class ComparePartTimeEarningsData extends Component {
               </div>
               <div id={id} className="col-8">
                 <CompareEarningsChart partTime={true} localAuth={this.props.localAuth} data={this.state.data} showAll={this.state.showAll} showMale={this.state.showMale} showFemale={this.state.showFemale}/>
+                <CMDLink
+                  localAuth={this.props.localAuth}
+                  dataset="ashe-table-7-earnings"
+                  body={body}
+                  icon="dark"
+                   />
                 {this.state.showAll ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value="comparePTEarningsAll">Save this chart</button> : null}
                 {this.state.showMale ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value="comparePTEarningsMale">Save this chart</button> : null}
                 {this.state.showFemale ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value="comparePTEarningsFemale">Save this chart</button> : null}

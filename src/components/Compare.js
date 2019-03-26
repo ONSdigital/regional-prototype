@@ -26,7 +26,6 @@ class Compare extends Component {
 
     await getGeoJSON()
       .then((response) => {
-        console.log(response)
         this.setState({
           places: response.features
         })

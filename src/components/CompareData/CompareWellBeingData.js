@@ -109,10 +109,7 @@ class CompareWellBeingData extends Component {
   }
 
   render() {
-    let bodyAnxiety = '{ "name": "allmeasuresofwellbeing", "options": [ "anxiety" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
-    let bodyHappiness = '{ "name": "allmeasuresofwellbeing", "options": [ "happiness" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
-    let bodyWorthwhile = '{ "name": "allmeasuresofwellbeing", "options": [ "worthwhile" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
-    let bodyLifeSatisfaction = '{ "name": "allmeasuresofwellbeing", "options": [ "life-satisfaction" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
+    let body = '{ "name": "allmeasuresofwellbeing", "options": [ "anxiety", "happiness", "worthwhile", "life-satisfaction" ] }, { "name": "estimate", "options": [ "average-mean", "fair", "good", "poor", "very-good" ] }, { "name": "time", "options": ["2017-18"] }'
     return (
       <div>
         {this.state.loadedAnxiety && this.state.loadedHappiness && this.state.loadedWorthwhile && this.state.loadedLifeSatisfaction ?
@@ -139,7 +136,14 @@ class CompareWellBeingData extends Component {
             </div>
           </div>
            : null}
-
+          <div className="cmd-wellbeing">
+            <CMDLink
+              localAuth={this.props.localAuth}
+              dataset="wellbeing-local-authority"
+              body={body}
+              icon="dark"
+               />
+          </div>
       </div>
     )
   }
