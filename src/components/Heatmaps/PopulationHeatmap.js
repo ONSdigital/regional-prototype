@@ -67,8 +67,8 @@ class PopulationHeatmap extends Component {
               'data': place
             },
             'paint': {
-              'fill-color': that.getColor(place.properties.density, ss.ckmeans(array, 7)),
-              'fill-opacity': 0.7,
+              'fill-color': that.getColor(place.properties.density, ss.ckmeans(array, 6)),
+              'fill-opacity': 1,
               'fill-outline-color': '#000000'
             }
         });
@@ -112,13 +112,12 @@ class PopulationHeatmap extends Component {
   }
 
   getColor(d, array) {
-    return Number(d) >= Number(array[6][0])  ? '#006d2c' :
-           Number(d) >= Number(array[5][0])  ? '#238b45' :
-           Number(d) >= Number(array[4][0])  ? '#41ae76' :
-           Number(d) >= Number(array[3][0])  ? '#66c2a4' :
-           Number(d) >= Number(array[2][0])  ? '#99d8c9' :
-           Number(d) >= Number(array[1][0])  ? '#ccece6' :
-           Number(d) >= Number(array[0][0])  ? '#edf8fb' :
+    return Number(d) >= Number(array[5][0])  ? '#006d2c' :
+           Number(d) >= Number(array[4][0])  ? '#238b45' :
+           Number(d) >= Number(array[3][0])  ? '#41ae76' :
+           Number(d) >= Number(array[2][0])  ? '#66c2a4' :
+           Number(d) >= Number(array[1][0])  ? '#99d8c9' :
+           Number(d) >= Number(array[0][0])  ? '#ccece6' :
                                                '#bdbdbd' ;
   }
 
@@ -126,13 +125,12 @@ class PopulationHeatmap extends Component {
     this.setState({
       legend: [
         {key: `No data`, color: '#bdbdbd'},
-        {key: `${Number(array[0][0]).toLocaleString('en')} - ${(Number(array[1][0]) - 1).toLocaleString('en')}`, color: '#edf8fb'},
-        {key: `${Number(array[1][0]).toLocaleString('en')} - ${(Number(array[2][0]) - 1).toLocaleString('en')}`, color: '#ccece6'},
-        {key: `${Number(array[2][0]).toLocaleString('en')} - ${(Number(array[3][0]) - 1).toLocaleString('en')}`, color: '#99d8c9'},
-        {key: `${Number(array[3][0]).toLocaleString('en')} - ${(Number(array[4][0]) - 1).toLocaleString('en')}`, color: '#66c2a4'},
-        {key: `${Number(array[4][0]).toLocaleString('en')} - ${(Number(array[5][0]) - 1).toLocaleString('en')}`, color: '#41ae76'},
-        {key: `${Number(array[5][0]).toLocaleString('en')} - ${(Number(array[6][0]) - 1).toLocaleString('en')}`, color: '#238b45'},
-        {key: `${Number(array[6][0]).toLocaleString('en')} +`, color: '#006d2c'},
+        {key: `${Number(array[0][0]).toLocaleString('en')} - ${(Number(array[1][0]) - 1).toLocaleString('en')}`, color: '#ccece6'},
+        {key: `${Number(array[1][0]).toLocaleString('en')} - ${(Number(array[2][0]) - 1).toLocaleString('en')}`, color: '#99d8c9'},
+        {key: `${Number(array[2][0]).toLocaleString('en')} - ${(Number(array[3][0]) - 1).toLocaleString('en')}`, color: '#66c2a4'},
+        {key: `${Number(array[3][0]).toLocaleString('en')} - ${(Number(array[4][0]) - 1).toLocaleString('en')}`, color: '#41ae76'},
+        {key: `${Number(array[4][0]).toLocaleString('en')} - ${(Number(array[5][0]) - 1).toLocaleString('en')}`, color: '#238b45'},
+        {key: `${Number(array[5][0]).toLocaleString('en')} +`, color: '#006d2c'},
       ]
     })
   }

@@ -66,7 +66,7 @@ class WellbeingHeatmap extends Component {
             },
             'paint': {
               'fill-color': that.getColor(place.properties.density, ss.ckmeans(array, 7)),
-              'fill-opacity': 0.7,
+              'fill-opacity': 1,
               'fill-outline-color': '#000000'
             }
         });
