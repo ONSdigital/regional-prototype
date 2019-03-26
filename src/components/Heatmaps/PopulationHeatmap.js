@@ -136,7 +136,6 @@ class PopulationHeatmap extends Component {
   }
 
   render() {
-    console.log(this.state.data)
     return (
         <div id={this.props.gender + "-population"} className="map">
           {this.state.loaded ?
