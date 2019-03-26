@@ -71,7 +71,7 @@ class HeatmapsContainer extends Component {
             </div>
             <div className="col-6">
               <div className="choropleth">
-                <h2>Wellbeing</h2>
+                <h2>Well-being</h2>
                 <form>
                   <div className="form-check form-check-inline">
                     <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="anxiety" checked={this.state.wellbeing === "anxiety"} onChange={(e) => {this.handleShowWellbeing(e)}}/>
