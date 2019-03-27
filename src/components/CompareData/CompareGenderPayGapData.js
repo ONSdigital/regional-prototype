@@ -17,7 +17,8 @@ class CompareGenderPayGapData extends Component {
       loaded: false,
       showAll: true,
       showFT: false,
-      showPT: false
+      showPT: false,
+      error: false
     }
   }
 
@@ -43,6 +44,7 @@ class CompareGenderPayGapData extends Component {
             })
           }
         })
+        .catch((error) => that.setState({error: true}))
 
       getHourlyEarnings(localAuth.id, "full-time", "female")
         .then((response) => {
@@ -60,6 +62,7 @@ class CompareGenderPayGapData extends Component {
             })
           }
         })
+        .catch((error) => that.setState({error: true}))
 
       getHourlyEarnings(localAuth.id, "part-time", "male")
         .then((response) => {
@@ -77,6 +80,7 @@ class CompareGenderPayGapData extends Component {
             })
           }
         })
+        .catch((error) => that.setState({error: true}))
 
       getHourlyEarnings(localAuth.id, "part-time", "female")
         .then((response) => {
@@ -94,6 +98,7 @@ class CompareGenderPayGapData extends Component {
             })
           }
         })
+        .catch((error) => that.setState({error: true}))
 
       getHourlyEarnings(localAuth.id, "all", "male")
         .then((response) => {
@@ -111,6 +116,7 @@ class CompareGenderPayGapData extends Component {
             })
           }
         })
+        .catch((error) => that.setState({error: true}))
 
       getHourlyEarnings(localAuth.id, "all", "female")
         .then((response) => {
@@ -128,6 +134,7 @@ class CompareGenderPayGapData extends Component {
             })
           }
         })
+        .catch((error) => that.setState({error: true}))
     })
 
     this.setState({

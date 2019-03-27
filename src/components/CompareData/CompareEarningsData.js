@@ -14,6 +14,7 @@ class CompareEarningsData extends Component {
       showMale: false,
       showFemale: false,
       date: 2017,
+      error: false
     }
   }
 
@@ -39,6 +40,8 @@ class CompareEarningsData extends Component {
           })
         }
       })
+      .catch((error) => that.setState({error: true}))
+
       getEarningsMale(item.id, 7)
       .then((response) => {
         count = count + 1
@@ -55,6 +58,8 @@ class CompareEarningsData extends Component {
           })
         }
       })
+      .catch((error) => that.setState({error: true}))
+
       getEarningsFemale(item.id, 7)
       .then((response) => {
         count = count + 1
@@ -71,6 +76,8 @@ class CompareEarningsData extends Component {
           })
         }
       })
+      .catch((error) => that.setState({error: true}))
+
     })
 
     this.setState({

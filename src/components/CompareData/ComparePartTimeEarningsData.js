@@ -14,6 +14,7 @@ class ComparePartTimeEarningsData extends Component {
       showMale: false,
       showFemale: false,
       date: 2017,
+      error: false
     }
   }
 
@@ -39,6 +40,8 @@ class ComparePartTimeEarningsData extends Component {
           })
         }
       })
+      .catch((error) => that.setState({error: true}))
+
       getPartTimeEarningsMale(item.id, 7)
       .then((response) => {
         count = count + 1
@@ -55,6 +58,8 @@ class ComparePartTimeEarningsData extends Component {
           })
         }
       })
+      .catch((error) => that.setState({error: true}))
+
       getPartTimeEarningsFemale(item.id, 7)
       .then((response) => {
         count = count + 1
@@ -71,6 +76,7 @@ class ComparePartTimeEarningsData extends Component {
           })
         }
       })
+      .catch((error) => that.setState({error: true}))
     })
 
     this.setState({

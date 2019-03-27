@@ -254,7 +254,7 @@
 /* Region */
 
 .region-info {
-  width: 500px;
+  min-width: 500px;
   position: absolute;
   top: 592px;
   left: 9.33%;
