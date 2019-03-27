@@ -167,7 +167,7 @@ class Search extends Component {
                       <label htmlFor={item} className="checkbox__label">{item}</label>
                     </form>
                     <div className="btn-group">
-                      <Link className="btn btn--primary" to={{pathname: '/local-authority/' + `${this.getCode(item)}/` + item.replace(/\s+/g, '-').toLowerCase(), state: this.addCode(item) }}>Go to Local Authority</Link>
+                      <Link className="go-to" to={{pathname: '/local-authority/' + `${this.getCode(item)}/` + item.replace(/\s+/g, '-').toLowerCase(), state: this.addCode(item) }}>Go to Local Authority</Link>
                     </div>
                   </div>
                 )}

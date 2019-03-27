@@ -141,6 +141,19 @@
   display: inline-block;
   float: right;
   margin: 16px 0;
+  line-height: 3;
+}
+
+.go-to {
+  color: #206095;
+  text-decoration: underline;
+  background: none;
+}
+
+.go-to:hover {
+  color: #206095;
+  text-decoration: underline;
+  background: none;
 }
 
 .btn {
