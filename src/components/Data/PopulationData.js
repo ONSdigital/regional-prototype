@@ -25,7 +25,7 @@ class PopulationData extends Component {
 
     let that = this;
 
-    await getPop(that.props.localAuth)
+    await getPop('*', that.props.localAuth, '0')
       .then((response) => {
         response.observations.forEach(function(year) {
           that.setState({
