@@ -88,7 +88,28 @@ class Search extends Component {
     })
   }
 
+  handleChange(e) {
+    this.setState({
+      compare: [...this.state.compare, this.addCode(e.target.value)]
+    })
+    this.state.compare.map((item) =>
+      (item.label === e.target.value ?
+        this.removeLA(e.target.value): null
+    ))
+  }
+
+  isChecked(item, array) {
+    let found = false
+    for(var i = 0; i < array.length; i++) {
+      if (array[i].label === item) {
+        found = true
+      }
+    }
+    return found
+  }
+
   render() {
+    console.log(this.state)
     let showingLA
     if(this.state.query) {
       const match = new RegExp(escapeRegExp(this.state.query), 'i')
@@ -110,6 +131,8 @@ class Search extends Component {
 
     this.handleCloseSearch = this.handleCloseSearch.bind(this)
     this.handleRemoveAll = this.handleRemoveAll.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.isChecked = this.isChecked.bind(this)
     return (
       <div className={this.state.query || this.state.show || this.state.compare.length > 0 ? "search-container" : null}>
         <div className="search search--results-page print--hide" id="searchBar">
@@ -138,11 +161,13 @@ class Search extends Component {
               <div className="col-8 results">
               <p>Showing {showingLA.length} results of {this.props.localAuthorities.length} Local Authorities<span className="close-search" onClick={this.handleCloseSearch}>Close X</span></p>
                 {showingLA.sort().map((item,key) =>
-                  <div key={key} className="local-authorities">
-                    <li>{item}</li>
+                  <div className="local-authorities" key={key}>
+                    <form className="local-authority-form">
+                      <input className="checkbox__input" id={item} type="checkbox" onChange={(e) => {this.handleChange(e)}} value={item} checked={this.isChecked(item, this.state.compare)} disabled={this.state.compare.length === 4 && !this.isChecked(item, this.state.compare)}/>
+                      <label htmlFor={item} className="checkbox__label">{item}</label>
+                    </form>
                     <div className="btn-group">
                       <Link className="btn btn--primary" to={{pathname: '/local-authority/' + `${this.getCode(item)}/` + item.replace(/\s+/g, '-').toLowerCase(), state: this.addCode(item) }}>Go to Local Authority</Link>
-                      <button className={this.state.compare.length === 4 || this.disableButton(this.state.compare, item) ? "btn btn--secondary btn--secondary-disabled" : "btn btn--secondary"} value={item} onClick={this.state.compare.length === 4 || this.disableButton(this.state.compare, item) ? null : (e) => this.handleAdd(e)}>Compare</button>
                     </div>
                   </div>
                 )}
