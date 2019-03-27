@@ -35,18 +35,22 @@ class EarningsHeatmap extends Component {
           item.dimensions.Geography.id = 'S12000047'
         }
         if(item.dimensions.Geography.id === place.properties.lad18cd) {
-          data.push({type: place.type, geometry: {type: place.geometry.type, coordinates: place.geometry.coordinates}, properties: {objectid: place.properties.objectid, lad18cd: place.properties.lad18cd, lad18nm: place.properties.lad18nm, lad18nmw: place.properties.lad18nmw, bng_e: place.properties.bng_e, bng_n: place.properties.bng_n, lat: place.properties.lat, long: place.properties.long, st_areashape: place.properties.st_areashape, st_lengthshape: place.properties.st_lengthshape, density: item.observation}})
+          data.push({type: place.type, geometry: {type: place.geometry.type, coordinates: place.geometry.coordinates}, properties: {objectid: place.properties.objectid, lad18cd: place.properties.lad18cd, lad18nm: place.properties.lad18nm, lad18nmw: place.properties.lad18nmw, bng_e: place.properties.bng_e, bng_n: place.properties.bng_n, lat: place.properties.lat, long: place.properties.long, st_areashape: place.properties.st_areashape, st_lengthshape: place.properties.st_lengthshape, density: Number(item.observation)}})
         }
       })
     })
 
     that.setState({
-      data: data
+      data: {
+        type: "FeatureCollection",
+        features: data
+      }
     })
 
-    let array = this.state.dataEarnings.map((item) => item.observation)
+    let array = this.state.data.features.map((item) => item.properties.density)
 
-    await this.setLegend(ss.ckmeans(array, 7))
+    this.setLegend(ss.ckmeans(array, 7))
+    let stops = that.getColor(ss.ckmeans(array, 7))
 
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
     mapboxgl.accessToken = 'pk.eyJ1IjoibWljaGFlbHJveW5vcnRvbiIsImEiOiJjanI5MGs3aWcwMnFvNGFsOWE3NTl2ZWR4In0.wm4DHL_Gb3gGIj7k8VSkgQ';
@@ -58,16 +62,18 @@ class EarningsHeatmap extends Component {
     })
 
     map.on('load', function () {
-      that.state.data.forEach(function(place) {
         map.addLayer({
-            'id': place.properties.objectid.toString(),
+            'id': 'earnings',
             'type': 'fill',
             'source': {
               'type': 'geojson',
-              'data': place
+              'data': that.state.data
             },
             'paint': {
-              'fill-color': that.getColor(place.properties.density, ss.ckmeans(array, 7)),
+              'fill-color': {
+                property: 'density',
+                stops: stops
+              },
               'fill-opacity': 1,
               'fill-outline-color': '#000000'
             }
@@ -78,12 +84,12 @@ class EarningsHeatmap extends Component {
           closeOnClick: false
         });
 
-        map.on('mouseenter', place.properties.objectid.toString(), function(e) {
+        map.on('mousemove', 'earnings', function(e) {
           map.getCanvas().style.cursor = 'pointer';
 
           var coordinates = [e.features[0].properties.long, e.features[0].properties.lat ];
           var description = ''
-          if (e.features[0].properties.density === "") {
+          if (e.features[0].properties.density === 0) {
             description = `<h3>${e.features[0].properties.lad18nm}</h3>No data`;
           } else {
             description = `<h3>${e.features[0].properties.lad18nm}</h3><h4>£${Number(e.features[0].properties.density).toLocaleString('en')}</h4>`;
@@ -97,11 +103,10 @@ class EarningsHeatmap extends Component {
           .addTo(map);
         });
 
-        map.on('mouseleave', place.properties.objectid.toString(), function() {
+        map.on('mouseleave', 'earnings', function() {
           map.getCanvas().style.cursor = '';
           popup.remove();
         });
-      })
     });
 
     this.setState({
@@ -109,14 +114,9 @@ class EarningsHeatmap extends Component {
     })
   }
 
-  getColor(d, array) {
-    return Number(d) >= Number(array[6][0])  ? '#08589e' :
-           Number(d) >= Number(array[5][0])  ? '#2b8cbe' :
-           Number(d) >= Number(array[4][0])  ? '#4eb3d3' :
-           Number(d) >= Number(array[3][0])  ? '#7bccc4' :
-           Number(d) >= Number(array[2][0])  ? '#a8ddb5' :
-           Number(d) >= Number(array[1][0])  ? '#ccebc5' :
-                               '#bdbdbd' ;
+  getColor(array) {
+    let stops = [[array[0][0], '#bdbdbd'], [array[1][0], '#ccebc5'], [array[2][0], '#a8ddb5'], [array[3][0], '#7bccc4'], [array[4][0], '#4eb3d3'], [array[5][0], '#2b8cbe'], [array[6][0], '#08589e']]
+    return stops
   }
 
   setLegend(array) {
