@@ -264,6 +264,16 @@
   padding: 15px;
 }
 
+.no-map-region-info {
+  background-color: #3B7A9E;
+  padding: 48px 165px;
+  color: #fff;
+}
+
+.no-map-region-info h1 {
+  margin: 0;
+}
+
 .region-info h1 {
   margin: 0;
 }

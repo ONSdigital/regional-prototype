@@ -90,14 +90,14 @@ class Region extends Component {
         </nav>
         {this.state.loaded ?
           <div>
-            {this.state.polygon.length > 0 ? <MapContainer container={this.props.match.params.id} polygon={this.state.polygon} mapCenter={this.state.mapCenter} zoom={this.state.zoom}/> : <div className="map-placeholder col-12"><p>Unable to load map for {this.state.localAuthLabel}</p></div>}
+            {this.state.polygon.length > 0 ? <MapContainer container={this.props.match.params.id} polygon={this.state.polygon} mapCenter={this.state.mapCenter} zoom={this.state.zoom}/> : null}
           </div>
           :
           <div className="map-placeholder">
             <p>Loading map data for {this.props.match.params.region}...</p>
           </div>
         }
-        <div className="region-info">
+        <div className={this.state.polygon.length > 0 ? "region-info" : "no-map-region-info"}>
           <h1>{this.state.localAuthLabel}</h1>
         </div>
         <ChartTab localAuthLabel={this.state.localAuthLabel} localAuth={this.props.match.params.id} />
