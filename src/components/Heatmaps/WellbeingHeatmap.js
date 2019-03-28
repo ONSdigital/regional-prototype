@@ -14,7 +14,6 @@ class WellbeingHeatmap extends Component {
   }
 
   async componentDidMount() {
-    let count = 0
     let that = this
     let data = []
 
@@ -46,8 +45,6 @@ class WellbeingHeatmap extends Component {
     })
 
     let array = this.state.data.features.map((item) => item.properties.density)
-    console.log(array)
-
     this.setLegend(ss.ckmeans(array, 7))
     let stops = that.getColor(ss.ckmeans(array, 7))
 

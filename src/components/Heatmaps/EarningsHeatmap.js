@@ -15,7 +15,6 @@ class EarningsHeatmap extends Component {
   }
 
   async componentDidMount() {
-    let count = 0
     let that = this
     let data = []
 

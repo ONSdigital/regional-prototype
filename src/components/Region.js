@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { getGeoJSON } from '../api/RequestHandler';
 import MapContainer from './MapContainer';
-import PopulationData from './Data/PopulationData';
 import ChartTab from './ChartTab';
 import {polygon} from '@turf/helpers';
 import turf from 'turf-extent';
