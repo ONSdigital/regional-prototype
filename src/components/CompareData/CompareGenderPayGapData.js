@@ -28,7 +28,7 @@ class CompareGenderPayGapData extends Component {
     let localAuthority = {}
     this.props.localAuth.forEach(function(localAuth) {
       localAuthority[localAuth.id] = {all: {male: [], female: []}, partTime: {male: [], female: []}, fullTime: {male:[], female: []}}
-      getHourlyEarnings(localAuth.id, "full-time", "male")
+      getHourlyEarnings(localAuth.id, "full-time", "male", 7)
         .then((response) => {
           count = count + 1
           response.observations.forEach(function(item) {
@@ -46,7 +46,7 @@ class CompareGenderPayGapData extends Component {
         })
         .catch((error) => that.setState({error: true}))
 
-      getHourlyEarnings(localAuth.id, "full-time", "female")
+      getHourlyEarnings(localAuth.id, "full-time", "female", 7)
         .then((response) => {
           count = count + 1
           response.observations.forEach(function(item) {
@@ -64,7 +64,7 @@ class CompareGenderPayGapData extends Component {
         })
         .catch((error) => that.setState({error: true}))
 
-      getHourlyEarnings(localAuth.id, "part-time", "male")
+      getHourlyEarnings(localAuth.id, "part-time", "male", 7)
         .then((response) => {
           count = count + 1
           response.observations.forEach(function(item) {
@@ -82,7 +82,7 @@ class CompareGenderPayGapData extends Component {
         })
         .catch((error) => that.setState({error: true}))
 
-      getHourlyEarnings(localAuth.id, "part-time", "female")
+      getHourlyEarnings(localAuth.id, "part-time", "female", 7)
         .then((response) => {
           count = count + 1
           response.observations.forEach(function(item) {
@@ -100,7 +100,7 @@ class CompareGenderPayGapData extends Component {
         })
         .catch((error) => that.setState({error: true}))
 
-      getHourlyEarnings(localAuth.id, "all", "male")
+      getHourlyEarnings(localAuth.id, "all", "male", 7)
         .then((response) => {
           count = count + 1
           response.observations.forEach(function(item) {
@@ -118,7 +118,7 @@ class CompareGenderPayGapData extends Component {
         })
         .catch((error) => that.setState({error: true}))
 
-      getHourlyEarnings(localAuth.id, "all", "female")
+      getHourlyEarnings(localAuth.id, "all", "female", 7)
         .then((response) => {
           count = count + 1
           response.observations.forEach(function(item) {
@@ -278,7 +278,7 @@ class CompareGenderPayGapData extends Component {
                 </div>
               </form>
             </div>
-            <div id={id} className="col-8">
+            <div id={id} className="col-lg-8 col-md-10">
               <CompareGenderPayGapChart compare={true} data={this.state.data} localAuth={this.props.localAuth} showAll={this.state.showAll} showFT={this.state.showFT} showPT={this.state.showPT}/>
               {this.state.showAll ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compare-GPG-all'>Save this chart</button> : null}
               {this.state.showFT ? <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compare-GPG-FT'>Save this chart</button> : null}

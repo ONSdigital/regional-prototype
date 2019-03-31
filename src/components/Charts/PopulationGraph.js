@@ -27,6 +27,8 @@ class PopulationGraph extends Component {
         </VictoryGroup>
         <VictoryAxis
           dependentAxis
+          axisLabelComponent={<VictoryLabel y={40} x={50} angle={0}/>}
+          label="Population"
           style={{
             ticks: {stroke: "black", size: 5},
             grid: {stroke: "grey"},
@@ -36,6 +38,8 @@ class PopulationGraph extends Component {
           tickCount={8}
           />
         <VictoryAxis
+          label="Year"
+          axisLabelComponent={<VictoryLabel y={280} />}
           tickFormat={(data) => `${data.toString()}`}
           style={{
             ticks: {stroke: "black", size: 5},

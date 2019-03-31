@@ -119,7 +119,7 @@ class ComparePartTimeEarningsData extends Component {
     data.forEach(function(i) {
       if (i.x === date) {
         figure = `£${i.y.toLocaleString('en')}`
-        cv = ` \u00B1${i.cv}`
+        cv = ` \u00B1${i.cv}%`
       }
     })
     return (<span>{figure} <sub>{cv}</sub></span>)
@@ -210,7 +210,7 @@ class ComparePartTimeEarningsData extends Component {
                   </div>
                 </form>
               </div>
-              <div id={id} className="col-8">
+              <div id={id} className="col-lg-8 col-md-10">
                 <CompareEarningsChart partTime={true} localAuth={this.props.localAuth} data={this.state.data} showAll={this.state.showAll} showMale={this.state.showMale} showFemale={this.state.showFemale}/>
                 <CMDLink
                   localAuth={this.props.localAuth}

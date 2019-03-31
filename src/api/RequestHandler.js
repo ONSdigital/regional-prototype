@@ -48,7 +48,7 @@ export function getPop(time, code, sex) {
 // Get Earnings
 
 export function getAllEarnings(code, sex, pattern, table) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=2017&Earnings=annual-pay-gross&Sex=${sex}&Workingpattern=${pattern}&Statistics=mean&Geography=${code}`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=2017&Earnings=annual-pay-gross&Sex=${sex}&Workingpattern=${pattern}&Statistics=median&Geography=${code}`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);
@@ -58,7 +58,7 @@ export function getAllEarnings(code, sex, pattern, table) {
 // Get Full Time Earnings
 
 export function getEarnings(code, table) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=all&Workingpattern=full-time&Statistics=mean&Geography=${code}`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=all&Workingpattern=full-time&Statistics=median&Geography=${code}`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);
@@ -66,7 +66,7 @@ export function getEarnings(code, table) {
 }
 
 export function getEarningsMale(code, table) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=male&Workingpattern=full-time&Statistics=mean&Geography=${code}`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=male&Workingpattern=full-time&Statistics=median&Geography=${code}`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);
@@ -74,7 +74,7 @@ export function getEarningsMale(code, table) {
 }
 
 export function getEarningsFemale(code, table) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=female&Workingpattern=full-time&Statistics=mean&Geography=${code}`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=female&Workingpattern=full-time&Statistics=median&Geography=${code}`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);
@@ -84,7 +84,7 @@ export function getEarningsFemale(code, table) {
 // Get Part Time Earnings
 
 export function getPartTimeEarnings(code, table) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=all&Workingpattern=part-time&Statistics=mean&Geography=${code}`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=all&Workingpattern=part-time&Statistics=median&Geography=${code}`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);
@@ -92,7 +92,7 @@ export function getPartTimeEarnings(code, table) {
 }
 
 export function getPartTimeEarningsMale(code, table) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=male&Workingpattern=part-time&Statistics=mean&Geography=${code}`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=male&Workingpattern=part-time&Statistics=median&Geography=${code}`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);
@@ -100,7 +100,7 @@ export function getPartTimeEarningsMale(code, table) {
 }
 
 export function getPartTimeEarningsFemale(code, table) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=female&Workingpattern=part-time&Statistics=mean&Geography=${code}`)
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=annual-pay-gross&Sex=female&Workingpattern=part-time&Statistics=median&Geography=${code}`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);
@@ -127,8 +127,8 @@ export function getLocalWellBeing(code, estimate, measure) {
 
 // Get Gender Pay Gap data
 
-export function getHourlyEarnings(code, hours, gender) {
-  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-7-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=hourly-pay-excluding-overtime&Sex=${gender}&Workingpattern=${hours}&Statistics=median&Geography=${code}`)
+export function getHourlyEarnings(code, hours, gender, table) {
+  return fetch(`https://api.beta.ons.gov.uk/v1/datasets/ashe-table-${table}-earnings/editions/time-series/versions/1/observations?Time=*&Earnings=hourly-pay-excluding-overtime&Sex=${gender}&Workingpattern=${hours}&Statistics=median&Geography=${code}`)
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);

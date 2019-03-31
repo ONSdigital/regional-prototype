@@ -231,13 +231,13 @@ class WellBeingData extends Component {
                             </tr>
                             <tr className="wellbeing-table-data">
                               <td>{this.props.localAuthLabel}</td>
-                              {this.state.localAnxiety.sort((a,b) => a.z - b.z).map((item) =>
+                              {this.state.localAnxiety.sort((a,b) => a.z - b.z).map((item) => item.y === 0 ? <td>No data</td> :
                                 <td>{item.y}</td>)}
-                              {this.state.localHappiness.sort((a,b) => a.z - b.z).map((item) =>
+                              {this.state.localHappiness.sort((a,b) => a.z - b.z).map((item) => item.y === 0 ? <td>No data</td> :
                                 <td>{item.y}</td>)}
-                              {this.state.localWorthwhile.sort((a,b) => a.z - b.z).map((item) =>
+                              {this.state.localWorthwhile.sort((a,b) => a.z - b.z).map((item) => item.y === 0 ? <td>No data</td> :
                                 <td>{item.y}</td>)}
-                              {this.state.localLifeSatisfaction.sort((a,b) => a.z - b.z).map((item) =>
+                              {this.state.localLifeSatisfaction.sort((a,b) => a.z - b.z).map((item) => item.y === 0 ? <td>No data</td> :
                                 <td>{item.y}</td>)}
                             </tr>
                             <tr className="wellbeing-table-data">
@@ -254,7 +254,7 @@ class WellBeingData extends Component {
                           </tbody>
                         </table>
                       </div>
-                      <div id="anxiety" className="col-5 wellbeing-col">
+                      <div id="anxiety" className="col-lg-5 col-md-10 col-sm-10 wellbeing-col">
                         <h3>Anxiety</h3>
                         <WellBeingChart localAuth={this.props.localAuth} local={this.state.localAnxiety} uk={this.state.ukAnxiety} color={["rgb(15, 130, 67)", "#3B7A9E"]} title={this.props.localAuthLabel} />
                         <CMDLink className="cmd-wellbeing"
@@ -265,7 +265,7 @@ class WellBeingData extends Component {
                            />
                          <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value={this.props.localAuth + '-anxiety'}>Save this chart</button>
                       </div>
-                      <div id="happiness" className="col-5 wellbeing-col">
+                      <div id="happiness" className="col-lg-5 col-md-10 col-sm-10 wellbeing-col">
                         <h3>Happiness</h3>
                         <WellBeingChart localAuth={this.props.localAuth} local={this.state.localHappiness} uk={this.state.ukHappiness} color={["rgb(255, 178, 76)", "#3B7A9E"]} title={this.props.localAuthLabel} />
                         <CMDLink className="cmd-happiness"
@@ -276,7 +276,7 @@ class WellBeingData extends Component {
                            />
                          <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value={this.props.localAuth + '-happiness'}>Save this chart</button>
                       </div>
-                      <div id="worthwhile" className="col-5 wellbeing-col">
+                      <div id="worthwhile" className="col-lg-5 col-md-10 col-sm-10 wellbeing-col">
                         <h3>Worthwhile</h3>
                         <WellBeingChart localAuth={this.props.localAuth} local={this.state.localWorthwhile} uk={this.state.ukWorthwhile} color={["rgb(211, 47, 47)", "#3B7A9E"]} title={this.props.localAuthLabel}  />
                         <CMDLink className="cmd-worthwhile"
@@ -287,7 +287,7 @@ class WellBeingData extends Component {
                            />
                          <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value={this.props.localAuth + '-worthwhile'}>Save this chart</button>
                       </div>
-                      <div id="lifeSatisfaction" className="col-5 wellbeing-col">
+                      <div id="lifeSatisfaction" className="col-lg-5 col-md-10 col-sm-10 wellbeing-col">
                         <h3>Life Satisfaction</h3>
                         <WellBeingChart localAuth={this.props.localAuth} local={this.state.localLifeSatisfaction} uk={this.state.ukLifeSatisfaction} color={["purple", "#3B7A9E"]} title={this.props.localAuthLabel}  />
                         <CMDLink className="cmd-life-satisfaction"

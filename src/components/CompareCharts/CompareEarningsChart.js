@@ -118,7 +118,7 @@ class CompareEarningsChart extends Component {
           <VictoryGroup
             key={key}
             data={this.props.data[item]['male']}
-            labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv})`}
+            labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv}%)`}
             labelComponent={
                 <VictoryTooltip
                   style={{ fontSize: 10 }}

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { getEarnings, getEarningsMale, getEarningsFemale } from '../../api/RequestHandler';
+import { getHourlyEarnings } from '../../api/RequestHandler';
 import EarningsChart from '../Charts/EarningsChart';
 import CMDLink from '../CMDLink';
 import {saveSvgAsPng} from 'save-svg-as-png';
 
-class EarningsData extends Component {
+class HourlyEarningsData extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -30,7 +30,7 @@ class EarningsData extends Component {
   async componentDidMount () {
     let that = this
 
-    await getEarnings(this.props.localAuth, 7)
+    await getHourlyEarnings(this.props.localAuth, "full-time", "all", 7)
       .then((response) => {
         response.observations.forEach(function(time) {
           if (time.observation === '') {
@@ -49,7 +49,7 @@ class EarningsData extends Component {
       })
       .catch((error) => this.setState({error: true}))
 
-    await getEarningsMale(this.props.localAuth, 7)
+    await getHourlyEarnings(this.props.localAuth, "full-time", "male", 7)
       .then((response) => {
         response.observations.forEach(function(time) {
           if(time.observation === '') {
@@ -68,7 +68,7 @@ class EarningsData extends Component {
       })
       .catch((error) => this.setState({error: true}))
 
-    await getEarningsFemale(this.props.localAuth, 7)
+    await getHourlyEarnings(this.props.localAuth, "full-time", "female", 7)
       .then((response) => {
         response.observations.forEach(function(time) {
           if(time.observation === '') {
@@ -88,7 +88,7 @@ class EarningsData extends Component {
       })
       .catch((error) => this.setState({error: true}))
 
-      await getEarnings(this.props.localAuth, 8)
+      await getHourlyEarnings(this.props.localAuth, "full-time", "all", 8)
         .then((response) => {
           response.observations.forEach(function(time) {
             if (time.observation === '') {
@@ -107,7 +107,7 @@ class EarningsData extends Component {
         })
         .catch((error) => this.setState({error: true}))
 
-      await getEarningsMale(this.props.localAuth, 8)
+      await getHourlyEarnings(this.props.localAuth, "full-time", "male", 8)
         .then((response) => {
           response.observations.forEach(function(time) {
             if(time.observation === '') {
@@ -126,7 +126,7 @@ class EarningsData extends Component {
         })
         .catch((error) => this.setState({error: true}))
 
-      await getEarningsFemale(this.props.localAuth, 8)
+      await getHourlyEarnings(this.props.localAuth, "full-time", "female", 8)
         .then((response) => {
           response.observations.forEach(function(time) {
             if(time.observation === '') {
@@ -210,7 +210,7 @@ class EarningsData extends Component {
     let porAll= this.state.por.all.filter((date) =>
         date.x === this.state.date ? date : null
       )
-    let body = '{"name": "earnings", "options": [ "annual-pay-gross" ] }, { "name": "sex", "options": [ "all", "female", "male" ] }, {"name": "statistics", "options": [ "median" ] }, { "name": "time", "options": [ "2017" ] }, { "name": "workingpattern", "options": ["full-time"] }'
+    let body = '{"name": "earnings", "options": [ "hourly-pay-excluding-overtime" ] }, { "name": "sex", "options": [ "all", "female", "male" ] }, {"name": "statistics", "options": [ "median" ] }, { "name": "time", "options": [ "2017" ] }, { "name": "workingpattern", "options": ["full-time"] }'
 
     return (
       <div className="col-lg-5 col-md-10 col-sm-10">
@@ -219,10 +219,10 @@ class EarningsData extends Component {
             {this.state.loaded && !this.state.error ?
               <div>
                   <div>
-                    <h2>Annual Gross Earnings for Full-Time Workers</h2>
+                    <h2>Hourly Earnings for Full-Time Workers</h2>
                     <h4>Key Figures ({this.state.date}):</h4>
                     <table className="earnings-table">
-                      <caption>Comparison of annual summary of earnings between place of work and place of residence</caption>
+                      <caption>Comparison hourly earnings between place of work and place of residence</caption>
                       <tbody>
                         <tr>
                           <th></th>
@@ -315,7 +315,7 @@ class EarningsData extends Component {
               </div>
                 :
               <div>
-                <h3>Annual Earnings for Full Time workers</h3>
+                <h3>Hourly Earnings for Full Time workers</h3>
                 <p>The service is unavailable, please check our <a href="https://twitter.com/onsdigital">twitter</a> feed for updates.</p>
                 <p>If you still encounter problems please <a href="mailto: web.comments@ons.gov.uk">contact us</a>. We apologise for any inconvenience this may have caused.</p>
               </div>
@@ -328,4 +328,4 @@ class EarningsData extends Component {
   }
 }
 
-export default EarningsData
+export default HourlyEarningsData

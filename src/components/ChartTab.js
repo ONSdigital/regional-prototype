@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import PopulationData from './Data/PopulationData';
 import EarningsData from './Data/EarningsData';
 import PartTimeEarningsData from './Data/PartTimeEarningsData';
+import HourlyEarningsData from './Data/HourlyEarningsData';
+import PartTimeHourlyEarningsData from './Data/PartTimeHourlyEarningsData';
 import WellBeingData from './Data/WellBeingData';
 import GenderPayGapData from './Data/GenderPayGapData';
 
@@ -10,7 +12,8 @@ class ChartTab extends Component {
     super(props)
     this.state = {
       demographics: true,
-      earnings: false,
+      earningsAnnual: false,
+      earningsHourly: false,
       genderPayGap: false,
       wellbeing: false,
       errorCount: 0
@@ -20,7 +23,8 @@ class ChartTab extends Component {
 
   handleDemographicsClick(e) {
     this.setState({
-      earnings: false,
+      earningsAnnual: false,
+      earningsHourly: false,
       genderPayGap: false,
       wellbeing: false,
       demographics: true,
@@ -28,9 +32,21 @@ class ChartTab extends Component {
     this.updateClass(e)
   }
 
-  handleEarningsClick(e) {
+  handleAnnualEarningsClick(e) {
     this.setState({
-      earnings: true,
+      earningsAnnual: true,
+      earningsHourly: false,
+      genderPayGap: false,
+      wellbeing: false,
+      demographics: false
+    })
+    this.updateClass(e)
+  }
+
+  handleHourlyEarningsClick(e) {
+    this.setState({
+      earningsAnnual: false,
+      earningsHourly: true,
       genderPayGap: false,
       wellbeing: false,
       demographics: false
@@ -40,7 +56,8 @@ class ChartTab extends Component {
 
   handleGenderPayGapClick(e) {
     this.setState({
-      earnings: false,
+      earningsAnnual: false,
+      earningsHourly: false,
       genderPayGap: true,
       wellbeing: false,
       demographics: false
@@ -50,7 +67,8 @@ class ChartTab extends Component {
 
   handleWellBeingClick(e) {
     this.setState({
-      earnings: false,
+      earningsAnnual: false,
+      earningsHourly: false,
       genderPayGap: false,
       wellbeing: true,
       demographics: false
@@ -75,7 +93,7 @@ class ChartTab extends Component {
 
 
   render() {
-    this.handleEarningsClick = this.handleEarningsClick.bind(this)
+    this.handleAnnualEarningsClick = this.handleAnnualEarningsClick.bind(this)
     this.handleGenderPayGapClick = this.handleGenderPayGapClick.bind(this)
     this.handleWellBeingClick = this.handleWellBeingClick.bind(this)
     return (
@@ -89,10 +107,13 @@ class ChartTab extends Component {
                           <span className="tab__link tab__link--active" onClick={(e) => {this.handleDemographicsClick(e)}}>Demographics</span>
                       </li>
                         <li className="tab__item width-sm--6">
-                            <span className="tab__link tab__link" onClick={(e) => {this.handleEarningsClick(e)}}>Earnings</span>
+                            <span className="tab__link tab__link" onClick={(e) => {this.handleAnnualEarningsClick(e)}}>Annual Gross Earnings</span>
                         </li>
                         <li className="tab__item width-sm--6">
-                            <span className="tab__link tab__link" onClick={(e) => {this.handleWellBeingClick(e)}}>Well-Being</span>
+                            <span className="tab__link tab__link" onClick={(e) => {this.handleHourlyEarningsClick(e)}}>Hourly Earnings</span>
+                        </li>
+                        <li className="tab__item width-sm--6">
+                            <span className="tab__link tab__link" onClick={(e) => {this.handleWellBeingClick(e)}}>Well-being</span>
                         </li>
                         <li className="tab__item width-sm--6">
                             <span className="tab__link tab__link" onClick={(e) => {this.handleGenderPayGapClick(e)}}>Gender Pay Gap</span>
@@ -104,12 +125,16 @@ class ChartTab extends Component {
         </div>
         <PopulationData localAuth={this.props.localAuth}  localAuthLabel={this.props.localAuthLabel} show={this.state.demographics}/>
         <div className="row justify-content-md-center">
-          <EarningsData localAuthLabel={this.props.localAuthLabel} localAuth={this.props.localAuth} show={this.state.earnings} errorCount={this.errorCount} />
-          <PartTimeEarningsData localAuthLabel={this.props.localAuthLabel} localAuth={this.props.localAuth} show={this.state.earnings} errorCount={this.errorCount}/>
-          {this.state.earnings && this.state.errorCount < 2 ? <div className="col-10">
+          <EarningsData localAuthLabel={this.props.localAuthLabel} localAuth={this.props.localAuth} show={this.state.earningsAnnual} errorCount={this.errorCount} />
+          <PartTimeEarningsData localAuthLabel={this.props.localAuthLabel} localAuth={this.props.localAuth} show={this.state.earningsAnnual} errorCount={this.errorCount}/>
+          {this.state.earningsAnnual && this.state.errorCount < 2 ? <div className="col-10">
             <p>The &#177; value represents the coefficient of variation (CV) and shows the extent of variability expressed as a percentage.</p>
             <p>*Estimates with a Coefficient of variation greater than 20% are suppressed from publication on quality grounds, along with those for which there is a risk of disclosure of individual employees or employers.</p>
           </div> : null}
+        </div>
+        <div className="row justify-content-md-center">
+          <HourlyEarningsData localAuthLabel={this.props.localAuthLabel} localAuth={this.props.localAuth} show={this.state.earningsHourly} errorCount={this.errorCount} />
+          <PartTimeHourlyEarningsData localAuthLabel={this.props.localAuthLabel} localAuth={this.props.localAuth} show={this.state.earningsHourly} errorCount={this.errorCount} />
         </div>
           <WellBeingData localAuthLabel={this.props.localAuthLabel}  localAuth={this.props.localAuth} show={this.state.wellbeing} />
           <GenderPayGapData localAuthLabel={this.props.localAuthLabel} localAuth={[{label: this.props.localAuthLabel, id: this.props.localAuth}, {label: 'UK', id: 'K02000001'}]} show={this.state.genderPayGap}/>

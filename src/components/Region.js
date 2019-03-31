@@ -96,8 +96,8 @@ class Region extends Component {
             <p>Loading map data for {this.props.match.params.region}...</p>
           </div>
         }
-        <div className={this.state.polygon.length > 0 ? "region-info" : "no-map-region-info"}>
-          <h1>{this.state.localAuthLabel}</h1>
+        <div className={this.state.polygon.length || this.state.loaded > 0 ? "region-info" : "no-map-region-info"}>
+          <h1>{this.state.localAuthLabel}</h1> <h2> ({this.props.match.params.id})</h2>
         </div>
         <ChartTab localAuthLabel={this.state.localAuthLabel} localAuth={this.props.match.params.id} />
       </div>

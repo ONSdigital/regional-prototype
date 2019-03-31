@@ -114,8 +114,8 @@ class PopulationData extends Component {
       <div>
         {this.props.show && this.state.loaded ?
           <div className="row justify-content-md-center">
-            <div className="col-5" id="population">
-              <h3>Population of {this.props.localAuthLabel}: {this.state.total.toLocaleString('en')} ({this.state.year})</h3>
+            <div className="col-lg-5 col-md-10 col-sm-10" id="population">
+              <h2>Population of {this.props.localAuthLabel}: {this.state.total.toLocaleString('en')} ({this.state.year})</h2>
               <p className="label male">Male<span className="male-legend"></span></p>
               <p className="label female"><span className="female-legend"></span>Female</p>
               <PopulationPyramid localAuth={this.props.localAuth} totalPop={this.state.total} fData={this.state.fData.sort(this.compareNumbers)} mData={this.state.mData.sort(this.compareNumbers)} />
@@ -128,11 +128,11 @@ class PopulationData extends Component {
                  />
                <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e, 2.5)}} value={this.props.localAuth + '-populationPyramid'}>Save this chart</button>
             </div>
-            <div className="col-5 pop-graph">
-              <h3>Sex</h3>
+            <div className="col-lg-5 col-md-10 col-sm-10 pop-graph">
+              <h2>Sex</h2>
               <PopulationPie localAuth={this.props.localAuth} data={[this.state.fTotal, this.state.mTotal]}/>
               <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e, 5)}} value={this.props.localAuth + '-populationPie'}>Save this chart</button>
-              <h3>Trend over Time</h3>
+              <h2>Trend over Time</h2>
               <div id="popGraph">
                 <PopulationGraph localAuth={this.props.localAuth} className="pop-graph" data={this.state.timeSeries} />
                 <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e, 1)}} value={this.props.localAuth + '-populationGraph'}>Save this chart</button>

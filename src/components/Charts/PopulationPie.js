@@ -11,42 +11,14 @@ class PopulationPie extends Component {
           colorScale={["orange", "tomato"]}
           innerRadius={100}
           data={this.props.data}
-          labels={(data) => ""}
           labelComponent={
             <VictoryLabel
               textAnchor="middle"
               style={{ fontSize: 30 }}
               x={200} y={200}
+              text={(data) => data.x === "Female" ? `${data.x} \n ${data.y.toFixed(2)}%` : null}
             />
           }
-          events={[
-            {
-              target: "data",
-              eventHandlers: {
-                onMouseOver: () => {
-                  return [{
-                    target: "labels",
-                    mutation: (props) => {
-                      return { text: (data) => `${data.x} \n ${data.y.toFixed(2)}%` }
-                    }
-                  }];
-                }
-              }
-            },
-            {
-              target: "data",
-              eventHandlers: {
-                onMouseLeave: () => {
-                  return [{
-                    target: "labels",
-                    mutation: (props) => {
-                      return { text: ""}
-                    }
-                  }];
-                }
-              }
-            }
-          ]}
         />
 
     </svg>

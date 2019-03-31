@@ -99,7 +99,7 @@ class HeatmapsContainer extends Component {
             </div>
             <div className="col-6">
               <div className="choropleth">
-                <h2>Average Full-time earnings</h2>
+                <h2>Average Full-Time Earnings</h2>
                 <form>
                   <div className="form-check form-check-inline">
                     <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="all" checked={this.state.earningsFT === "all"} onChange={(e) => {this.handleEarningsFT(e)}}/>
@@ -121,7 +121,7 @@ class HeatmapsContainer extends Component {
             </div>
             <div className="col-6">
               <div className="choropleth">
-                <h2>Average Part-time earnings</h2>
+                <h2>Average Part-Time Earnings</h2>
                   <form>
                     <div className="form-check form-check-inline">
                       <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="all" checked={this.state.earningsPT === "all"} onChange={(e) => {this.handleEarningsPT(e)}}/>

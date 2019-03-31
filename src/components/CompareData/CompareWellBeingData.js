@@ -114,22 +114,22 @@ class CompareWellBeingData extends Component {
       <div>
         {this.state.loadedAnxiety && this.state.loadedHappiness && this.state.loadedWorthwhile && this.state.loadedLifeSatisfaction ?
           <div className="row justify-content-md-center">
-            <div id="anxiety" className="col-6 compare-wellbeing">
+            <div id="anxiety" className="col-lg-6 col-md-12 compare-wellbeing">
               <h4 className="well-being-title">Anxiety</h4>
               <CompareWellBeingChart localAuth={this.props.localAuth} data={this.state.data} title="anxiety" />
               <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compareAnxiety'>Save this chart</button>
             </div>
-            <div id="happiness" className="col-6 compare-wellbeing">
+            <div id="happiness" className="col-lg-6 col-md-12 compare-wellbeing">
               <h4 className="well-being-title">Happiness</h4>
               <CompareWellBeingChart localAuth={this.props.localAuth} data={this.state.data} title="happiness"/>
               <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compareHappiness'>Save this chart</button>
             </div>
-            <div id="worthwhile" className="col-6 compare-wellbeing">
+            <div id="worthwhile" className="col-lg-6 col-md-12 compare-wellbeing">
               <h4 className="well-being-title">Worthwhile</h4>
               <CompareWellBeingChart localAuth={this.props.localAuth} data={this.state.data} title="worthwhile" />
               <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compareWorthwhile'>Save this chart</button>
             </div>
-            <div id="lifeSatisfaction" className="col-6 compare-wellbeing">
+            <div id="lifeSatisfaction" className="col-lg-6 col-md-12 compare-wellbeing">
               <h4 className="well-being-title">Life Satisfaction</h4>
               <CompareWellBeingChart localAuth={this.props.localAuth} data={this.state.data} title="lifeSatisfaction" />
               <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value='compareLifeSatisfaction'>Save this chart</button>

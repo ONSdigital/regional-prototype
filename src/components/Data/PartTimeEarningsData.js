@@ -135,7 +135,7 @@ class PartTimeEarningsData extends Component {
     this.setState({
       loaded: true
     })
-    
+
     if(this.state.error) {
       this.props.errorCount()
     }
@@ -197,12 +197,12 @@ class PartTimeEarningsData extends Component {
       )
     let body = '{"name": "earnings", "options": [ "annual-pay-gross" ] }, { "name": "sex", "options": [ "all", "female", "male" ] }, {"name": "statistics", "options": [ "median" ] }, { "name": "time", "options": [ "2017" ] }, { "name": "workingpattern", "options": ["part-time"] }'
     return (
-      <div className="col-5">
+      <div className="col-lg-5 col-md-10 col-sm-10">
         {this.props.show ?
           <div>
             {this.state.loaded && !this.state.error ?
               <div>
-                <h3>Annual Earnings for Part Time workers</h3>
+                <h2>Annual Gross Earnings for Part-Time Workers</h2>
                 <h4>Key Figures ({this.state.date}):</h4>
                 <table className="earnings-table">
                   <caption>Comparison of annual summary of earnings between place of work and place of residence</caption>
@@ -218,19 +218,19 @@ class PartTimeEarningsData extends Component {
                       <td>
                         {powAll.length > 0 ? `£${powAll[0].y.toLocaleString('en')}` : "No data*"}
                          <sub>
-                           &#177;{powAll.length > 0 ? `${powAll[0].cv}` : null}
+                           &#177;{powAll.length > 0 ? `${powAll[0].cv}%` : null}
                          </sub>
                       </td>
                       <td>
                         {powMale.length > 0 ? `£${powMale[0].y.toLocaleString('en')}` : "No data*"}
                          <sub>
-                           &#177;{powMale.length > 0 ? `${powMale[0].cv}` : null}
+                           &#177;{powMale.length > 0 ? `${powMale[0].cv}%` : null}
                          </sub>
                       </td>
                       <td>
                         {powFemale.length > 0 ? `£${powFemale[0].y.toLocaleString('en')}` : "No data*"}
                          <sub>
-                           &#177;{powFemale.length > 0 ? `${powFemale[0].cv}` : null}
+                           &#177;{powFemale.length > 0 ? `${powFemale[0].cv}%` : null}
                          </sub>
                       </td>
                     </tr>
@@ -239,19 +239,19 @@ class PartTimeEarningsData extends Component {
                         <td>
                           {porAll.length > 0 ? `£${porAll[0].y.toLocaleString('en')}` : "No data*"}
                           <sub>
-                            &#177;{porAll.length > 0 ? `${porAll[0].cv}` : null}
+                            &#177;{porAll.length > 0 ? `${porAll[0].cv}%` : null}
                           </sub>
                         </td>
                         <td>
                           {porMale.length > 0 ? `£${porMale[0].y.toLocaleString('en')}` : "No data*"}
                           <sub>
-                            &#177;{porMale.length > 0 ? `${porMale[0].cv}` : null}
+                            &#177;{porMale.length > 0 ? `${porMale[0].cv}%` : null}
                           </sub>
                         </td>
                         <td>
                           {porFemale.length > 0 ? `£${porFemale[0].y.toLocaleString('en')}` : "No data*"}
                           <sub>
-                            &#177;{porFemale.length > 0 ? `${porFemale[0].cv}` : null}
+                            &#177;{porFemale.length > 0 ? `${porFemale[0].cv}%` : null}
                           </sub>
                         </td>
                     </tr>

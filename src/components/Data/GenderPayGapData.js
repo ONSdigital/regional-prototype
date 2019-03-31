@@ -25,7 +25,7 @@ class GenderPayGapData extends Component {
     let localAuthority = {}
     this.props.localAuth.forEach(function(localAuth) {
       localAuthority[localAuth.id] = {all: {male: [], female: []}, partTime: {male: [], female: []}, fullTime: {male:[], female: []}}
-      getHourlyEarnings(localAuth.id, "full-time", "male")
+      getHourlyEarnings(localAuth.id, "full-time", "male", 7)
         .then((response) => {
           count = count + 1
           response.observations.forEach(function(item) {
@@ -46,7 +46,7 @@ class GenderPayGapData extends Component {
         })
         .catch((error) => that.setState({error: true}))
 
-      getHourlyEarnings(localAuth.id, "full-time", "female")
+      getHourlyEarnings(localAuth.id, "full-time", "female", 7)
         .then((response) => {
           count = count + 1
           response.observations.forEach(function(item) {
@@ -67,7 +67,7 @@ class GenderPayGapData extends Component {
         })
         .catch((error) => that.setState({error: true}))
 
-      getHourlyEarnings(localAuth.id, "part-time", "male")
+      getHourlyEarnings(localAuth.id, "part-time", "male", 7)
         .then((response) => {
           count = count + 1
           response.observations.forEach(function(item) {
@@ -88,7 +88,7 @@ class GenderPayGapData extends Component {
         })
         .catch((error) => that.setState({error: true}))
 
-      getHourlyEarnings(localAuth.id, "part-time", "female")
+      getHourlyEarnings(localAuth.id, "part-time", "female", 7)
         .then((response) => {
           count = count + 1
           response.observations.forEach(function(item) {
@@ -109,7 +109,7 @@ class GenderPayGapData extends Component {
         })
         .catch((error) => that.setState({error: true}))
 
-      getHourlyEarnings(localAuth.id, "all", "male")
+      getHourlyEarnings(localAuth.id, "all", "male", 7)
         .then((response) => {
           count = count + 1
           response.observations.forEach(function(item) {
@@ -130,7 +130,7 @@ class GenderPayGapData extends Component {
         })
         .catch((error) => that.setState({error: true}))
 
-      getHourlyEarnings(localAuth.id, "all", "female")
+      getHourlyEarnings(localAuth.id, "all", "female", 7)
         .then((response) => {
           count = count + 1
           response.observations.forEach(function(item) {
@@ -237,7 +237,7 @@ class GenderPayGapData extends Component {
                     <p>The gender pay gap is calculated as the difference between average hourly earnings (excluding overtime) of men and women as a proportion of average hourly earnings (excluding overtime) of men’s earnings. For example, a 4.0% gender pay gap denotes that women earn 4.0% less per hour, on average, than men. Conversely, a negative 4.0% gender pay gap denotes that women earn 4.0% more, on average, then men.</p>
                   </div>
                   {this.state.loaded ?
-                    <div className="col-5">
+                    <div className="col-lg-5 col-md-10 col-sm-10">
                       <h4>Key Figures (2017):</h4>
                         <table>
                           <caption>Comparison of the gender pay gap between {this.props.localAuthLabel} and the UK</caption>
@@ -262,7 +262,7 @@ class GenderPayGapData extends Component {
                     </div>
                      : null}
                   {this.state.loaded ?
-                      <div id={id} className="col-5 radio-buttons">
+                      <div id={id} className="col-lg-5 col-md-10 col-sm-10 radio-buttons">
                         <form>
                           <div className="form-check form-check-inline">
                             <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked={this.state.showAll} onChange={this.handleShowAll}/>

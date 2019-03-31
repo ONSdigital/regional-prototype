@@ -20,10 +20,7 @@
 }
 .choropleth .map {
   border-bottom: none;
-}
-
-.hide-map {
-
+  height: 500px;
 }
 
 .legend {
@@ -135,6 +132,7 @@
 
 .local-authorities li {
   display: inline-block;
+  font-size: 18px;
 }
 
 .local-authorities .btn-group {
@@ -256,12 +254,31 @@
 .region-info {
   min-width: 500px;
   position: absolute;
-  top: 592px;
+  top: 440px;
   left: 9.33%;
   background-color: #3B7A9E;
   z-index: 1;
   color: #fff;
   padding: 15px;
+  display: inline-flex;
+}
+
+.region-info h2 {
+  margin-top: 0;
+  line-height: 48px;
+  padding-left: 10px;
+}
+
+@media only screen and (max-width: 767px) {
+  .region-info h1 {
+    font-size: 22px;
+  }
+
+  .region-info h2 {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
 }
 
 .no-map-region-info {
@@ -321,7 +338,7 @@
 }
 
 .map {
-  height: 500px;
+  height: 350px;
   width: 100%;
   border-bottom: 1px solid #000;
 }
@@ -344,6 +361,12 @@
   border-top: 1px solid #414042;
   border-left: 1px solid #414042;
   border-right: 1px solid #414042;
+}
+
+@media (max-width: 767px) {
+  .width-sm--6 {
+      width: 130px !important;
+  }
 }
 
 table {
@@ -384,6 +407,12 @@ tr:nth-child(even) {
 
 .wellbeing-table-data td:nth-child(17) {
   border-right: 1px solid #333;
+}
+
+@media only screen and (max-width: 1250px) {
+  .wellbeing-table {
+    display: none;
+  }
 }
 
 .wellbeing-col {
@@ -428,6 +457,20 @@ tr:nth-child(even) {
   margin-bottom: 20px;
 }
 
+@media only screen and (max-width: 991px) {
+  .map-div h2 {
+    font-size: 18px;
+  }
+
+  .map-card {
+    height: 270px;
+  }
+
+  .map-card .map {
+    height: 200px;
+  }
+ }
+
 .key-figures {
   margin-top: 15px;
 }
@@ -446,6 +489,12 @@ label {
 
 table tr td {
   padding: 15px;
+}
+
+@media only screen and (max-width: 767px) {
+  table tr td {
+    padding: 0;
+  }
 }
 
 .well-being-title {

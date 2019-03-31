@@ -65,7 +65,7 @@ class EarningsChart extends Component {
         <VictoryChart domain={{ x: [2012, 2017]}} domainPadding={{y: [20,20], x: [20, 20]}} >
           <VictoryGroup
             data={this.props.dataFull}
-            labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv})`}
+            labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv}%)`}
             labelComponent={
                 <VictoryTooltip
                   style={{ fontSize: 10 }}
@@ -82,7 +82,7 @@ class EarningsChart extends Component {
           </VictoryGroup>
           <VictoryGroup
             data={this.props.dataMale}
-            labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv})`}
+            labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv}%)`}
             labelComponent={
                 <VictoryTooltip
                   style={{ fontSize: 10 }}
@@ -98,7 +98,7 @@ class EarningsChart extends Component {
           </VictoryGroup>
           <VictoryGroup
             data={this.props.dataFemale}
-            labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv})`}
+            labels={(data) => `£${data.y.toLocaleString('en')}` + ` (\u00B1${data.cv}%)`}
             labelComponent={
                 <VictoryTooltip
                   style={{ fontSize: 10 }}
