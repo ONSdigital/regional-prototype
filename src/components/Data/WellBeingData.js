@@ -199,7 +199,7 @@ class WellBeingData extends Component {
                     <div className="row justify-content-md-center">
                       <div className="col-10">
                         <h2>Well-being</h2>
-                        <p>Estimates of anxiety, happiness, worthwhile and life satisfaction compared with the UK estimates for the year ending March 2018</p>
+                        <p>Estimates of anxiety, happiness, worthwhile and life satisfaction compared with the UK estimates for the year ending March 2018. </p>
                         <h4>Key Figures (2017-18):</h4>
                         <table className="wellbeing-table">
                           <tbody>
@@ -298,6 +298,16 @@ class WellBeingData extends Component {
                            />
                          <button className="btn btn--primary save" onClick={(e) => {this.handleDownload(e)}} value={this.props.localAuth + '-lifeSatisfaction'}>Save this chart</button>
                       </div>
+                      <div className="col-10">
+                        <p>The groupings used are defined as:
+                          <ul>
+                            <li className= "margin-top--0 margin-bottom--0">Very good - a rating of 0-1 for anxiety and 9-10 for happiness, life satisfaction and worthwhile. </li>
+                            <li className= "margin-top--0 margin-bottom--0">Good - a rating of 2-3 for anxiety and 7-8 for happiness, life satisfaction and worthwhile. </li>
+                            <li className= "margin-top--0 margin-bottom--0">Fair - a rating of 4-5 for anxiety and 5-6 for happiness, life satisfaction and worthwhile. </li>
+                            <li className= "margin-top--0 margin-bottom--0">Poor - a rating of 6-10 for anxiety and 0-4 for happiness, life satisfaction and worthwhile.</li> 
+                          </ul>
+                        </p>
+                    </div>
                     </div>
                     :
                     <div className="row justify-content-md-center">
@@ -306,7 +316,9 @@ class WellBeingData extends Component {
                         <p>If you still encounter problems please <a href="mailto: web.comments@ons.gov.uk">contact us</a>. We apologise for any inconvenience this may have caused.</p>
                      </div>
                    </div>
+                   
                   }
+
                 </div>
                :
                null
