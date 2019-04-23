@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './assets/css/main.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { getCodes, getGeoJSON } from './api/RequestHandler';
+import Warning from './components/Warning';
 import Header from './components/Header';
 import Search from './components/Search';
 import Region from './components/Region';
@@ -51,6 +52,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+        <Warning />
           <Header />
           <Switch>
             <Route exact path="/" component={() => <div><Search localAuthorities={this.state.localAuthorities} /><HeatmapsContainer places={this.state.data} loaded={this.state.loaded} /></div>} />

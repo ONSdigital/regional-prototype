@@ -168,6 +168,7 @@ class CompareEarningsData extends Component {
             <div className="row justify-content-md-center">
               {Object.keys(this.state.data).map((item, key) =>
                 <div key={key} className="col">
+                <p className = "margin-top--0 margin-bottom--0">Working in {this.props.localAuth[key].label}</p>
                   <table>
                     <tbody>
                       <tr>

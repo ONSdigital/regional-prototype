@@ -144,6 +144,16 @@ class CompareWellBeingData extends Component {
               icon="dark"
                />
           </div>
+          <div className="col-10">
+                        <p>The groupings used are defined as:
+                          <ul>
+                            <li className= "margin-top--0 margin-bottom--0">Very good - a rating of 0-1 for anxiety and 9-10 for happiness, life satisfaction and worthwhile. </li>
+                            <li className= "margin-top--0 margin-bottom--0">Good - a rating of 2-3 for anxiety and 7-8 for happiness, life satisfaction and worthwhile. </li>
+                            <li className= "margin-top--0 margin-bottom--0">Fair - a rating of 4-5 for anxiety and 5-6 for happiness, life satisfaction and worthwhile. </li>
+                            <li className= "margin-top--0 margin-bottom--0">Poor - a rating of 6-10 for anxiety and 0-4 for happiness, life satisfaction and worthwhile.</li> 
+                          </ul>
+                        </p>
+                    </div>
       </div>
     )
   }
