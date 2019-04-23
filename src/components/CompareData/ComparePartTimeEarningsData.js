@@ -149,7 +149,7 @@ class ComparePartTimeEarningsData extends Component {
           {this.state.loaded ?
             <div className="key-figures">
               <form>
-                <div className="form-group row">
+                <div className="form-group row margin-left--1">
                   <label htmlFor="exampleFormControlSelect1">Key Figures:</label>
                   <select onChange={(e)=> {this.handleDate(e)}} className="col-2 form-control" id="exampleFormControlSelect1">
                     <option value="2017">2017</option>

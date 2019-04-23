@@ -121,25 +121,25 @@ class Compare extends Component {
               </div>
             )}
           </div>
-          <div className="col-12">
+          <div className="col-12 padding-left--0">
             <h2>Full-Time Earnings</h2>
           </div>
           <div className="row justify-content-md-center">
             {this.state.loaded ? <CompareEarningsData localAuth={this.state.localAuths} /> : null}
           </div>
-          <div className="col-12">
+          <div className="col-12 padding-left--0">
             <h2>Part-Time Earnings</h2>
           </div>
           <div className="row justify-content-md-center">
             {this.state.loaded ? <ComparePartTimeEarningsData localAuth={this.state.localAuths} /> : null}
           </div>
-          <div className="col-12">
+          <div className="col-12 padding-left--0">
             <h2>Well-being</h2>
           </div>
           <div className="row justify-content-md-center">
             {this.state.loaded ? <CompareWellBeingData localAuth={this.state.localAuths} /> : null}
           </div>
-          <div className="col-12">
+          <div className="col-12 padding-left--0">
             <h2>Gender Pay Gap</h2>
           </div>
           <div className="row justify-content-md-center">
