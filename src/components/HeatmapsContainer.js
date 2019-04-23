@@ -45,7 +45,7 @@ class HeatmapsContainer extends Component {
     this.handleEarningsPT = this.handleEarningsPT.bind(this)
     return (
       <div className="container">
-        <h1>UK Highlights</h1>
+        <h1 className="margin-bottom--0">UK highlights</h1>
         {this.props.loaded ?
           <div className="row justify-content-md-center">
             <div className="col-6">
