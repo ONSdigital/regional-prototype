@@ -45,7 +45,7 @@ class HeatmapsContainer extends Component {
     this.handleEarningsPT = this.handleEarningsPT.bind(this)
     return (
       <div className="container">
-        <h1 className="margin-bottom--0">UK highlights</h1>
+        <h1 className="margin-bottom--0">Selected UK highlights</h1>
         {this.props.loaded ?
           <div className="row justify-content-md-center">
             <div className="col-6">
@@ -68,6 +68,7 @@ class HeatmapsContainer extends Component {
                 {this.state.population === "0" ? <PopulationHeatmap data={this.props.places} gender={this.state.population} /> : null }
                 {this.state.population === "1" ? <PopulationHeatmap data={this.props.places} gender={this.state.population} /> : null }
                 {this.state.population === "2" ? <PopulationHeatmap data={this.props.places} gender={this.state.population} /> : null }
+                <p className = "margin-left--1 padding-right--1">Source: <a href = "https://beta.ons.gov.uk/datasets/mid-year-pop-est/editions/time-series/versions/4">Population Estimates for UK, England and Wales, Scotland and Northern Ireland</a></p>
               </div>
             </div>
             <div className="col-6">
@@ -95,6 +96,7 @@ class HeatmapsContainer extends Component {
                 {this.state.wellbeing === "happiness" ? <WellbeingHeatmap data={this.props.places} measure="happiness"/> : null}
                 {this.state.wellbeing === "life-satisfaction" ? <WellbeingHeatmap data={this.props.places} measure="life-satisfaction"/> : null}
                 {this.state.wellbeing === "worthwhile" ? <WellbeingHeatmap data={this.props.places} measure="worthwhile"/> : null}
+                <p className = "margin-left--1 padding-right--1">Source: <a href = "https://beta.ons.gov.uk/datasets/wellbeing-local-authority/editions/time-series/versions/1">Personal well-being estimates by local authority</a></p>
               </div>
             </div>
             <div className="col-6">
@@ -117,6 +119,7 @@ class HeatmapsContainer extends Component {
                 {this.state.earningsFT === "female" ? <EarningsHeatmap data={this.props.places} gender={this.state.earningsFT} pattern="full-time" table="7" /> : null}
                 {this.state.earningsFT === "male" ? <EarningsHeatmap data={this.props.places} gender={this.state.earningsFT} pattern="full-time" table="7" /> : null}
                 {this.state.earningsFT === "all" ? <EarningsHeatmap data={this.props.places} gender={this.state.earningsFT} pattern="full-time" table="7" /> : null}
+                <p className = "margin-left--1 padding-right--1">Source: <a href = "https://beta.ons.gov.uk/datasets/ashe-table-7-earnings/editions/time-series/versions/1">Annual summary of earnings, place of work by Local Authority</a></p>
               </div>
             </div>
             <div className="col-6">
@@ -139,6 +142,7 @@ class HeatmapsContainer extends Component {
                   {this.state.earningsPT === "female" ? <EarningsHeatmap data={this.props.places} gender={this.state.earningsPT} pattern="part-time" table="7" /> : null}
                   {this.state.earningsPT === "male" ? <EarningsHeatmap data={this.props.places} gender={this.state.earningsPT} pattern="part-time" table="7" /> : null}
                   {this.state.earningsPT === "all" ? <EarningsHeatmap data={this.props.places} gender={this.state.earningsPT} pattern="part-time" table="7" /> : null}
+                  <p className = "margin-left--1 padding-right--1">Source: <a href = "https://beta.ons.gov.uk/datasets/ashe-table-7-earnings/editions/time-series/versions/1">Annual summary of earnings, place of work by Local Authority</a></p>
               </div>
             </div>
           </div>

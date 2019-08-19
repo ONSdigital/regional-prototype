@@ -65,7 +65,6 @@ class Region extends Component {
       loaded: true,
       zoom: size
     })
-
   }
 
   render() {

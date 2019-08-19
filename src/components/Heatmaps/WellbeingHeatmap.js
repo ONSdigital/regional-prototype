@@ -71,7 +71,7 @@ class WellbeingHeatmap extends Component {
                 stops: stops
               },
               'fill-opacity': 1,
-              'fill-outline-color': '#000000'
+              'fill-outline-color': '#ccc'
             }
         });
 
@@ -106,6 +106,11 @@ class WellbeingHeatmap extends Component {
           map.getCanvas().style.cursor = '';
           popup.remove();
         });
+
+        map.on('click', 'wellbeing', function (e) {
+          let urlSafeName = e.features[0].properties.lad18nm.replace(/ /g, "-")
+          window.location.href = '/local-authority/' + e.features[0].properties.lad18cd + '/' + urlSafeName;
+          });
     })
 
     this.setState({
