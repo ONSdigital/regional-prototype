@@ -135,6 +135,10 @@ class ChartTab extends Component {
         <div className="row justify-content-md-center">
           <HourlyEarningsData localAuthLabel={this.props.localAuthLabel} localAuth={this.props.localAuth} show={this.state.earningsHourly} errorCount={this.errorCount} />
           <PartTimeHourlyEarningsData localAuthLabel={this.props.localAuthLabel} localAuth={this.props.localAuth} show={this.state.earningsHourly} errorCount={this.errorCount} />
+          {this.state.earningsHourly && this.state.errorCount < 2 ? <div className="col-10">
+            <p>The &#177; value represents the coefficient of variation (CV) and shows the extent of variability expressed as a percentage.</p>
+            <p>*Estimates with a Coefficient of variation greater than 20% are suppressed from publication on quality grounds, along with those for which there is a risk of disclosure of individual employees or employers.</p>
+          </div> : null}
         </div>
           <WellBeingData localAuthLabel={this.props.localAuthLabel}  localAuth={this.props.localAuth} show={this.state.wellbeing} />
           <GenderPayGapData localAuthLabel={this.props.localAuthLabel} localAuth={[{label: this.props.localAuthLabel, id: this.props.localAuth}, {label: 'UK', id: 'K02000001'}]} show={this.state.genderPayGap}/>
