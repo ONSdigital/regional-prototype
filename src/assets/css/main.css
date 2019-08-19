@@ -49,6 +49,15 @@
 }
 /* Search */
 
+.search__input {
+  background: #fff;
+}
+
+.list__options {
+  text-decoration: underline;
+  cursor:pointer;
+}
+
 .results {
   height: 500px;
   overflow: scroll;

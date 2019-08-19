@@ -147,10 +147,11 @@ class Search extends Component {
                 value={this.state.query}
                 onChange={(event) => this.updateQuery(event.target.value)}
               />
-            <button type="submit" className="search__button search__button--results-page col--md-3 col--lg-3" id="nav-search-submit" onClick={(e) => this.handleSearch(e)}>
+            <button type="submit" className="search__button search__button--results-page col--md-8 col--lg-8" id="nav-search-submit" onClick={(e) => this.handleSearch(e)}>
                 <span className="visuallyhidden">Search</span>
                 <span className="icon icon-search--light"></span>
               </button>
+              <p className = "list__options" onClick={(e) => this.handleSearch(e)}>or select local authorities from a list</p>
             </form>
           </div>
         </div>
