@@ -12,7 +12,7 @@ export function getCodes() {
 // Get Geo Data
 
 export function getGeoJSON() {
-  return fetch('https://opendata.arcgis.com/datasets/b2d5f4f8e9eb469bb22af910bdc1de22_3.geojson')
+  return fetch('https://opendata.arcgis.com/datasets/604fc1fbe022460eaac4758c7521c3e7_0.geojson')
     .then((response) => response.json())
     .catch((error) => {
     console.error(error);
