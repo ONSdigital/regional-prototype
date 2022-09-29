@@ -14,7 +14,7 @@
     "save-svg-as-png": "^1.4.11",
     "simple-statistics": "^7.0.2",
     "turf-extent": "^1.0.4",
-    "victory": "^31.1.0"
+    "victory": "^36.6.8"
   },
   "scripts": {
     "start": "react-scripts start",
