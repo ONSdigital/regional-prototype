@@ -6,7 +6,7 @@
     "@turf/area": "^6.0.1",
     "@turf/helpers": "^6.1.4",
     "escape-string-regexp": "^1.0.5",
-    "mapbox-gl": "^0.52.0",
+    "mapbox-gl": "^2.13.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
